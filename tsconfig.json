@@ -25,6 +25,6 @@
     "src/**/*.ts",
     "src/**/*.tsx",
   ],
-  "paths": { "components/*": ["src/components/*"], "pages/*": ["pages/*"] , "@assets/*": ["src/assets/*"] },
+  "paths": { "components/*": ["src/components/*"], "pages/*": ["pages/*"] , "@assets/*": ["src/assets/*"],"container/*": ["src/container/*"] },
   "exclude": ["node_modules"]
 }

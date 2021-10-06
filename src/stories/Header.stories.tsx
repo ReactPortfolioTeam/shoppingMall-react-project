@@ -1,5 +1,5 @@
+import Header from "container/layout/Header";
 import React from "react";
-import Header from "../container/layout/header";
 
 export default {
     title: "Header/Header", // "문서"/"문서"/"컴포넌트명" 1차분류/2차분류/3차분류

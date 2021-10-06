@@ -18,13 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src"
   },
   "include": [
     "src",
     "src/**/*.ts",
     "src/**/*.tsx",
   ],
-  "paths": { "components/*": ["src/components/*"], "pages/*": ["pages/*"] , "@assets/*": ["src/assets/*"],"container/*": ["src/container/*"] },
+  "paths": { "components/*": ["components/*"], "pages/*": ["pages/*"] , "@assets/*": ["assets/*"],"container/*": ["container/*"] },
   "exclude": ["node_modules"]
 }

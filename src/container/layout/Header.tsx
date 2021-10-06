@@ -9,6 +9,12 @@ const Header: React.FC = () => {
             </nav>
             <div className="">
                 <h2 className="screen_out">로고,장바구니</h2>
+                <img
+                    src="/images/Logo.png"
+                    alt="Logo"
+                    width="200px"
+                    height="200px"
+                ></img>
             </div>
         </HeaderContainer>
     );

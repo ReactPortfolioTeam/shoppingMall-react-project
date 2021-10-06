@@ -1,41 +1,41 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import styled from "styled-components";
 
-import { Button } from './Button';
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Example/Button',
-  component: Button,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
-} as ComponentMeta<typeof Button>;
+    title: "Button/Button", // "문서"/"문서"/"컴포넌트명" 1차분류/2차분류/3차분류
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
-
-export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  primary: true,
-  label: 'Button',
+    decorators: [
+        // 아래에 export 한 컴포넌트를 감싸는 방법
+        (Story: any) => <Story />,
+    ],
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: 'Button',
+interface Props {
+    color: string;
+    type: "button" | "submit" | "reset" | undefined;
+    children: React.ReactNode;
+}
+
+const Button: React.FC<Props> = (props) => {
+    const { color = "#000", type = "button" } = props;
+    return (
+        <ButtonStyle color={color} type={type}>
+            {props.children}
+        </ButtonStyle>
+    );
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
+const ButtonStyle = styled.button`
+    background-color: ${(props) => props.color};
+    padding: 50px;
+`;
 
-export const Small = Template.bind({});
-Small.args = {
-  size: 'small',
-  label: 'Button',
+const ButtonTemplate = (args: any) => <Button {...args} />;
+
+export const DefaultButton: any = ButtonTemplate.bind({});
+DefaultButton.args = {
+    color: "#ffffff",
+    type: "button",
+
+    children: <h3>버튼</h3>,
 };

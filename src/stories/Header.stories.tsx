@@ -1,8 +1,8 @@
-import Header from "container/layout/Header";
-import React from "react";
+import Header from 'container/layout/Header';
+import React from 'react';
 
 export default {
-    title: "Header/Header", // "문서"/"문서"/"컴포넌트명" 1차분류/2차분류/3차분류
+    title: 'Header/Header', // "문서"/"문서"/"컴포넌트명" 1차분류/2차분류/3차분류
 
     decorators: [
         // 아래에 export 한 컴포넌트를 감싸는 방법
@@ -11,5 +11,5 @@ export default {
 };
 
 export const HeaderStory = () => {
-    return <Header></Header>;
+    return <Header />;
 };

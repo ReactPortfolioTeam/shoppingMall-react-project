@@ -1,22 +1,27 @@
-import * as React from "react";
-import styled from "styled-components";
+import * as React from 'react';
+import styled from 'styled-components';
+import MainCollectionContainer from './MainCollectionContainer';
+import MainNewsContainer from './MainNewsContainer';
 
-const MainView: React.FC = () => {
-  return (
-    <MainViewContainer id="main__view">
-      <div style={{ height: "200px" }}>item</div>
-      <div style={{ height: "200px" }}>item</div>
-      <div style={{ height: "200px" }}>item</div>
-      <div style={{ height: "200px" }}>item</div>
-      <div style={{ height: "200px" }}>item</div>
-    </MainViewContainer>
-  );
+export interface ContainerProps {
+    children?: React.ReactNode;
+}
+
+const MainView: React.FC<ContainerProps> = (p: ContainerProps) => {
+    return (
+        <MainViewContainer id="main__view">
+            <MainNewsContainer />
+            <MainCollectionContainer />
+        </MainViewContainer>
+    );
 };
 
-const MainViewContainer = styled.main`
-  display: flex;
-  flex-direction: column;
-  border: 2px solid black;
+export const MainViewContainer = styled.main`
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    border: 2px solid black;
 `;
 
 export default MainView;

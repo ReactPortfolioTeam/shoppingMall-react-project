@@ -20,7 +20,7 @@ module.exports = {
     },
     plugins: ['react', '@typescript-eslint'],
     rules: {
-        indent: ['error', 4],
+        indent: ['warn', 4],
         'linebreak-style': 0,
         'import/no-dynamic-require': 0,
         'import/no-unresolved': 0,
@@ -45,5 +45,7 @@ module.exports = {
         'arrow-body-style': 0, // 화살표함수
         'react/self-closing-comp': 1, // 셀프 클로징 img br 컴포넌트 바로 닫아야 하는 경우  /> 경고
         'no-unused-vars': 1, // 사용하지 않는 변수 혹은 import 경고
+        'jsx-a11y/anchor-is-valid': 1, //  href="#" 일경우 경고
+        'no-undef': 1,
     },
 };

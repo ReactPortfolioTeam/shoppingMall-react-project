@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
     box-sizing:border-box;
+	font-family: sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -45,6 +46,34 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+html{
+	font-size: 16px;
+	position: relative;
+	height: 100%;
+}
+a,a:link,a:visited{
+	text-decoration:none;
+	
+}
+
+h1{
+	font-size: 2rem;
+}
+h2{
+	font-size: 1.5rem;
+}
+h3{
+	font-size: 1.33rem;
+}
+h4{
+	font-size: 1.17rem;
+}
+h5{
+	font-size: 0.83rem;
+}
+h6{
+	font-size: 0.67rem;
 }
 
 `;

@@ -1,3 +1,5 @@
+import Button from 'component/Header/Button';
+import TextButton from 'component/Header/TextButton';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -16,20 +18,6 @@ interface Props {
     children: React.ReactNode;
 }
 
-const ButtonStyle = styled.button`
-    background-color: ${(props) => props.color};
-    padding: 50px;
-`;
-
-const Button: React.FC<Props> = (props) => {
-    const { color = '#000', type = 'button' } = props;
-    return (
-        <ButtonStyle color={color} type={type}>
-            {props.children}
-        </ButtonStyle>
-    );
-};
-
 const ButtonTemplate = (args: any) => <Button {...args} />;
 
 export const DefaultButton: any = ButtonTemplate.bind({});
@@ -38,4 +26,8 @@ DefaultButton.args = {
     type: 'button',
 
     children: <h3>버튼</h3>,
+};
+
+export const TextButtonStory: any = () => {
+    return <TextButton>New</TextButton>;
 };

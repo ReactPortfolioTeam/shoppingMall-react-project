@@ -11,5 +11,5 @@ export default {
 };
 
 export const HeaderStory = () => {
-    return <Header />;
+    return <Header item="item" />;
 };

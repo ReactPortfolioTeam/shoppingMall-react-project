@@ -4,7 +4,12 @@ module.exports = {
         es2021: true,
         node: true,
     },
-    extends: ['plugin:react/recommended', 'airbnb', 'prettier'],
+    extends: [
+        'plugin:react/recommended',
+        'airbnb',
+        'prettier',
+        'eslint:recommended',
+    ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaFeatures: {
@@ -38,5 +43,7 @@ module.exports = {
         'react-hooks/exhaustive-deps': 0,
         'react/destructuring-assignment': 0, // react props ...props
         'arrow-body-style': 0, // 화살표함수
+        'react/self-closing-comp': 1, // 셀프 클로징 img br 컴포넌트 바로 닫아야 하는 경우  /> 경고
+        'no-unused-vars': 1, // 사용하지 않는 변수 혹은 import 경고
     },
 };

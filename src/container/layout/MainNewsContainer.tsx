@@ -1,16 +1,29 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { ContainerProps, MainViewContainer } from './Main_view';
+import { ContainerProps, MainViewStyle } from './Main_view';
+import NewsContents from './News__contents';
 
 const MainNewsContainer: React.FC<ContainerProps> = (p: ContainerProps) => {
     const { children } = p;
     return (
-        <MainViewContainer>
-            <div style={{ height: '400px' }}>.new__contents</div>
-            <div style={{ height: '400px' }}>.new__contents</div>
-            <div style={{ height: '400px' }}>.new__contents</div>
-            <div style={{ height: '400px' }}>.new__contents</div>
-        </MainViewContainer>
+        <MainViewStyle id="main__view__newsContainer">
+            <NewsContents
+                imageSrc="https://picsum.photos/600/400"
+                imageAlt="randomImg"
+            />
+            <NewsContents
+                imageSrc="https://picsum.photos/600/400"
+                imageAlt="randomImg"
+            />
+            <NewsContents
+                imageSrc="https://picsum.photos/600/400"
+                imageAlt="randomImg"
+            />
+            <NewsContents
+                imageSrc="https://picsum.photos/600/400"
+                imageAlt="randomImg"
+            />
+        </MainViewStyle>
     );
 };
 

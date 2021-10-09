@@ -9,18 +9,19 @@ export interface ContainerProps {
 
 const MainView: React.FC<ContainerProps> = (p: ContainerProps) => {
     return (
-        <MainViewContainer id="main__view">
+        <MainViewStyle id="main__view">
             <MainNewsContainer />
             <MainCollectionContainer />
-        </MainViewContainer>
+        </MainViewStyle>
     );
 };
 
-export const MainViewContainer = styled.main`
+export const MainViewStyle = styled.main`
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 0;
-    margin: 0;
+    margin: 0 0 8px 0;
     border: 2px solid black;
 `;
 

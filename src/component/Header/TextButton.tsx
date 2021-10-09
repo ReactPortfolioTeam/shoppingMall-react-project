@@ -9,13 +9,14 @@ interface ButtonProps {
     height?: string;
 }
 
-const TextButton: React.FC<Props> = (props) => {
-    const { children, width = 'auto', height = 'auto' } = props;
-    return (
-        <TextButtonStyle width={width} height={height}>
-            {children}
-        </TextButtonStyle>
-    );
+const TextButton: React.FC<Props> = (props: Props) => {
+    const { children } = props;
+    return <TextButtonStyle {...props}>{children}</TextButtonStyle>;
+};
+
+TextButton.defaultProps = {
+    width: 'auto',
+    height: 'auto',
 };
 
 export default TextButton;

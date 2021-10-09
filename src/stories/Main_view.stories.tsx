@@ -1,4 +1,4 @@
-import MainView from 'container/layout/Main_view';
+import MainView from 'container/Main/Main_view';
 import React from 'react';
 
 export default {
@@ -6,7 +6,5 @@ export default {
     decoration: [(Story: any) => <Story />],
 };
 export const MainViewStories = () => {
-
     return <MainView />;
-
 };

@@ -8,7 +8,7 @@ const CollectionItem = (props: IAppProps) => {
         <CollectionItemStyle>
             <h4>New Arrivals</h4>
             <div>
-                <img src="https://picsum.photos/300" />
+                <img src="https://picsum.photos/300" alt="" />
                 <div
                     style={{
                         display: 'flex',

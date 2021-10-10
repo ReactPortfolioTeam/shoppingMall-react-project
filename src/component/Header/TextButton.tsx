@@ -40,17 +40,18 @@ const TextButtonStyle = styled.a<ButtonProps>`
         props.changeColor ? props.changeColorFrom : props.color};
     text-decoration: none;
 
-    :after {
+    ::after {
         display: block;
         content: '';
         margin-top: 3px;
-        border-bottom: 1px solid black;
-        transition: all 0.5s;
-        transform: scaleX(0);
-        width: ${(props) => props.width};
+        background-color: black;
+        transition: all 0.25s linear;
+        width: 0px;
+
+        height: 1px;
     }
-    :hover:after {
-        transform: scaleX(1);
+    :hover::after {
+        width: 100%;
     }
     :hover {
         color: ${(props) => props.changeColor && props.changeColorTo};

@@ -47,5 +47,6 @@ module.exports = {
         'no-unused-vars': 1, // 사용하지 않는 변수 혹은 import 경고
         'jsx-a11y/anchor-is-valid': 1, //  href="#" 일경우 경고
         'no-undef': 1,
+        'react/default-props-match-prop-types': 1,
     },
 };

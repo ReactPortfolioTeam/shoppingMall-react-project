@@ -1,4 +1,5 @@
-import Button, { ButtonHover } from 'component/Header/Button';
+import Button from 'component/Header/Button';
+import { ButtonHover } from 'component/Header/ButtonHover';
 import TextButton from 'component/Header/TextButton';
 import React from 'react';
 import styled from 'styled-components';
@@ -18,9 +19,24 @@ export default {
 
 const StoryContainer = styled.div`
     padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 `;
 
 const ButtonTemplate = (args: any) => <Button {...args} />;
+
+export const Buttons: any = () => {
+    return (
+        <>
+            <Button>Button</Button>
+
+            <ButtonHover>ButtonHover</ButtonHover>
+
+            <TextButton>TextButton</TextButton>
+        </>
+    );
+};
 
 export const DefaultButton: any = ButtonTemplate.bind({});
 DefaultButton.args = {
@@ -36,7 +52,7 @@ export const TextButtonStory: any = () => {
 
 export const ButtoHoverStory: any = () => {
     return (
-        <ButtonHover width="350px">
+        <ButtonHover isOverrlay width="350px">
             <>
                 Sign up for newsletters
                 <img src="/images/icon/arrow-right.svg" alt="arrow" />

@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
+import { JunhanStyle } from './Junhan.style';
 
 const GlobalStyle = createGlobalStyle`
-
+${JunhanStyle}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -75,7 +76,11 @@ h5{
 h6{
 	font-size: 0.67rem;
 }
-
+.line{
+	width:100%;
+	color:  #dedede;
+	border: 0.5px solid #dedede;
+}
 `;
 
 export default GlobalStyle;

@@ -76,11 +76,7 @@ h5{
 h6{
 	font-size: 0.67rem;
 }
-.line{
-	width:100%;
-	color:  #dedede;
-	border: 0.5px solid #dedede;
-}
+
 `;
 
 export default GlobalStyle;

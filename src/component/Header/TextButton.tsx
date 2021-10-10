@@ -47,6 +47,7 @@ const TextButtonStyle = styled.a<ButtonProps>`
         border-bottom: 1px solid black;
         transition: all 0.5s;
         transform: scaleX(0);
+        width: ${(props) => props.width};
     }
     :hover:after {
         transform: scaleX(1);

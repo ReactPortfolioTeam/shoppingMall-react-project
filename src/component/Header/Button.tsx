@@ -1,13 +1,14 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 
-interface Props {
-    children: string;
+export interface ButtonProps {
+    children: string | ReactElement<any, any>;
     width?: string;
     height?: string;
+    type?: 'button' | 'reset' | 'submit';
 }
 
-const Button = styled.button<Props>`
+const Button = styled.button<ButtonProps>`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     padding: 0 10.8px;
@@ -24,5 +25,6 @@ const Button = styled.button<Props>`
 Button.defaultProps = {
     width: 'auto',
     height: '2rem',
+    type: 'button',
 };
 export default Button;

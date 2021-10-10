@@ -57,6 +57,7 @@ const Header: React.FC<Props> = ({ item = 'item', count = 3 }) => {
                     </div>
                 </div>
             </HeaderContainer>
+            <hr className="line" />
         </>
     );
 };
@@ -71,7 +72,7 @@ const HeaderContainer = styled.header`
     padding: 0 2rem;
     min-height: 86px;
     width: 100%;
-    border-bottom: 1px solid #dedede;
+
     & > div {
         display: flex;
         justify-content: space-between;
@@ -109,8 +110,11 @@ const HeaderContainer = styled.header`
         height: calc(21.4 / 16 * 1rem);
         background-color: #000000;
         color: #fff;
-        border-radius: 40%;
+        text-align: center;
+        padding: 0;
+        border-radius: 50%;
         margin-right: 10px;
+        border: none;
         &:hover {
             cursor: pointer;
         }

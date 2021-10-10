@@ -1,3 +1,4 @@
+import Footer from 'container/layout/Footer';
 import Header from 'container/layout/Header';
 import React from 'react';
 
@@ -12,4 +13,8 @@ export default {
 
 export const HeaderStory = () => {
     return <Header item="item" />;
+};
+
+export const FooterStory = () => {
+    return <Footer />;
 };

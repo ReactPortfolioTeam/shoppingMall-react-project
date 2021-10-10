@@ -1,4 +1,5 @@
 import Button from 'component/Header/Button';
+import { ButtonHover } from 'component/Header/ButtonHover';
 import TextButton from 'component/Header/TextButton';
 import React from 'react';
 import styled from 'styled-components';
@@ -8,17 +9,34 @@ export default {
 
     decorators: [
         // 아래에 export 한 컴포넌트를 감싸는 방법
-        (Story: any) => <Story />,
+        (Story: any) => (
+            <StoryContainer>
+                <Story />
+            </StoryContainer>
+        ),
     ],
 };
 
-interface Props {
-    color: string;
-    type: 'button' | 'submit' | 'reset' | undefined;
-    children: React.ReactNode;
-}
+const StoryContainer = styled.div`
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+`;
 
 const ButtonTemplate = (args: any) => <Button {...args} />;
+
+export const Buttons: any = () => {
+    return (
+        <>
+            <Button>Button</Button>
+
+            <ButtonHover>ButtonHover</ButtonHover>
+
+            <TextButton>TextButton</TextButton>
+        </>
+    );
+};
 
 export const DefaultButton: any = ButtonTemplate.bind({});
 DefaultButton.args = {
@@ -30,4 +48,15 @@ DefaultButton.args = {
 
 export const TextButtonStory: any = () => {
     return <TextButton>New</TextButton>;
+};
+
+export const ButtoHoverStory: any = () => {
+    return (
+        <ButtonHover isOverrlay width="350px">
+            <>
+                Sign up for newsletters
+                <img src="/images/icon/arrow-right.svg" alt="arrow" />
+            </>
+        </ButtonHover>
+    );
 };

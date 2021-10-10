@@ -1,6 +1,6 @@
-import Button from 'component/Header/Button';
-import { ButtonHover } from 'component/Header/ButtonHover';
-import TextButton from 'component/Header/TextButton';
+import Button from 'component/Button/Button';
+import { ButtonHover } from 'component/Button/ButtonHover';
+import TextButton from 'component/Button/TextButton';
 import React from 'react';
 import styled from 'styled-components';
 

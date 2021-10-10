@@ -44,6 +44,7 @@ const ButtonHoverStyle = styled.button<ButtonHoverProps>`
     background-color: #fff;
     cursor: pointer;
     transition: all 0.25s;
+
     :hover {
         color: rgba(85, 85, 85, 1);
         border: 1px solid #000;

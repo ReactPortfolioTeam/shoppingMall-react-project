@@ -1,5 +1,5 @@
-import TextButton from 'component/Header/TextButton';
-import Button from 'component/Header/Button';
+import TextButton from 'component/Button/TextButton';
+import Button from 'component/Button/Button';
 
 import React from 'react';
 import styled from 'styled-components';

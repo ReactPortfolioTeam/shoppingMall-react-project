@@ -115,6 +115,7 @@ const HeaderContainer = styled.header`
         border-radius: 50%;
         margin-right: 10px;
         border: none;
+
         &:hover {
             cursor: pointer;
         }

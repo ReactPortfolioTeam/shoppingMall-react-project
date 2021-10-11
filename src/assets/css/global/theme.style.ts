@@ -1,14 +1,6 @@
 /*
-
-html font-size 16px 기준
-
-h1 : 2rem, 32px
-h2 : 1.5rem, 24px
-h3 : 1.33rem, 21.28px
-h4 : 1.17rem, 18.72px
-h5 : 0.83rem, 13.28px
-h6 : 0.67rem, 10.72px
-
+Theme 사용하기전 TypeScript에서 에러가 뜨니
+아래처럼 모듈로 정의를 해주어야 사용이 가능하다.
 
 */
 
@@ -57,6 +49,16 @@ declare module 'styled-components' {
             tablet: string;
             desktopL: string;
         };
+        colors: {
+            darkRed: string;
+            red: string;
+            white: string;
+            blue: string;
+            dark: string;
+            gray: string;
+            darkGray: string;
+            gold: string;
+        };
     }
 }
 
@@ -100,13 +102,14 @@ const fonts = {
 };
 
 const colors = {
-    dark_red: '#842424',
+    darkRed: '#842424',
     red: '#cc4242',
     white: '#fff',
     blue: '#4d90fe',
     dark: '1f1f1f',
     gray: '#666',
-    dark_gray: '#333',
+    darkGray: '#333',
+    gold: '#877551',
 };
 
 const size = {
@@ -122,35 +125,10 @@ const device = {
     desktopL: `@media only screen and (max-width: ${size.desktop})`,
 };
 
-// 테마에 따라 다른 값을 갖는 색상 값입니다
-const lightThemeColors = {
-    ...colors,
-};
-
-// 테마와 관련없이 공통으로 사용되는 변수들입니다
-const Theme = {
-    margins,
-    paddings,
-    fonts,
-    device,
-};
-
 export const MyTheme: DefaultTheme = {
     margins,
     paddings,
     fonts,
     device,
+    colors,
 };
-// const darkThemeColors = {
-//     ...colors,
-//     primary: '#fff',
-//     secondary: '#333',
-//     tertiary: '#d4d0c4',
-// };
-
-// 각 테마는 공통 변수와 함께, 각기 다른 색상 값들을 갖습니다.
-// 해당 프로젝트에선 lightTheme를 먼저 작성하고 추후에 darkTheme 업데이트 논의 예정
-// export const darkTheme = {
-//     ...defalutTheme,
-//     colors: darkThemeColors,
-// };

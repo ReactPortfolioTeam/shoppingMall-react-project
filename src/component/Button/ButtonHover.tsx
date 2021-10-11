@@ -1,10 +1,13 @@
 /* eslint-disable react/default-props-match-prop-types */
+import { MyTheme } from 'assets/css/global/theme.style';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { ButtonProps } from './Button';
 
 interface ButtonHoverProps extends ButtonProps {
     isOverrlay?: boolean;
+    backgroundColor?: string;
+    color?: string;
 }
 
 export const ButtonHover: React.FC<ButtonHoverProps> = (
@@ -24,6 +27,8 @@ ButtonHover.defaultProps = {
     height: '54px',
     type: 'button',
     isOverrlay: false,
+    backgroundColor: MyTheme.colors.white,
+    color: MyTheme.colors.gray,
 };
 
 const ButtonHoverContainer = styled.div`
@@ -36,17 +41,18 @@ const ButtonHoverStyle = styled.button<ButtonHoverProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: rgba(85, 85, 85, 0.7);
+    color: ${(props) => props.color};
+    opacity: 0.9;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
     padding: 0 15px;
     border: 1px solid rgba(55, 55, 55, 0.5);
-    background-color: #fff;
+    background-color: ${(props) => props.backgroundColor};
     cursor: pointer;
     transition: all 0.25s;
 
     :hover {
-        color: rgba(85, 85, 85, 1);
+        opacity: 1;
         border: 1px solid #000;
         ${(props) =>
             props.isOverrlay &&

@@ -57,11 +57,13 @@ const InputContainer = styled.div<StyleProps>`
     position: relative;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
+    cursor: pointer;
     & > label {
         position: absolute;
         left: ${(props) => (props.value !== '' ? '0' : '10px')};
         top: ${(props) => (props.value !== '' ? '-20px' : '13px')};
         transition: all 0.25s;
+        cursor: pointer;
         color: ${(props) => props.theme.colors.gray};
     }
     & > input {
@@ -79,8 +81,9 @@ const InputContainer = styled.div<StyleProps>`
         }
     }
     :focus-within {
+        cursor: pointer;
         & > label {
-            transition: all 1000s;
+            transition: all 0.25s;
             top: -20px;
             left: 0;
         }

@@ -27,8 +27,8 @@ ButtonHover.defaultProps = {
     height: '54px',
     type: 'button',
     isOverrlay: false,
-    backgroundColor: MyTheme.colors.white,
-    color: MyTheme.colors.gray,
+    backgroundColor: '#fff',
+    color: '#666',
 };
 
 const ButtonHoverContainer = styled.div`

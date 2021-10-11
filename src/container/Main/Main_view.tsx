@@ -1,3 +1,4 @@
+import { MyTheme } from 'assets/css/global/theme.style';
 import * as React from 'react';
 import styled from 'styled-components';
 import MainCollectionContainer from './MainCollectionContainer';
@@ -10,8 +11,10 @@ export interface ContainerProps {
 const MainView: React.FC<ContainerProps> = (p: ContainerProps) => {
     return (
         <MainViewStyle id="main__view">
-            <MainNewsContainer />
-            <MainCollectionContainer />
+            <MainContentsStyle>
+                <MainNewsContainer />
+                <MainCollectionContainer />
+            </MainContentsStyle>
         </MainViewStyle>
     );
 };
@@ -21,8 +24,13 @@ export const MainViewStyle = styled.main`
     flex-direction: column;
     align-items: center;
     padding: 0;
-    margin: 0 0 8px 0;
-    border: 2px solid black;
+    margin: 0 0 ${MyTheme.margins.m10} 0;
+`;
+export const MainContentsStyle = styled.section`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc((${MyTheme.size.desktop}) * 0.8);
 `;
 
 export default MainView;

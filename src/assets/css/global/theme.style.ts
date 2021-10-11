@@ -59,6 +59,11 @@ declare module 'styled-components' {
             darkGray: string;
             gold: string;
         };
+        size: {
+            mobile: string;
+            tablet: string;
+            desktop: string;
+        };
     }
 }
 
@@ -131,4 +136,5 @@ export const MyTheme: DefaultTheme = {
     fonts,
     device,
     colors,
+    size,
 };

@@ -8,19 +8,19 @@ const MainNewsContainer: React.FC<ContainerProps> = (p: ContainerProps) => {
     return (
         <MainViewStyle id="main__view__newsContainer">
             <NewsContents
-                imageSrc="https://picsum.photos/600/400"
+                imageSrc="https://picsum.photos/800/600"
                 imageAlt="randomImg"
             />
             <NewsContents
-                imageSrc="https://picsum.photos/600/400"
+                imageSrc="https://picsum.photos/800/600"
                 imageAlt="randomImg"
             />
             <NewsContents
-                imageSrc="https://picsum.photos/600/400"
+                imageSrc="https://picsum.photos/800/600"
                 imageAlt="randomImg"
             />
             <NewsContents
-                imageSrc="https://picsum.photos/600/400"
+                imageSrc="https://picsum.photos/800/600"
                 imageAlt="randomImg"
             />
         </MainViewStyle>

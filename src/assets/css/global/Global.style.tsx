@@ -105,7 +105,6 @@ html{
 }
 a,a:link,a:visited{
 	text-decoration:none;
-	
 }
 ${({ theme }) => css`
         h1 {

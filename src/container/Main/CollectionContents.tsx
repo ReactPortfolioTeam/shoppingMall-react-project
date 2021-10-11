@@ -7,10 +7,22 @@ export interface IAppProps {}
 const CollectionContents = (props: IAppProps) => {
     return (
         <CollectionContentsStyle>
-            <CollectionItem />
-            <CollectionItem />
-            <CollectionItem />
-            <CollectionItem />
+            <CollectionItem
+                imgSrc="https://picsum.photos/300"
+                imgAlt="sampleImg"
+            />
+            <CollectionItem
+                imgSrc="https://picsum.photos/300"
+                imgAlt="sampleImg"
+            />
+            <CollectionItem
+                imgSrc="https://picsum.photos/300"
+                imgAlt="sampleImg"
+            />
+            <CollectionItem
+                imgSrc="https://picsum.photos/300"
+                imgAlt="sampleImg"
+            />
         </CollectionContentsStyle>
     );
 };

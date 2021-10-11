@@ -7,7 +7,6 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
 function App() {
-    console.log(MyTheme);
     return (
         <ThemeProvider theme={MyTheme}>
             <GlobalStyle />

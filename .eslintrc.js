@@ -48,5 +48,6 @@ module.exports = {
         'jsx-a11y/anchor-is-valid': 1, //  href="#" 일경우 경고
         'no-undef': 1,
         'react/default-props-match-prop-types': 1,
+        camelcase: 0,
     },
 };

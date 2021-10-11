@@ -59,15 +59,13 @@ const InputContainer = styled.div<StyleProps>`
     height: ${(props) => props.height};
     & > label {
         position: absolute;
-        left: ${(props) => props.theme.paddings.base};
-        top: calc(${(props) => props.theme.paddings.base} + 3px);
-        top: ${(props) => props.value && '-20px'};
-        left: ${(props) => props.value && '0'};
+        left: ${(props) => (props.value !== '' ? '0' : '10px')};
+        top: ${(props) => (props.value !== '' ? '-20px' : '13px')};
         transition: all 0.25s;
         color: ${(props) => props.theme.colors.gray};
     }
     & > input {
-        padding: ${(props) => props.theme.paddings.base};
+        padding: ${(props) => props.theme.paddings.p10};
         width: 100%;
         height: 100%;
         box-sizing: border-box;
@@ -82,6 +80,7 @@ const InputContainer = styled.div<StyleProps>`
     }
     :focus-within {
         & > label {
+            transition: all 1000s;
             top: -20px;
             left: 0;
         }

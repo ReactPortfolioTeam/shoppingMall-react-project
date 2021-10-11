@@ -2,6 +2,8 @@ import { createGlobalStyle, css } from 'styled-components';
 import { JunhanStyle } from './Junhan.style';
 
 const GlobalStyle = createGlobalStyle`
+
+${JunhanStyle}
 @font-face {
     font-family: "3sixteen-Futura";
     src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.eot?v=8475405467952757196 ");
@@ -49,7 +51,7 @@ const GlobalStyle = createGlobalStyle`
 
 
 
-${JunhanStyle}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -110,21 +112,21 @@ ${({ theme }) => css`
             font-size: ${theme.fonts.size.title};
         }
 		h2{
-			font-size: ${theme.fonts.size.xl};
+			font-size: ${theme.fonts.size.fs18};
 		}
 		h3{
-			font-size: ${theme.fonts.size.lg};
+			font-size: ${theme.fonts.size.fs16};
 
 		h4{
 			font-size: ${theme.fonts.size.base};
 
 		}
 		h5{
-			font-size: ${theme.fonts.size.sm};
+			font-size: ${theme.fonts.size.fs12};
 
 		}
 		h6{
-			font-size: ${theme.fonts.size.xs};
+			font-size: ${theme.fonts.size.fs10};
 
 		}
 		body{

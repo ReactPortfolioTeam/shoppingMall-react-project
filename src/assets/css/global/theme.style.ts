@@ -9,33 +9,33 @@ import { DefaultTheme } from 'styled-components';
 declare module 'styled-components' {
     export interface DefaultTheme {
         margins: {
-            xxs: string;
-            xs: string;
-            sm: string;
-            base: string;
-            lg: string;
-            xl: string;
-            xxl: string;
+            m1: string;
+            m2_5: string;
+            m5: string;
+            m10: string;
+            m20: string;
+            m40: string;
+            m80: string;
         };
         paddings: {
-            xxs: string;
-            xs: string;
-            sm: string;
-            base: string;
-            lg: string;
-            xl: string;
-            xxl: string;
+            p1: string;
+            p2_5: string;
+            p5: string;
+            p10: string;
+            p20: string;
+            p40: string;
+            p80: string;
         };
         fonts: {
             family: {
                 base: string;
             };
             size: {
-                xs: string;
-                sm: string;
+                fs10: string;
+                fs12: string;
                 base: string;
-                lg: string;
-                xl: string;
+                fs16: string;
+                fs18: string;
                 title: string;
             };
             weight: {
@@ -63,23 +63,23 @@ declare module 'styled-components' {
 }
 
 const margins = {
-    xxs: '0.071429rem', // 1px
-    xs: '0.178571rem', // 2.5
-    sm: '0.357143rem', // 5
-    base: '0.714286rem', // 10
-    lg: '1.428571rem', // 20
-    xl: '2.857143rem', // 40
-    xxl: '5.714286rem', // 80
+    m1: '0.071429rem', // 1px
+    m2_5: '0.178571rem', // 2.5
+    m5: '0.357143rem', // 5
+    m10: '0.714286rem', // 10
+    m20: '1.428571rem', // 20
+    m40: '2.857143rem', // 40
+    m80: '5.714286rem', // 80
 };
 
 const paddings = {
-    xxs: '0.071429rem',
-    xs: '0.178571rem',
-    sm: '0.357143rem',
-    base: '0.714286rem',
-    lg: '1.428571rem',
-    xl: '2.857143rem',
-    xxl: '5.714286rem',
+    p1: '0.071429rem',
+    p2_5: '0.178571rem',
+    p5: '0.357143rem',
+    p10: '0.714286rem',
+    p20: '1.428571rem',
+    p40: '2.857143rem',
+    p80: '5.714286rem',
 };
 
 const fonts = {
@@ -87,11 +87,11 @@ const fonts = {
         base: `'3sixteen-Futura',Helvetica Neue,Helvetica,Arial,sans-serif;`,
     },
     size: {
-        xs: '0.71428rem', // 10px
-        sm: '0.857rem', // 12px
+        fs10: '0.71428rem', // 10px
+        fs12: '0.857rem', // 12px
         base: '1rem', // 14px
-        lg: '1.142rem', // 16px
-        xl: '1.285rem', // 18px
+        fs16: '1.142rem', // 16px
+        fs18: '1.285rem', // 18px
         title: '1.428rem', // 20px
     },
     weight: {

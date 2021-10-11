@@ -1,26 +1,20 @@
+import GlobalStyle from 'assets/css/global/Global.style';
+import { MyTheme } from 'assets/css/global/theme.style';
+import Footer from 'container/layout/Footer';
+import Header from 'container/layout/Header';
+import MainView from 'container/Main/Main_view';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from 'styled-components';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={MyTheme}>
+            <GlobalStyle />
+            <Header item="dd" />
+            <MainView />
+            <Footer />
+        </ThemeProvider>
+    );
 }
 
 export default App;

@@ -11,7 +11,7 @@ export interface ButtonProps {
 const Button = styled.button<ButtonProps>`
     width: ${(props) => props.width};
     height: ${(props) => props.height};
-    padding: 0 ${(props) => props.theme.paddings.base};
+    padding: 0 ${(props) => props.theme.paddings.p10};
     border: 1px solid black;
     background-color: ${(props) => props.theme.colors.white};
     border-radius: 3px;

@@ -44,7 +44,7 @@ const TextButtonStyle = styled.a<ButtonProps>`
         display: block;
         content: '';
         margin-top: 3px;
-        background-color: black;
+        background-color: ${(props) => props.theme.colors.dark};
         transition: all 0.25s linear;
         width: 0px;
 

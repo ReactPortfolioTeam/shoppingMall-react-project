@@ -1,8 +1,10 @@
+import { MyTheme } from 'assets/css/global/theme.style';
 import Button from 'component/Button/Button';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import TextButton from 'component/Button/TextButton';
 import React from 'react';
 import styled from 'styled-components';
+import { StoryContainer } from './StoryContainer';
 
 export default {
     title: 'Button/Button', // "문서"/"문서"/"컴포넌트명" 1차분류/2차분류/3차분류
@@ -17,13 +19,6 @@ export default {
     ],
 };
 
-const StoryContainer = styled.div`
-    padding: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-`;
-
 const ButtonTemplate = (args: any) => <Button {...args} />;
 
 export const Buttons: any = () => {
@@ -32,7 +27,13 @@ export const Buttons: any = () => {
             <Button>Button</Button>
 
             <ButtonHover>ButtonHover</ButtonHover>
-
+            <ButtonHover isOverrlay>ButtonHover isOverrlay</ButtonHover>
+            <ButtonHover
+                backgroundColor={MyTheme.colors.gold}
+                color={MyTheme.colors.white}
+            >
+                ButtonHover ChangeBackground-color
+            </ButtonHover>
             <TextButton>TextButton</TextButton>
         </>
     );

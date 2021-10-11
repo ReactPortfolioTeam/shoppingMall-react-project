@@ -1,42 +1,98 @@
 /*
-
-html font-size 16px 기준
-
-h1 : 2rem, 32px
-h2 : 1.5rem, 24px
-h3 : 1.33rem, 21.28px
-h4 : 1.17rem, 18.72px
-h5 : 0.83rem, 13.28px
-h6 : 0.67rem, 10.72px
-
+Theme 사용하기전 TypeScript에서 에러가 뜨니
+아래처럼 모듈로 정의를 해주어야 사용이 가능하다.
 
 */
 
+import { DefaultTheme } from 'styled-components';
+
+declare module 'styled-components' {
+    export interface DefaultTheme {
+        margins: {
+            xxs: string;
+            xs: string;
+            sm: string;
+            base: string;
+            lg: string;
+            xl: string;
+            xxl: string;
+        };
+        paddings: {
+            xxs: string;
+            xs: string;
+            sm: string;
+            base: string;
+            lg: string;
+            xl: string;
+            xxl: string;
+        };
+        fonts: {
+            family: {
+                base: string;
+            };
+            size: {
+                xs: string;
+                sm: string;
+                base: string;
+                lg: string;
+                xl: string;
+                title: string;
+            };
+            weight: {
+                light: number;
+                normal: number;
+                bold: number;
+            };
+        };
+        device: {
+            mobile: string;
+            tablet: string;
+            desktopL: string;
+        };
+        colors: {
+            darkRed: string;
+            red: string;
+            white: string;
+            blue: string;
+            dark: string;
+            gray: string;
+            darkGray: string;
+            gold: string;
+        };
+    }
+}
+
 const margins = {
-    sm: "0.67rem",
-    base: "1rem",
-    lg: "1.5rem",
-    xl: "2rem",
+    xxs: '0.071429rem', // 1px
+    xs: '0.178571rem', // 2.5
+    sm: '0.357143rem', // 5
+    base: '0.714286rem', // 10
+    lg: '1.428571rem', // 20
+    xl: '2.857143rem', // 40
+    xxl: '5.714286rem', // 80
 };
-  
+
 const paddings = {
-    sm: "0.67rem",
-    base: "1rem",
-    lg: "1.5rem",
-    xl: "2rem",
+    xxs: '0.071429rem',
+    xs: '0.178571rem',
+    sm: '0.357143rem',
+    base: '0.714286rem',
+    lg: '1.428571rem',
+    xl: '2.857143rem',
+    xxl: '5.714286rem',
 };
-  
+
 const fonts = {
     family: {
-        base: `'Noto Sans KR', sans-serif`,
-        title: `'Merriweather', serif`,
+        base: `'3sixteen-Futura',Helvetica Neue,Helvetica,Arial,sans-serif;`,
     },
     size: {
-        sm: "0.83rem",
-        base: "1.17rem",
-        lg: "1.33rem",
-        xl: "1.5rem",
-        title: "2rem",
+        xs: '0.71428rem', // 10px
+        sm: '0.857rem', // 12px
+        base: '1rem', // 14px
+        lg: '1.142rem', // 16px
+        xl: '1.285rem', // 18px
+        title: '1.428rem', // 20px
     },
     weight: {
         light: 100,
@@ -44,56 +100,35 @@ const fonts = {
         bold: 700,
     },
 };
-  
+
 const colors = {
-    red: "#ff4d4d",
-    yellow: "#ffff4d",
-    blue: "#0099ff",
+    darkRed: '#842424',
+    red: '#cc4242',
+    white: '#fff',
+    blue: '#4d90fe',
+    dark: '1f1f1f',
+    gray: '#666',
+    darkGray: '#333',
+    gold: '#877551',
 };
-  
+
 const size = {
-    mobile: "425px",
-    tablet: "768px",
-    desktop: "1440px",
+    mobile: '425px',
+    tablet: '720px',
+    desktop: '1024px',
 };
-  
+
 // 미디어 쿼리의 중복 코드를 줄이기위해 정의된 변수입니다
 const device = {
     mobile: `@media only screen and (max-width: ${size.mobile})`,
     tablet: `@media only screen and (max-width: ${size.tablet})`,
     desktopL: `@media only screen and (max-width: ${size.desktop})`,
 };
-  
-// 테마에 따라 다른 값을 갖는 색상 값입니다 
-const lightThemeColors = {
-    ...colors,
-    primary: "#333",
-    secondary: "#fff",
-    tertiary: "#808080",
-};
-  
-const darkThemeColors = {
-    ...colors,
-    primary: "#fff",
-    secondary: "#333",
-    tertiary: "#d4d0c4",
-};
-  
-// 테마와 관련없이 공통으로 사용되는 변수들입니다
-const defalutTheme = {
+
+export const MyTheme: DefaultTheme = {
     margins,
     paddings,
     fonts,
     device,
-};
-  
-// 각 테마는 공통 변수와 함께, 각기 다른 색상 값들을 갖습니다.
-export const darkTheme = {
-    ...defalutTheme,
-    colors: darkThemeColors,
-};
-  
-export const lightTheme = {
-    ...defalutTheme,
-    colors: lightThemeColors,
+    colors,
 };

@@ -1,7 +1,54 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import { JunhanStyle } from './Junhan.style';
 
 const GlobalStyle = createGlobalStyle`
+@font-face {
+    font-family: "3sixteen-Futura";
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.eot?v=8475405467952757196 ");
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.eot?v=8475405467952757196 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.woff?v=2055986069778670836 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.woff2?2821 ") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "3sixteen-Futura";
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.eot?v=996123339364548918 ");
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.eot?v=996123339364548918 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.woff?v=13076472133656725296 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.woff2?2821 ") format("woff2");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "3sixteen-Futura";
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.eot?v=13443831076423191093 ");
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.eot?v=13443831076423191093 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.woff?v=15614256649977071015 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.woff2?2821 ") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "3sixteen-Futura";
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.eot?v=1443922868093412514 ");
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.eot?v=1443922868093412514 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.woff?v=7700426176577362567 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.woff2?2821 ") format("woff2");
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: "3sixteen-Brewery";
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.eot?v=12899612267492566931 ");
+    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.eot?v=12899612267492566931 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.woff?v=12665231174229498725 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.woff2?2821 ") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+
+
 ${JunhanStyle}
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -15,7 +62,7 @@ table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed, 
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+time, mark, audio, video,input {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,7 +70,8 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
     box-sizing:border-box;
-	font-family: sans-serif;
+	font-family: '3sixteen-Futura',"Helvetica Neue",Helvetica,Arial,sans-serif;
+	
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -49,33 +97,44 @@ table {
 	border-spacing: 0;
 }
 html{
-	font-size: 16px;
+	font-size: 14px;
 	position: relative;
-	height: 100%;
+	
 }
 a,a:link,a:visited{
 	text-decoration:none;
 	
 }
+${({ theme }) => css`
+        h1 {
+            font-size: ${theme.fonts.size.title};
+        }
+		h2{
+			font-size: ${theme.fonts.size.xl};
+		}
+		h3{
+			font-size: ${theme.fonts.size.lg};
 
-h1{
-	font-size: 2rem;
-}
-h2{
-	font-size: 1.5rem;
-}
-h3{
-	font-size: 1.33rem;
-}
-h4{
-	font-size: 1.17rem;
-}
-h5{
-	font-size: 0.83rem;
-}
-h6{
-	font-size: 0.67rem;
-}
+		h4{
+			font-size: ${theme.fonts.size.base};
+
+		}
+		h5{
+			font-size: ${theme.fonts.size.sm};
+
+		}
+		h6{
+			font-size: ${theme.fonts.size.xs};
+
+		}
+		body{
+			font-family: ${theme.fonts.family.base}
+			font-weight: ${theme.fonts.weight.normal};
+          	font-size: ${theme.fonts.size.base};
+		}
+    `}
+
+
 
 `;
 

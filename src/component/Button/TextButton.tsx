@@ -12,6 +12,7 @@ interface ButtonProps {
     changeColor?: boolean;
     changeColorFrom?: string;
     changeColorTo?: string;
+    onClick?: any;
 }
 
 const TextButton: React.FC<Props> = (props: Props) => {
@@ -27,6 +28,7 @@ TextButton.defaultProps = {
     changeColor: false,
     changeColorFrom: '#666',
     changeColorTo: '#000',
+    onClick: () => {},
 };
 
 export default TextButton;

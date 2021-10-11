@@ -15,4 +15,21 @@ export const JunhanStyle = css`
 
         user-select: none;
     }
+    .rotate90 {
+        transform: rotate(90deg);
+    }
+    .filter-gray {
+        filter: invert(41%) sepia(1%) saturate(0%) hue-rotate(347deg)
+            brightness(95%) contrast(92%);
+    }
+    .center-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        color: #666;
+        border: none;
+        cursor: pointer;
+    }
 `;

@@ -98,7 +98,7 @@ const FooterContainer = styled.footer`
     .footer-content__div {
         display: flex;
         height: 210px;
-        padding: 40px;
+        padding: ${(props) => props.theme.paddings.p40};
         & > div {
             display: flex;
             flex-direction: column;
@@ -114,14 +114,14 @@ const FooterContainer = styled.footer`
                 display: flex;
             }
             li {
-                margin-right: 20px;
+                margin-right: ${(props) => props.theme.margins.m20};
             }
         }
         & > div:last-child {
             width: 190px;
             align-items: center;
             & img:first-of-type {
-                margin-right: 20px;
+                margin-right: ${(props) => props.theme.margins.m20};
             }
             img {
                 width: 14px;

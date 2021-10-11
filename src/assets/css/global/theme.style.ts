@@ -106,7 +106,7 @@ const colors = {
     red: '#cc4242',
     white: '#fff',
     blue: '#4d90fe',
-    dark: '1f1f1f',
+    dark: '#1f1f1f',
     gray: '#666',
     darkGray: '#333',
     gold: '#877551',

@@ -5,17 +5,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface Props {
-    item: string;
     count?: number;
+    setMenu: any;
 }
 
-const Header: React.FC<Props> = ({ item = 'item', count = 3 }) => {
+const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
     return (
         <>
             <HeaderContainer>
                 <div className="wrapper">
                     <nav className="left-menu__nav">
-                        <h2 className="screen-out__h2">메뉴{item}</h2>
+                        <h2 className="screen-out__h2">메뉴</h2>
                         <ul>
                             <li>
                                 <TextButton href="#">Shop</TextButton>
@@ -37,7 +37,11 @@ const Header: React.FC<Props> = ({ item = 'item', count = 3 }) => {
                                 </TextButton>
                             </li>
                             <li>
-                                <TextButton changeColor href="#">
+                                <TextButton
+                                    changeColor
+                                    href="#"
+                                    onClick={() => setMenu('login')}
+                                >
                                     Sign in
                                 </TextButton>
                             </li>
@@ -69,7 +73,7 @@ Header.defaultProps = {
 export default Header;
 
 const HeaderContainer = styled.header`
-    padding: 0 2rem;
+    padding: 0 ${(props) => props.theme.paddings.p40};
     min-height: 86px;
     width: 100%;
 
@@ -82,14 +86,21 @@ const HeaderContainer = styled.header`
     .left-menu__nav {
         display: flex;
         align-items: center;
+
         & > ul {
             display: flex;
             align-items: center;
             height: 100%;
 
             & > li {
-                padding: 0 calc(10.8 / 16 * 1rem);
+                padding: 0 ${(props) => props.theme.paddings.p10};
+                & > a {
+                    font-weight: ${(props) => props.theme.fonts.weight.bold};
+                }
             }
+        }
+        & > :last-child {
+            font-weight: ${(props) => props.theme.fonts.weight.bold};
         }
     }
     .screen-out__h2 {
@@ -101,19 +112,19 @@ const HeaderContainer = styled.header`
         height: 100%;
         & img {
             width: 5rem;
-            height: calc(30 / 16 * 1rem);
+            height: calc(30 / 14 * 1rem);
             object-fit: cover;
         }
     }
     .badge__button {
-        width: calc(21.4 / 16 * 1rem);
-        height: calc(21.4 / 16 * 1rem);
+        width: calc(21.4 / 14 * 1rem);
+        height: calc(21.4 / 14 * 1rem);
         background-color: #000000;
         color: #fff;
         text-align: center;
         padding: 0;
         border-radius: 50%;
-        margin-right: 10px;
+        margin-right: ${(props) => props.theme.margins.m10};
         border: none;
 
         &:hover {

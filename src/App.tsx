@@ -1,5 +1,6 @@
 import GlobalStyle from 'assets/css/global/Global.style';
 import { MyTheme } from 'assets/css/global/theme.style';
+import About from 'container/About/About';
 import Footer from 'container/layout/Footer';
 import Header from 'container/layout/Header';
 import Login from 'container/Login/Login';
@@ -16,6 +17,7 @@ function App() {
             <Header setMenu={setMenu} />
             {menu === '' && <MainView />}
             {menu === 'login' && <Login />}
+            {menu === 'about' && <About />}
 
             <Footer />
         </ThemeProvider>

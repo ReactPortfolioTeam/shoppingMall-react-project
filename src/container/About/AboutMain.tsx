@@ -35,6 +35,7 @@ const AboutMainContainer = styled.div`
     padding: 0 13%;
     display: flex;
     background-image: url('https://picsum.photos/2000');
+    background-repeat: no-repeat;
     & > div {
         width: 50%;
         display: flex;

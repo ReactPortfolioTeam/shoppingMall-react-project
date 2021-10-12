@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/v1/signup
+content-type: application/json
+
+{
+    "password": "sample123",
+    "userid": "sample",
+    "name": "sample",
+    "confirmPw": "sample123",
+    "email": "you@example.com",
+    "address": "sample",
+}

@@ -11,6 +11,6 @@ export default {
     ],
 };
 
-export const LoginStory = () => {
+export const AboutStory = () => {
     return <About />;
 };

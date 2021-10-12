@@ -53,17 +53,13 @@ const MainCollectionSidebar = (props: IAppProps) => {
 const CollectionSidebarStyle = styled.div`
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: auto;
     padding: ${MyTheme.paddings.p5};
+    padding-right: ${MyTheme.paddings.p40};
+    margin: 0 ${MyTheme.margins.m80} 0 ${MyTheme.margins.m5};
     border-right: 1px solid black;
     & > h2 {
         margin-bottom: ${MyTheme.margins.m5};
-    }
-
-    a:hover {
-        font-size: larger;
-        color: ${MyTheme.colors.gray};
-        transition: all 100ms ease-out;
     }
 `;
 

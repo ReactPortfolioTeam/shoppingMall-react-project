@@ -20,17 +20,16 @@ const MainView: React.FC<ContainerProps> = (p: ContainerProps) => {
 };
 
 export const MainViewStyle = styled.main`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 0;
     margin: 0 0 ${MyTheme.margins.m10} 0;
+    width: 100%;
 `;
 export const MainContentsStyle = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: calc((${MyTheme.size.desktop}) * 0.8);
+    width: 100%;
+    //width: calc((${MyTheme.size.desktop}) * 0.8);
 `;
 
 export default MainView;

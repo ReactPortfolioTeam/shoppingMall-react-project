@@ -19,18 +19,20 @@ const MainCollectionContainer: React.FC<ContainerProps> = (
     );
 };
 
-const CollectionContainerStyle = styled.section`
-    display: flex;
-    flex-direction: row;
-    padding: ${MyTheme.paddings.p1};
-    width: calc((${MyTheme.size.desktop}) * 0.8);
-`;
-
 const MainCollectionStyle = styled.div`
+    width: 100%;
     h3 {
         text-align: left;
         margin: ${MyTheme.margins.m5};
     }
+`;
+
+const CollectionContainerStyle = styled.section`
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    padding: ${MyTheme.paddings.p1};
+    width: auto;
 `;
 
 export default MainCollectionContainer;

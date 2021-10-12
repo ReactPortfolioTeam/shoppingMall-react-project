@@ -50,7 +50,7 @@ const MainCollectionSidebar = (props: IAppProps) => {
     );
 };
 
-const CollectionSidebarStyle = styled.div`
+const CollectionSidebarStyle = styled.aside`
     display: flex;
     flex-direction: column;
     width: auto;

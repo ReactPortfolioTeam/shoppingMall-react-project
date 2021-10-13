@@ -24,7 +24,12 @@ const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
                                 <TextButton href="#">News</TextButton>
                             </li>
                             <li>
-                                <TextButton href="#">Search</TextButton>
+                                <TextButton
+                                    href="#"
+                                    onClick={() => setMenu('search')}
+                                >
+                                    Search
+                                </TextButton>
                             </li>
                             <li>
                                 <TextButton changeColor href="#">
@@ -50,7 +55,7 @@ const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
                     </nav>
                     <div className="right-menu__div">
                         <h2 className="screen-out__h2">3sixteen</h2>
-                        <a href="#">
+                        <a href="#" onClick={() => setMenu('')}>
                             <img src="/images/Logo.png" alt="Logo" />
                         </a>
                         {count && (

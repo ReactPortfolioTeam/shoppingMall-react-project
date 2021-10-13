@@ -16,6 +16,7 @@ const Button = styled.button<ButtonProps>`
     background-color: ${(props) => props.theme.colors.white};
     border-radius: 3px;
     transition: all 0.5s;
+    cursor: pointer;
     &:hover {
         background-color: ${(props) => props.theme.colors.dark};
         color: ${(props) => props.theme.colors.white};

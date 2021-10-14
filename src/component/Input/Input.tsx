@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
@@ -31,16 +31,33 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
         height,
         name,
     } = props;
+    const label = useRef<HTMLLabelElement>(null);
+
+    const focusDiv = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.value !== '' && label.current !== null) {
+            label.current.style.top = '-20px';
+            label.current.style.left = '0px';
+        } else if (label.current !== null) {
+            label.current.style.removeProperty('top');
+            label.current.style.removeProperty('left');
+        }
+    };
+
     return (
         <InputContainer width={width} height={height} value={value}>
-            <label htmlFor={id}>{content}</label>
+            <label ref={label} htmlFor={id}>
+                {content}
+            </label>
             <input
                 id={id}
                 type={type}
                 placeholder={placeholder}
                 value={value}
                 name={name}
-                onChange={onChange}
+                onChange={(e) => {
+                    onChange(e);
+                    focusDiv(e);
+                }}
             />
         </InputContainer>
     );
@@ -64,8 +81,8 @@ const InputContainer = styled.div<StyleProps>`
     cursor: pointer;
     & > label {
         position: absolute;
-        left: ${(props) => (props.value !== '' ? '0' : '10px')};
-        top: ${(props) => (props.value !== '' ? '-20px' : '13px')};
+        left: 10px;
+        top: 13px;
         transition: all 0.25s;
         cursor: pointer;
         color: ${(props) => props.theme.colors.gray};

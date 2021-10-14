@@ -7,6 +7,7 @@ import Login from 'container/Login/Login';
 import MainView from 'container/Main/Main_view';
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
+import Shop from 'container/Shop/Shop';
 
 function App() {
     const [menu, setMenu] = useState<string>('');
@@ -17,8 +18,8 @@ function App() {
             <Header setMenu={setMenu} />
             {menu === '' && <MainView />}
             {menu === 'login' && <Login />}
+            {menu === 'shop' && <Shop />}
             {menu === 'about' && <About />}
-
             <Footer />
         </ThemeProvider>
     );

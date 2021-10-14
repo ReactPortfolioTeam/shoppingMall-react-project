@@ -38,7 +38,6 @@ StockSPerSize =
     itemStockForL:number,
     itemStockForXL:number,
     itemStockForXXL:number
-    
 }
 *
 */
@@ -53,7 +52,7 @@ const ShopItem=()=>{
 
     return(
         <ShopItemWithQuickAdd>
-            <img src="https://picsum.photos/300?random=1" alt="sample"/>
+            <img width="100%" height="100%" src="https://picsum.photos/300?random=1" alt="sample"/>
             <div className="cart">
                 {!selected &&
                     <div className="hover-target">
@@ -62,7 +61,7 @@ const ShopItem=()=>{
                 }
                     
                 {selected && 
-                    <div className="display-option">
+                    <div className="display-option-container">
                         <button onClick={onClick} type="button" className="option">X</button>
                         <input onClick={()=>alert("구현 필요")} className="add-cart" id="add" type="submit" value="Add to "/>    
                     </div>
@@ -104,13 +103,7 @@ export const ShopItemWithQuickAdd = styled.div`
     margin:${MyTheme.margins.m20};
     position:relative;
     margin-bottom:${MyTheme.margins.m80}; ;
-
-
-    & img{
-    width: 100%;
-    height:100%;
-    }
-
+   //이미지 내부에 위치한 카트 관련 기능
     & div.cart{
         display: inline-block;
         background-color: white;
@@ -121,56 +114,48 @@ export const ShopItemWithQuickAdd = styled.div`
         bottom: 5%;
         cursor:pointer;
         display: none;
-
-        & .display-option {
+    //사이즈 선택 시 뒤로가거나 카트 넣기 기능 툴팁 컨테이너
+        & .display-option-container {
             width:150%;
-            background-color: red;
             justify-content: left;
         
         & .option{
             display: inline-block;
             width: 25%;
-            height: 30px;
+            height: 100%;
             background-color: white;
             color:black;
             border: none;
             cursor: pointer;
-
         }
 
         & .add-cart{
             width:75%;
-            height: 30px;
+            height: 100%;
             background-color:black;
             color:white;
             font-size: ${MyTheme.fonts.size.fs18};
             cursor: pointer;
-
         }
-
-
-
-        }   
-
-        & div{
+    }   
+    //////////////////옵션 표시 및 카트 툴팁 컨테이너 끝////////////////////////// 
+    
+         & div{
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
+        } 
+  
         
         & .container{
             display:none;
 
             & div{
                 display: inline-block;
-                width:max-content;
+                width: max-content;
 
-                & input[type=radio]{
-                    display:none;
-                }
                 & button{
                     display: inline-block;
                     width:50px;
@@ -192,7 +177,6 @@ export const ShopItemWithQuickAdd = styled.div`
                     bottom:50%;
                     left:10%;
                     transform: rotate(90edeg);
-                    
                 }
             }
         }
@@ -211,10 +195,11 @@ export const ShopItemWithQuickAdd = styled.div`
         }
     }
     & div.meta-data{
+
+        
         width: 100%;
         position:absolute;
-        bottom:-45px;
-        overflow: hidden;
+        bottom:-40px;
 }
 
 

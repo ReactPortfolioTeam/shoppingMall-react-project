@@ -28,7 +28,7 @@ const ShopContainerStyle = styled.section`
     display: flex;
     flex-direction: row;
     padding: ${MyTheme.paddings.p1};
-    width: auto;
+    width: 100%;
 `;
 
 export default Shop;

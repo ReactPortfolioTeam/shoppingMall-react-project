@@ -18,7 +18,7 @@ const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
                         <h2 className="screen-out__h2">메뉴</h2>
                         <ul>
                             <li>
-                                <TextButton href="#">Shop</TextButton>
+                                <TextButton href="#" onClick={() => setMenu('shop')}>Shop</TextButton>
                             </li>
                             <li>
                                 <TextButton href="#">News</TextButton>

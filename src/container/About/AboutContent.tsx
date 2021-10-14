@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+import Slide from 'component/Slide/Slide';
+import React from 'react';
 import styled from 'styled-components';
-
-interface SlideProps {
-    imgObject: Array<string>;
-}
-interface SlideContainerProps {
-    number: number;
-}
 
 const AboutContent = () => {
     const dummyImage = [
-        'https://picsum.photos/1500/1000',
-        'https://picsum.photos/1400/1000',
-        'https://picsum.photos/1300/1000',
-        'https://picsum.photos/1200/1000',
-        'https://picsum.photos/1100/1000',
-        'https://picsum.photos/1000/1000',
-        'https://picsum.photos/1900/1000',
-        'https://picsum.photos/1800/1000',
+        'https://picsum.photos/1500/1000?random=1',
+        'https://picsum.photos/1500/1000?random=8',
+        'https://picsum.photos/1500/1000?random=7',
+        'https://picsum.photos/1500/1000?random=6',
+        'https://picsum.photos/1500/1000?random=5',
+        'https://picsum.photos/1500/1000?random=4',
+        'https://picsum.photos/1500/1000?random=3',
+        'https://picsum.photos/1500/1000?random=2',
     ];
     return (
         <AboutContentContainer>
@@ -32,46 +28,39 @@ const AboutContent = () => {
                 by 3sixteen is designed to become a permanent fixture in our
                 lineup.
             </p>
-            <Slide imgObject={dummyImage}></Slide>
+            <Slide imgObject={dummyImage} />
+            <p>
+                This guiding philosophy is evident in the pieces we&apos;ve
+                developed since then: our shirts, jackets, basics and
+                accessories all take cues in form and function from our jeans.
+                Fabrics and trims are always chosen for their capacity to
+                develop character with time.
+            </p>
+            <p>
+                Our company’s foundation is in our faith. Humility and integrity
+                are equally important to us as quality and design. We also
+                strive to cultivate strong relationships with the artists,
+                craftsmen, and friends to whom we owe our success. With our
+                quarterly interview feature, Singularities, and our artist
+                collaboration project, Vanguard, 3sixteen always aspires to pay
+                due respect.
+            </p>
+            <p>3sixteen: the last shall be first.</p>
+            <p>
+                <strong>Recommended Reading:</strong>
+            </p>
+            <ul>
+                <li>
+                    <a href="#">&quot;Start to Finish&quot; (Hypebeast)</a>
+                </li>
+                <li>
+                    <a href="#">&quot;Start to Finish&quot; (Hypebeast)</a>
+                </li>
+                <li>
+                    <a href="#">&quot;Start to Finish&quot; (Hypebeast)</a>
+                </li>
+            </ul>
         </AboutContentContainer>
-    );
-};
-
-const Slide: React.FC<SlideProps> = ({ imgObject }) => {
-    const [activeNum, setActiveNum] = useState<number>(1);
-
-    useEffect(() => {
-        if (activeNum === 0) {
-            setActiveNum(imgObject.length);
-        } else if (activeNum >= imgObject.length + 1) {
-            setActiveNum(1);
-        }
-    }, [activeNum]);
-    return (
-        <SlideContainer number={activeNum}>
-            {imgObject.map((item, index) => {
-                return <img id={`image${index}`} src={item} alt="LoremImage" />;
-            })}
-            <div>
-                {imgObject.map((item, index) => (
-                    <div key={`div${item}`} id={`div${index}`} />
-                ))}
-            </div>
-            <button
-                className="left-button__button"
-                type="button"
-                onClick={() => setActiveNum(activeNum - 1)}
-            >
-                hi
-            </button>
-            <button
-                className="right-button__button"
-                type="button"
-                onClick={() => setActiveNum(activeNum + 1)}
-            >
-                hi
-            </button>
-        </SlideContainer>
     );
 };
 
@@ -80,51 +69,4 @@ export default AboutContent;
 const AboutContentContainer = styled.article`
     width: 100%;
     padding: 0 13%;
-`;
-
-const SlideContainer = styled.div<SlideContainerProps>`
-    width: 100%;
-    height: 50vw;
-    overflow: hidden;
-    position: relative;
-    & > img {
-        width: 100%;
-        height: 100%;
-        transition: opacity 0.2s, height 0.001s;
-    }
-    & > img:nth-child(${(props) => props.number}) {
-        visibility: visible;
-        height: 100%;
-        opacity: 0.7;
-    }
-    & > img:not(:nth-child(${(props) => props.number})) {
-        position: absolute;
-        height: 0;
-        opacity: 0;
-    }
-    & > div {
-        width: 100%;
-        display: flex;
-        position: absolute;
-        bottom: 50px;
-        & > div {
-            width: 100%;
-            margin: 0 ${(props) => props.theme.margins.m2_5};
-            height: 2px;
-            background-color: ${(props) => props.theme.colors.darkGray};
-        }
-        & > div:nth-child(${(props) => props.number}) {
-            background-color: ${(props) => props.theme.colors.white};
-        }
-    }
-    & > button {
-        position: absolute;
-        top: 50%;
-    }
-    .left-button__button {
-        left: 0;
-    }
-    .right-button__button {
-        right: 0;
-    }
 `;

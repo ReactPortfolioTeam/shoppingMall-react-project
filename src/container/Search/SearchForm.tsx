@@ -2,9 +2,11 @@ import Button from 'component/Button/Button';
 import * as React from 'react';
 import styled from 'styled-components';
 
-export interface IAppProps {}
+export interface IAppProps {
+    setSubmit: any;
+}
 
-const SearchForm: React.FC<IAppProps> = () => {
+const SearchForm: React.FC<IAppProps> = ({ setSubmit }) => {
     return (
         <SearchFormStyle>
             <label htmlFor="input-search">
@@ -22,7 +24,7 @@ const SearchForm: React.FC<IAppProps> = () => {
                         placeholder="Search"
                     />
                 </div>
-                <Button>Submit</Button>
+                <Button onClick={() => setSubmit(true)}>Submit</Button>
             </div>
         </SearchFormStyle>
     );

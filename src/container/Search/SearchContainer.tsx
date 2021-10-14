@@ -2,19 +2,34 @@ import Button from 'component/Button/Button';
 import * as React from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
+import SearchContent from './SearchContent';
 
 export interface IAppProps {}
 
 const SearchContainer: React.FC<IAppProps> = () => {
+    const [submit, setSubmit] = React.useState<boolean>(false);
     return (
-        <SearchContainerStyle>
-            <aside id="search__sidebar-section">sidebar section</aside>
-            <div id="search__input-section">
-                <SearchForm />
-            </div>
-        </SearchContainerStyle>
+        <>
+            {submit ? (
+                <ResultContainerStyle>
+                    <SearchContent />
+                </ResultContainerStyle>
+            ) : (
+                <SearchContainerStyle>
+                    <aside id="search__sidebar-section">sidebar section</aside>
+                    <div id="search__input-section">
+                        <SearchForm setSubmit={setSubmit} />
+                    </div>
+                </SearchContainerStyle>
+            )}
+        </>
     );
 };
+
+const ResultContainerStyle = styled.section`
+    display: flex;
+    align-items: center;
+`;
 
 const SearchContainerStyle = styled.section`
     display: flex;

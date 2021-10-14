@@ -10,6 +10,7 @@ interface InputProps {
     onChange: React.ChangeEventHandler;
     width?: string;
     height?: string;
+    name?: string;
 }
 
 interface StyleProps {
@@ -28,6 +29,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
         onChange,
         width,
         height,
+        name,
     } = props;
     return (
         <InputContainer width={width} height={height} value={value}>
@@ -37,6 +39,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
                 type={type}
                 placeholder={placeholder}
                 value={value}
+                name={name}
                 onChange={onChange}
             />
         </InputContainer>
@@ -49,6 +52,7 @@ Input.defaultProps = {
     placeholder: 'you@example.com',
     width: '380px',
     height: '40px',
+    name: '',
 };
 
 export default Input;

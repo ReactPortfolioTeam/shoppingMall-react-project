@@ -25,7 +25,10 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
     };
 
     return (
-        <JoinFormContainer>
+        <JoinFormContainer
+            action="http://localhost:8080/api/v1/signup"
+            method="post"
+        >
             {isView ? (
                 <fieldset>
                     <legend>
@@ -39,6 +42,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                             width="50%"
                             content="First Name"
                             placeholder="First"
+                            name="name"
                         />
                         <Input
                             id="lastName"
@@ -47,6 +51,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                             width="50%"
                             content="Last Name"
                             placeholder="Last"
+                            name="name"
                         />
                     </div>
                     <Input
@@ -63,6 +68,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         onChange={changeUser}
                         content="Password"
                         placeholder="6 or more characters"
+                        name="password"
                     />
                     <ButtonHover
                         width="100%"

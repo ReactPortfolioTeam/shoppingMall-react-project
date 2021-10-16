@@ -8,6 +8,7 @@ interface ButtonHoverProps extends ButtonProps {
     isOverrlay?: boolean;
     backgroundColor?: string;
     color?: string;
+    onClick?: React.MouseEventHandler;
 }
 
 export const ButtonHover: React.FC<ButtonHoverProps> = (
@@ -29,6 +30,7 @@ ButtonHover.defaultProps = {
     isOverrlay: false,
     backgroundColor: '#fff',
     color: '#666',
+    onClick: () => {},
 };
 
 const ButtonHoverContainer = styled.div`

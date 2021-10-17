@@ -18,21 +18,44 @@ const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
                         <h2 className="screen-out__h2">메뉴</h2>
                         <ul>
                             <li>
-                                <TextButton href="#" onClick={() => setMenu('shop')}>Shop</TextButton>
+                                <TextButton
+                                    href="#"
+                                    onClick={() => setMenu('shop')}
+                                >
+                                    Shop
+                                </TextButton>
                             </li>
                             <li>
-                                <TextButton href="#">News</TextButton>
+                                <TextButton
+                                    href="#"
+                                    onClick={() => setMenu('news')}
+                                >
+                                    News
+                                </TextButton>
                             </li>
                             <li>
-                                <TextButton href="#">Search</TextButton>
+                                <TextButton
+                                    href="#"
+                                    onClick={() => setMenu('search')}
+                                >
+                                    Search
+                                </TextButton>
                             </li>
                             <li>
-                                <TextButton changeColor href="#">
+                                <TextButton
+                                    changeColor
+                                    href="#"
+                                    onClick={() => setMenu('visit')}
+                                >
                                     Visit
                                 </TextButton>
                             </li>
                             <li>
-                                <TextButton changeColor href="#">
+                                <TextButton
+                                    changeColor
+                                    href="#"
+                                    onClick={() => setMenu('about')}
+                                >
                                     About
                                 </TextButton>
                             </li>

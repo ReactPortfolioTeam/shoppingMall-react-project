@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { HtmlTagStyle } from 'utils/HtmlTagStyle';
 
 interface SlideProps {
     imgObject: Array<string>;
@@ -13,6 +14,7 @@ const Slide: React.FC<SlideProps> = ({ imgObject }) => {
     const [activeNum, setActiveNum] = useState<number>(1);
 
     useEffect(() => {
+        //  activeNum 1 ~ Object.length 까지 존재
         if (activeNum === 0) {
             setActiveNum(imgObject.length);
         } else if (activeNum >= imgObject.length + 1) {
@@ -23,25 +25,23 @@ const Slide: React.FC<SlideProps> = ({ imgObject }) => {
     }, [activeNum]);
 
     const clickButton = () => {
-        HtmlTagStyle('#image', 'height', '100%');
-        HtmlTagStyle('#image', 'opacity', '0.7');
-        HtmlTagStyle('#div', 'background-color', '#fff');
-    };
+        //  리팩토링 할 예정 효율적으로 너무 안좋은 스타일 이라 생각됩니다.
+        const imageStyle = [
+            {
+                styleName: 'height',
+                styleValue: '100%',
+            },
+            {
+                styleName: 'opacity',
+                styleValue: '0.7',
+            },
+        ];
+        const divStyle = [
+            { styleName: 'background-color', styleValue: '#fff' },
+        ];
 
-    const HtmlTagStyle = (id: string, style: any, styleValue: string) => {
-        const ActiveTag = document?.querySelectorAll<HTMLElement>(
-            `${id}${activeNum - 1}`
-        )[0];
-
-        for (const i in imgObject) {
-            const getTag = document?.querySelectorAll<HTMLElement>(
-                `${id}${i}`
-            )[0];
-
-            getTag.style.removeProperty(style);
-        }
-
-        ActiveTag.style[style] = styleValue;
+        HtmlTagStyle('#image', imageStyle, activeNum, imgObject.length + 1);
+        HtmlTagStyle('#div', divStyle, activeNum, imgObject.length + 1);
     };
 
     return (
@@ -66,14 +66,14 @@ const Slide: React.FC<SlideProps> = ({ imgObject }) => {
                 type="button"
                 onClick={() => setActiveNum(activeNum - 1)}
             >
-                LeftButton
+                &lt;
             </button>
             <button
                 className="right-button__button"
                 type="button"
                 onClick={() => setActiveNum(activeNum + 1)}
             >
-                RightButton
+                &gt;
             </button>
         </SlideContainer>
     );
@@ -91,7 +91,6 @@ const SlideContainer = styled.div<SlideContainerProps>`
         height: 100%;
         transition: opacity 0.2s, height 0.001s;
         position: absolute;
-
         opacity: 0;
     }
 
@@ -99,22 +98,45 @@ const SlideContainer = styled.div<SlideContainerProps>`
         width: 100%;
         display: flex;
         position: absolute;
-        bottom: 50px;
+        bottom: 30px;
         & > div {
             width: 100%;
             margin: 0 ${(props) => props.theme.margins.m2_5};
-            height: 2px;
+            height: 1.5px;
             background-color: ${(props) => props.theme.colors.darkGray};
         }
     }
     & > button {
         position: absolute;
         top: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: rgba(255, 255, 255, 0.75);
+        color: ${(p) => p.theme.colors.gray};
+        font-size: ${(p) => p.theme.fonts.size.title};
+        cursor: pointer;
+        border: none;
+        transition: all 0.25s;
+        :hover {
+            background-color: rgba(255, 255, 255, 1);
+        }
     }
+
     .left-button__button {
         left: 0;
+        transform: translateX(-100%);
     }
     .right-button__button {
         right: 0;
+        transform: translateX(100%);
+    }
+
+    :hover {
+        .left-button__button {
+            transform: translateX(0%);
+        }
+        .right-button__button {
+            transform: translateX(0%);
+        }
     }
 `;

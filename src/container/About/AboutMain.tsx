@@ -30,8 +30,8 @@ const AboutMain = () => {
 export default AboutMain;
 
 const AboutMainContainer = styled.div`
+    height: calc(100vh - 86px);
     width: 100%;
-    height: 100%;
     padding: 0 13%;
     display: flex;
     background-image: url('https://picsum.photos/2000');

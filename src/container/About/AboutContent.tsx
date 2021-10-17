@@ -5,16 +5,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const AboutContent = () => {
-    const dummyImage = [
-        'https://picsum.photos/1500/1000?random=1',
-        'https://picsum.photos/1500/1000?random=8',
-        'https://picsum.photos/1500/1000?random=7',
-        'https://picsum.photos/1500/1000?random=6',
-        'https://picsum.photos/1500/1000?random=5',
-        'https://picsum.photos/1500/1000?random=4',
-        'https://picsum.photos/1500/1000?random=3',
-        'https://picsum.photos/1500/1000?random=2',
-    ];
     return (
         <AboutContentContainer>
             <p>
@@ -69,4 +59,37 @@ export default AboutContent;
 const AboutContentContainer = styled.article`
     width: 100%;
     padding: 0 13%;
+
+    & > p,
+    ul {
+        width: 40%;
+        margin-top: ${(p) => p.theme.margins.m40};
+    }
+    & > p {
+        line-height: 120%;
+        color: ${(p) => p.theme.colors.gray};
+    }
+    strong,
+    a {
+        font-weight: ${(p) => p.theme.fonts.weight.bold};
+        color: ${(p) => p.theme.colors.dark};
+    }
+    ul {
+        margin-left: ${(p) => p.theme.margins.m10};
+        list-style-type: disc;
+    }
+    & > div {
+        margin-top: ${(p) => p.theme.margins.m40};
+    }
 `;
+
+const dummyImage = [
+    'https://picsum.photos/1500/1000?random=1',
+    'https://picsum.photos/1500/1000?random=8',
+    'https://picsum.photos/1500/1000?random=7',
+    'https://picsum.photos/1500/1000?random=6',
+    'https://picsum.photos/1500/1000?random=5',
+    'https://picsum.photos/1500/1000?random=4',
+    'https://picsum.photos/1500/1000?random=3',
+    'https://picsum.photos/1500/1000?random=2',
+];

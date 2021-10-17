@@ -49,14 +49,17 @@ const CollectionContentsStyle = styled.div`
     overflow-x: scroll;
     overflow-y: hidden;
     &::-webkit-scrollbar {
-        height: 4px;
+        height: 6px;
         background-color: transparent;
     }
     &::-webkit-scrollbar-thumb {
-        background-color: #222327;
+        background-color: ${MyTheme.colors.gray};
         background-clip: padding-box;
         border: 1px solid transparent;
-        border-radius: 10px;
+        border-radius: 4px;
+        &:hover {
+            background-color: black;
+        }
     }
     &::-webkit-scrollbar-track {
         background-color: transparent;

@@ -7,10 +7,10 @@ import SearchContent from './SearchContent';
 export interface IAppProps {}
 
 const SearchContainer: React.FC<IAppProps> = () => {
-    const [submit, setSubmit] = React.useState<boolean>(false);
+    const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
     return (
         <>
-            {submit ? (
+            {isSubmit ? (
                 <ResultContainerStyle>
                     <SearchContent />
                 </ResultContainerStyle>
@@ -18,7 +18,7 @@ const SearchContainer: React.FC<IAppProps> = () => {
                 <SearchContainerStyle>
                     <aside id="search__sidebar-section">sidebar section</aside>
                     <div id="search__input-section">
-                        <SearchForm setSubmit={setSubmit} />
+                        <SearchForm setSubmit={setIsSubmit} />
                     </div>
                 </SearchContainerStyle>
             )}

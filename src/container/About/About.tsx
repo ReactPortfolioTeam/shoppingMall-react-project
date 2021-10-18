@@ -1,5 +1,9 @@
+import {
+    Flex,
+    FlexBoxDiv,
+} from 'assets/styledComponents/global/globalStyle.style';
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import AboutContent from './AboutContent';
 import AboutFooter from './AboutFooter';
 import AboutMain from './AboutMain';
@@ -16,7 +20,4 @@ const About = () => {
 
 export default About;
 
-const AboutContainer = styled.section`
-    height: calc(100vh - 86px);
-    width: 100%;
-`;
+const AboutContainer = styled.div``;

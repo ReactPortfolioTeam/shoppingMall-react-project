@@ -48,6 +48,22 @@ module.exports = {
         'jsx-a11y/anchor-is-valid': 1, //  href="#" 일경우 경고
         'no-undef': 1,
         'react/default-props-match-prop-types': 1,
+        'jsx-a11y/label-has-associated-control': [
+            'error',
+            {
+                required: {
+                    some: ['nesting', 'id'],
+                },
+            },
+        ],
+        'jsx-a11y/label-has-for': [
+            'error',
+            {
+                required: {
+                    some: ['nesting', 'id'],
+                },
+            },
+        ],
         camelcase: 0,
     },
 };

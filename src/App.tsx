@@ -12,7 +12,7 @@ import Shop from 'container/Shop/Shop';
 
 function App() {
     const [menu, setMenu] = useState<string>('');
-    console.log(menu);
+
     return (
         <ThemeProvider theme={MyTheme}>
             <GlobalStyle />

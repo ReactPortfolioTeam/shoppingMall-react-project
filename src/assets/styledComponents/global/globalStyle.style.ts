@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import Css from 'csstype';
 
 interface FlexBoxProps {
-    justifyContent?: string;
-    alignItems?: string;
-    flexDirection?: string;
+    justifyContent?: Css.Property.JustifyContent;
+    alignItems?: Css.Property.AlignItems;
+    flexDirection?: Css.Property.FlexDirection;
 }
 
 export const FlexBoxDiv = styled.div<FlexBoxProps>`

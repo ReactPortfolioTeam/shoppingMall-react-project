@@ -12,7 +12,7 @@ export default {
 };
 
 export const HeaderStory = () => {
-    return <Header setMenu={console.log} />;
+    return <Header />;
 };
 
 export const FooterStory = () => {

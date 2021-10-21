@@ -9,20 +9,42 @@ import SearchView from 'container/Search/SearchView';
 import React, { useState } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Shop from 'container/Shop/Shop';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import AdminMain from 'container/Admin/AdminMain';
 
 function App() {
-    const [menu, setMenu] = useState<string>('');
-
+    let isAdmin = false;
+    if (window.location.pathname.includes('/admin')) {
+        isAdmin = true;
+    }
     return (
         <ThemeProvider theme={MyTheme}>
             <GlobalStyle />
-            <Header setMenu={setMenu} />
-            {menu === '' && <MainView />}
-            {menu === 'search' && <SearchView />}
-            {menu === 'login' && <Login />}
-            {menu === 'shop' && <Shop />}
-            {menu === 'about' && <About />}
-            <Footer />
+            <BrowserRouter>
+                {!isAdmin && <Header />}
+
+                <Switch>
+                    <Route exact path="/">
+                        <MainView />
+                    </Route>
+                    <Route path="/search">
+                        <SearchView />
+                    </Route>
+                    <Route path="/login">
+                        <Login />
+                    </Route>
+                    <Route path="/shop">
+                        <Shop />
+                    </Route>
+                    <Route path="/about">
+                        <About />
+                    </Route>
+                    <Route path="/admin">
+                        <AdminMain />
+                    </Route>
+                </Switch>
+                {!isAdmin && <Footer />}
+            </BrowserRouter>
         </ThemeProvider>
     );
 }

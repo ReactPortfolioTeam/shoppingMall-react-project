@@ -3,13 +3,13 @@ import Button from 'component/Button/Button';
 
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 interface Props {
     count?: number;
-    setMenu: any;
 }
 
-const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
+const Header: React.FC<Props> = ({ count = 3 }) => {
     return (
         <>
             <HeaderContainer>
@@ -18,64 +18,45 @@ const Header: React.FC<Props> = ({ setMenu, count = 3 }) => {
                         <h2 className="screen-out__h2">메뉴</h2>
                         <ul>
                             <li>
-                                <TextButton
-                                    href="#"
-                                    onClick={() => setMenu('shop')}
-                                >
-                                    Shop
-                                </TextButton>
+                                <Link to="shop">
+                                    <TextButton href="#">Shop</TextButton>
+                                </Link>
                             </li>
                             <li>
-                                <TextButton
-                                    href="#"
-                                    onClick={() => setMenu('news')}
-                                >
-                                    News
-                                </TextButton>
+                                <TextButton href="#">News</TextButton>
                             </li>
                             <li>
-                                <TextButton
-                                    href="#"
-                                    onClick={() => setMenu('search')}
-                                >
-                                    Search
-                                </TextButton>
+                                <Link to="search">
+                                    <TextButton href="#">Search</TextButton>
+                                </Link>
                             </li>
                             <li>
-                                <TextButton
-                                    changeColor
-                                    href="#"
-                                    onClick={() => setMenu('visit')}
-                                >
+                                <TextButton changeColor href="#">
                                     Visit
                                 </TextButton>
                             </li>
                             <li>
-                                <TextButton
-                                    changeColor
-                                    href="#"
-                                    onClick={() => setMenu('about')}
-                                >
-                                    About
-                                </TextButton>
+                                <Link to="about">
+                                    <TextButton changeColor href="#">
+                                        About
+                                    </TextButton>
+                                </Link>
                             </li>
                             <li>
-                                <TextButton
-                                    changeColor
-                                    href="#"
-                                    onClick={() => setMenu('login')}
-                                >
-                                    Sign in
-                                </TextButton>
+                                <Link to="login">
+                                    <TextButton changeColor href="#">
+                                        Sign in
+                                    </TextButton>
+                                </Link>
                             </li>
                         </ul>
                         <Button>Appointments</Button>
                     </nav>
                     <div className="right-menu__div">
                         <h2 className="screen-out__h2">3sixteen</h2>
-                        <a href="#" onClick={() => setMenu('')}>
+                        <Link to="/">
                             <img src="/images/Logo.png" alt="Logo" />
-                        </a>
+                        </Link>
                         {count && (
                             <button type="button" className="badge__button">
                                 {count}

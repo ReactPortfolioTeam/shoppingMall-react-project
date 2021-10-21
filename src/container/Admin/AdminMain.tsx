@@ -33,12 +33,12 @@ const AdminMainContainer = styled.div`
     & > div {
         display: flex;
         & > nav {
-            width: 20%;
-            height: 100%;
+            width: 15%;
+            height: calc(100vh - 86px);
         }
         & > div {
-            width: 80%;
-            height: 100%;
+            width: 85%;
+            height: calc(100vh - 86px);
         }
     }
 `;

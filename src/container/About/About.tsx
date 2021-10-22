@@ -1,4 +1,3 @@
-
 import React from 'react';
 import styled, { css } from 'styled-components';
 import AboutContent from './AboutContent';
@@ -10,7 +9,7 @@ const About = () => {
         <AboutContainer>
             <AboutMain />
             <AboutContent />
-            <AboutFooter />            
+            <AboutFooter />
         </AboutContainer>
     );
 };

@@ -1,7 +1,7 @@
-import {
-    Flex,
-    FlexBoxDiv,
-} from 'assets/styledComponents/global/globalStyle.style';
+// import {
+//     Flex,
+//     FlexBoxDiv,
+// } from 'assets/styledComponents/global/globalStyle.style';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import AboutContent from './AboutContent';

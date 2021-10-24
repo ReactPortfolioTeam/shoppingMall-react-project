@@ -1,5 +1,6 @@
 import Button from 'component/Button/Button';
 import { ButtonHover } from 'component/Button/ButtonHover';
+
 import TextButton from 'component/Button/TextButton';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -11,19 +12,24 @@ const AdminSideMenu = () => {
             <ul>
                 <li>
                     <Link to="/admin/user">
-                        <Button type="button">회원정보관리</Button>
+                        <ButtonHover>회원정보관리</ButtonHover>
                     </Link>
                 </li>
                 <li>
                     <Link to="/admin/product">
-                        <Button type="button">상품정보관리</Button>
+                        <ButtonHover>상품등록</ButtonHover>
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/admin/product">
+                        <ButtonHover>상품수정</ButtonHover>
                     </Link>
                 </li>
                 <li>
                     <Link to="/">
-                        <Button type="button" height="40px">
+                        <ButtonHover width="100%" height="40px">
                             메인페이지로
-                        </Button>
+                        </ButtonHover>
                     </Link>
                 </li>
             </ul>
@@ -34,24 +40,29 @@ const AdminSideMenu = () => {
 export default AdminSideMenu;
 
 const AdminSideMenuContainer = styled.nav`
-    background-color: rgba(66, 66, 66, 0.5);
     ul {
         margin-top: 20px;
         padding: 0 10px;
     }
-    button {
+    a > div {
         width: 100%;
-        height: 40px;
-        border: 1px solid ${(p) => p.theme.colors.darkGray};
-        background-color: ${(p) => p.theme.colors.white};
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    button {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 60px;
+        font-size: ${(p) => p.theme.fonts.size.title};
+        color: ${(p) => p.theme.colors.gray};
         margin-bottom: 3px;
         cursor: pointer;
         transition: all 0.2s;
-        :hover {
-            opacity: 0.5;
-        }
+        padding: 30px 0;
     }
-    li:nth-of-type(3) {
+    li:last-of-type {
         position: fixed;
         width: 14%;
         bottom: 0;

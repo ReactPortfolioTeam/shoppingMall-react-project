@@ -11,6 +11,7 @@ import { ThemeProvider } from 'styled-components';
 import Shop from 'container/Shop/Shop';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
+import { RecoilRoot } from 'recoil';
 
 function App() {
     let isAdmin = false;
@@ -18,34 +19,36 @@ function App() {
         isAdmin = true;
     }
     return (
-        <ThemeProvider theme={MyTheme}>
-            <GlobalStyle />
-            <BrowserRouter>
-                {!isAdmin && <Header />}
+        <RecoilRoot>
+            <ThemeProvider theme={MyTheme}>
+                <GlobalStyle />
+                <BrowserRouter>
+                    {!isAdmin && <Header />}
 
-                <Switch>
-                    <Route exact path="/">
-                        <MainView />
-                    </Route>
-                    <Route path="/search">
-                        <SearchView />
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/shop">
-                        <Shop />
-                    </Route>
-                    <Route path="/about">
-                        <About />
-                    </Route>
-                    <Route path="/admin">
-                        <AdminMain />
-                    </Route>
-                </Switch>
-                {!isAdmin && <Footer />}
-            </BrowserRouter>
-        </ThemeProvider>
+                    <Switch>
+                        <Route exact path="/">
+                            <MainView />
+                        </Route>
+                        <Route path="/search">
+                            <SearchView />
+                        </Route>
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                        <Route path="/shop">
+                            <Shop />
+                        </Route>
+                        <Route path="/about">
+                            <About />
+                        </Route>
+                        <Route path="/admin">
+                            <AdminMain />
+                        </Route>
+                    </Switch>
+                    {!isAdmin && <Footer />}
+                </BrowserRouter>
+            </ThemeProvider>
+        </RecoilRoot>
     );
 }
 

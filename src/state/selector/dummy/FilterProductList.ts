@@ -11,9 +11,11 @@ export const FilterProductList = selector({
         const category = get(Category);
         const list = get(Products);
 
-        const category_id = category.find(filter)?.category_id;
-
         if (filter !== 'All') {
+            const category_id = category.find(
+                (item) => item.category === filter
+            )?.category_id;
+
             return list.filter((item) => item.category_id === category_id);
         } else {
             return list;

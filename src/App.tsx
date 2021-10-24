@@ -11,18 +11,20 @@ import { ThemeProvider } from 'styled-components';
 import Shop from 'container/Shop/Shop';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
+import MiniCart from 'container/MiniCart/MiniCart';
 
 function App() {
     let isAdmin = false;
     if (window.location.pathname.includes('/admin')) {
         isAdmin = true;
     }
+    const [isCart, setIsCart] = useState(false);
     return (
         <ThemeProvider theme={MyTheme}>
             <GlobalStyle />
             <BrowserRouter>
-                {!isAdmin && <Header />}
-
+                {!isAdmin && <Header setIsCart={setIsCart} />}
+                <MiniCart isCart={isCart} setIsCart={setIsCart} />
                 <Switch>
                     <Route exact path="/">
                         <MainView />

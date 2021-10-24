@@ -7,9 +7,10 @@ import { Link } from 'react-router-dom';
 
 interface Props {
     count?: number;
+    setIsCart: any;
 }
 
-const Header: React.FC<Props> = ({ count = 3 }) => {
+const Header: React.FC<Props> = ({ count = 3, setIsCart }) => {
     return (
         <>
             <HeaderContainer>
@@ -58,7 +59,11 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                             <img src="/images/Logo.png" alt="Logo" />
                         </Link>
                         {count && (
-                            <button type="button" className="badge__button">
+                            <button
+                                type="button"
+                                className="badge__button"
+                                onClick={() => setIsCart(true)}
+                            >
                                 {count}
                             </button>
                         )}

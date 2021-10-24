@@ -1,6 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import { MyTheme } from 'assets/css/global/theme.style';
 import GloblaStyle from '../src/assets/css/global/Global.style';
+import { BrowserRouter } from 'react-router-dom';
 
 export const parameters = {
     layout: 'fullscreen',
@@ -17,8 +18,10 @@ export const parameters = {
 export const decorators = [
     (Story) => (
         <ThemeProvider theme={MyTheme}>
-            <GloblaStyle />
-            <Story />
+            <BrowserRouter>
+                <GloblaStyle />
+                <Story />
+            </BrowserRouter>
         </ThemeProvider>
     ),
 ];

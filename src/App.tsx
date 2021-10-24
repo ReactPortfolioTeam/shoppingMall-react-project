@@ -12,6 +12,8 @@ import Shop from 'container/Shop/Shop';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
 import MiniCart from 'container/MiniCart/MiniCart';
+import { RecoilRoot } from 'recoil';
+
 
 function App() {
     let isAdmin = false;
@@ -20,6 +22,9 @@ function App() {
     }
     const [isCart, setIsCart] = useState(false);
     return (
+
+        
+        <RecoilRoot>
         <ThemeProvider theme={MyTheme}>
             <GlobalStyle />
             <BrowserRouter>
@@ -48,6 +53,8 @@ function App() {
                 {!isAdmin && <Footer />}
             </BrowserRouter>
         </ThemeProvider>
+        </RecoilRoot>
+
     );
 }
 

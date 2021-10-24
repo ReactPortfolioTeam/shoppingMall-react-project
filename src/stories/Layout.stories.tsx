@@ -12,7 +12,7 @@ export default {
 };
 
 export const HeaderStory = () => {
-    return <Header />;
+    return <Header setIsCart={undefined} />;
 };
 
 export const FooterStory = () => {

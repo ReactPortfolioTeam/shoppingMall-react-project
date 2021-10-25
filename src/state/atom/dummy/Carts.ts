@@ -4,27 +4,27 @@ export const Carts = atom({
     key: 'Carts',
     default: [
         {
-            optionid: '0001',
+            product_option_id: 1,
             quantity: 1,
         },
         {
-            optionid: '0002',
+            product_option_id: 2,
             quantity: 2,
         },
         {
-            optionid: '0003',
+            product_option_id: 3,
             quantity: 1,
         },
         {
-            optionid: '0004',
+            product_option_id: 4,
             quantity: 3,
         },
         {
-            optionid: '0005',
+            product_option_id: 5,
             quantity: 2,
         },
         {
-            optionid: '0006',
+            product_option_id: 6,
             quantity: 1,
         },
     ],

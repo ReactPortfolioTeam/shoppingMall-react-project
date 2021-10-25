@@ -1,10 +1,9 @@
 import * as React from 'react';
+import { useSetRecoilState } from 'recoil';
+import { Modal } from 'state/atom/modal/Modal';
 
-interface IAppProps {
-    handleModalShow: any;
-}
-
-const MiniCartHeader: React.FC<IAppProps> = ({ handleModalShow }) => {
+const MiniCartHeader: React.FC = () => {
+    const setModal = useSetRecoilState(Modal);
     return (
         <div className="mini-cart-header">
             <div className="cart-header-left">
@@ -27,7 +26,12 @@ const MiniCartHeader: React.FC<IAppProps> = ({ handleModalShow }) => {
                     className="button-text js-close-mini-cart"
                     type="button"
                     tabIndex={0}
-                    onClick={() => handleModalShow(false)}
+                    onClick={() =>
+                        setModal({
+                            isOpen: false,
+                            ModalComponent: undefined,
+                        })
+                    }
                 >
                     <span className="visually-hidden">Close</span>
                     <span className="inline-icon">

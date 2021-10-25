@@ -1,16 +1,20 @@
 import TextButton from 'component/Button/TextButton';
 import Button from 'component/Button/Button';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { Modal } from 'state/atom/modal/Modal';
+import MiniCart from 'container/MiniCart/MiniCart';
 
 interface Props {
     count?: number;
-    handleModalShow: any;
 }
 
-const Header: React.FC<Props> = ({ count = 3, handleModalShow }) => {
+const Header: React.FC<Props> = ({ count = 3 }) => {
+    const [modal, setModal] = useRecoilState(Modal);
+    useEffect(() => console.log(modal), [modal]);
     return (
         <>
             <HeaderContainer>
@@ -62,7 +66,12 @@ const Header: React.FC<Props> = ({ count = 3, handleModalShow }) => {
                             <button
                                 type="button"
                                 className="badge__button"
-                                onClick={() => handleModalShow(true)}
+                                onClick={() =>
+                                    setModal({
+                                        isOpen: true,
+                                        ModalComponent: MiniCart,
+                                    })
+                                }
                             >
                                 {count}
                             </button>

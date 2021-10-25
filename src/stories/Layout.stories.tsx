@@ -12,7 +12,7 @@ export default {
 };
 
 export const HeaderStory = () => {
-    return <Header handleModalShow={undefined} />;
+    return <Header />;
 };
 
 export const FooterStory = () => {

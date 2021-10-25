@@ -3,17 +3,12 @@ import styled from 'styled-components';
 import MiniCartContents from './MiniCartContents';
 import MiniCartHeader from './MiniCartHeader';
 
-interface IAppProps {
-    show: boolean;
-    handleModalShow: any;
-}
-
-const MiniCart: React.FC<IAppProps> = ({ show, handleModalShow }) => {
+const MiniCart: React.FC = () => {
     return (
-        <MiniCartStyle show={show}>
+        <MiniCartStyle show>
             <div id="mini-cart">
                 <div className="mini-cart-inner wrapper">
-                    <MiniCartHeader handleModalShow={handleModalShow} />
+                    <MiniCartHeader />
                     <MiniCartContents />
                 </div>
             </div>

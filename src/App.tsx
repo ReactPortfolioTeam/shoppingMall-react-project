@@ -20,22 +20,14 @@ function App() {
     if (window.location.pathname.includes('/admin')) {
         isAdmin = true;
     }
-    const [isModal, setIsModal] = useState(false);
-    const handleModalShow = (status: boolean) => {
-        setIsModal(status);
-    };
+
     return (
         <RecoilRoot>
             <ThemeProvider theme={MyTheme}>
                 <GlobalStyle />
                 <BrowserRouter>
-                    {!isAdmin && <Header handleModalShow={handleModalShow} />}
-                    <ModalPortals>
-                        <MiniCart
-                            show={isModal}
-                            handleModalShow={handleModalShow}
-                        />
-                    </ModalPortals>
+                    {!isAdmin && <Header />}
+                    <ModalPortals />
                     <Switch>
                         <Route exact path="/">
                             <MainView />

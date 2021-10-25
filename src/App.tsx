@@ -13,6 +13,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
 import MiniCart from 'container/MiniCart/MiniCart';
 import ModalPortals from 'modal/ModalComponent';
+import { RecoilRoot } from 'recoil';
 
 function App() {
     let isAdmin = false;
@@ -24,39 +25,41 @@ function App() {
         setIsModal(status);
     };
     return (
-        <ThemeProvider theme={MyTheme}>
-            <GlobalStyle />
-            <BrowserRouter>
-                {!isAdmin && <Header handleModalShow={handleModalShow} />}
-                <ModalPortals>
-                    <MiniCart
-                        show={isModal}
-                        handleModalShow={handleModalShow}
-                    />
-                </ModalPortals>
-                <Switch>
-                    <Route exact path="/">
-                        <MainView />
-                    </Route>
-                    <Route path="/search">
-                        <SearchView />
-                    </Route>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                    <Route path="/shop">
-                        <Shop />
-                    </Route>
-                    <Route path="/about">
-                        <About />
-                    </Route>
-                    <Route path="/admin">
-                        <AdminMain />
-                    </Route>
-                </Switch>
-                {!isAdmin && <Footer />}
-            </BrowserRouter>
-        </ThemeProvider>
+        <RecoilRoot>
+            <ThemeProvider theme={MyTheme}>
+                <GlobalStyle />
+                <BrowserRouter>
+                    {!isAdmin && <Header handleModalShow={handleModalShow} />}
+                    <ModalPortals>
+                        <MiniCart
+                            show={isModal}
+                            handleModalShow={handleModalShow}
+                        />
+                    </ModalPortals>
+                    <Switch>
+                        <Route exact path="/">
+                            <MainView />
+                        </Route>
+                        <Route path="/search">
+                            <SearchView />
+                        </Route>
+                        <Route path="/login">
+                            <Login />
+                        </Route>
+                        <Route path="/shop">
+                            <Shop />
+                        </Route>
+                        <Route path="/about">
+                            <About />
+                        </Route>
+                        <Route path="/admin">
+                            <AdminMain />
+                        </Route>
+                    </Switch>
+                    {!isAdmin && <Footer />}
+                </BrowserRouter>
+            </ThemeProvider>
+        </RecoilRoot>
     );
 }
 

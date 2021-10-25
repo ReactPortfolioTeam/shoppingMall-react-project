@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { ProductFilter } from 'state/atom/dummy/ProductFilter';
+import { FilterProductList } from 'state/selector/dummy/FilterProductList';
 import styled from 'styled-components';
 import ShopItem from './ShopItem';
 
-const ShopContent= ()=>{
-    
-    return(
+const ShopContent = () => {
+    const [filter, setFilter] = useRecoilState(ProductFilter);
+    useEffect(() => {
+        setFilter('Bottoms');
+    }, []);
+    const Item = useRecoilValue(FilterProductList);
+    console.log(Item);
+    return (
         <ShopContents>
-            <ShopItem/>
-            <ShopItem/>
-            <ShopItem/>
-            <ShopItem/>
-            <ShopItem/>
-            <ShopItem/>
-            <ShopItem/>
+            <ShopItem />
+            <ShopItem />
+            <ShopItem />
+            <ShopItem />
+            <ShopItem />
+            <ShopItem />
+            <ShopItem />
         </ShopContents>
-    )
-}
+    );
+};
 
 export const ShopContents = styled.div`
     width: 80%;
@@ -37,6 +45,6 @@ export const ShopContents = styled.div`
         box-shadow: inset 0px 0px 5px white;
     }
     display: flex;
-`
+`;
 
 export default ShopContent;

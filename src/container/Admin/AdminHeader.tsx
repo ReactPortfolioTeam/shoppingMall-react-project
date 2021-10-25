@@ -7,11 +7,6 @@ const AdminHeader = () => {
     return (
         <AdminHeaderContainer>
             <h1>3SixTeen Administrator</h1>
-            <Link to="/">
-                <Button type="button" height="40px">
-                    Home
-                </Button>
-            </Link>
         </AdminHeaderContainer>
     );
 };

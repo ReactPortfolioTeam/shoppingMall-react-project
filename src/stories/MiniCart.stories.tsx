@@ -6,5 +6,5 @@ export default {
     decoration: [(Story: any) => <Story />],
 };
 export const MiniCartStories = () => {
-    return <MiniCart isCart setIsCart={undefined} />;
+    return <MiniCart show handleModalShow={undefined} />;
 };

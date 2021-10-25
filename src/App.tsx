@@ -12,19 +12,28 @@ import Shop from 'container/Shop/Shop';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
 import MiniCart from 'container/MiniCart/MiniCart';
+import ModalPortals from 'modal/ModalComponent';
 
 function App() {
     let isAdmin = false;
     if (window.location.pathname.includes('/admin')) {
         isAdmin = true;
     }
-    const [isCart, setIsCart] = useState(false);
+    const [isModal, setIsModal] = useState(false);
+    const handleModalShow = (status: boolean) => {
+        setIsModal(status);
+    };
     return (
         <ThemeProvider theme={MyTheme}>
             <GlobalStyle />
             <BrowserRouter>
-                {!isAdmin && <Header setIsCart={setIsCart} />}
-                <MiniCart isCart={isCart} setIsCart={setIsCart} />
+                {!isAdmin && <Header handleModalShow={handleModalShow} />}
+                <ModalPortals>
+                    <MiniCart
+                        show={isModal}
+                        handleModalShow={handleModalShow}
+                    />
+                </ModalPortals>
                 <Switch>
                     <Route exact path="/">
                         <MainView />

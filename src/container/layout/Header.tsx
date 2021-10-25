@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 
 interface Props {
     count?: number;
-    setIsCart: any;
+    handleModalShow: any;
 }
 
-const Header: React.FC<Props> = ({ count = 3, setIsCart }) => {
+const Header: React.FC<Props> = ({ count = 3, handleModalShow }) => {
     return (
         <>
             <HeaderContainer>
@@ -62,7 +62,7 @@ const Header: React.FC<Props> = ({ count = 3, setIsCart }) => {
                             <button
                                 type="button"
                                 className="badge__button"
-                                onClick={() => setIsCart(true)}
+                                onClick={() => handleModalShow(true)}
                             >
                                 {count}
                             </button>

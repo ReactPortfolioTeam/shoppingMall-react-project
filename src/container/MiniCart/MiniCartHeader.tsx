@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 interface IAppProps {
-    setIsCart: any;
+    handleModalShow: any;
 }
 
-const MiniCartHeader: React.FC<IAppProps> = ({ setIsCart }) => {
+const MiniCartHeader: React.FC<IAppProps> = ({ handleModalShow }) => {
     return (
         <div className="mini-cart-header">
             <div className="cart-header-left">
@@ -27,7 +27,7 @@ const MiniCartHeader: React.FC<IAppProps> = ({ setIsCart }) => {
                     className="button-text js-close-mini-cart"
                     type="button"
                     tabIndex={0}
-                    onClick={() => setIsCart(false)}
+                    onClick={() => handleModalShow(false)}
                 >
                     <span className="visually-hidden">Close</span>
                     <span className="inline-icon">

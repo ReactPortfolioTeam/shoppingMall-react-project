@@ -4,16 +4,16 @@ import MiniCartContents from './MiniCartContents';
 import MiniCartHeader from './MiniCartHeader';
 
 interface IAppProps {
-    isCart: boolean;
-    setIsCart: any;
+    show: boolean;
+    handleModalShow: any;
 }
 
-const MiniCart: React.FC<IAppProps> = ({ isCart, setIsCart }) => {
+const MiniCart: React.FC<IAppProps> = ({ show, handleModalShow }) => {
     return (
-        <MiniCartStyle isCart={isCart}>
+        <MiniCartStyle show={show}>
             <div id="mini-cart">
                 <div className="mini-cart-inner wrapper">
-                    <MiniCartHeader setIsCart={setIsCart} />
+                    <MiniCartHeader handleModalShow={handleModalShow} />
                     <MiniCartContents />
                 </div>
             </div>
@@ -22,7 +22,7 @@ const MiniCart: React.FC<IAppProps> = ({ isCart, setIsCart }) => {
     );
 };
 interface MiniCartStyleProps {
-    isCart: boolean;
+    show: boolean;
 }
 const MiniCartStyle = styled.div<MiniCartStyleProps>`
     .inline-icon {
@@ -155,7 +155,7 @@ const MiniCartStyle = styled.div<MiniCartStyleProps>`
         }
     }
     #no-click {
-        display: ${(props) => (props.isCart ? 'block' : 'none')};
+        display: ${(props) => (props.show ? 'block' : 'none')};
         position: fixed;
         top: 0;
         left: 0;
@@ -166,7 +166,7 @@ const MiniCartStyle = styled.div<MiniCartStyleProps>`
     }
 
     #mini-cart {
-        display: ${(props) => (props.isCart ? 'block' : 'none')};
+        display: ${(props) => (props.show ? 'block' : 'none')};
         width: calc(50% - 0.7142857143rem);
         position: absolute;
         top: 0;

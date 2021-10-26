@@ -1,5 +1,6 @@
 import { MyTheme } from 'assets/css/global/theme.style';
 import { useState } from 'react';
+import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
 interface Props {
@@ -12,9 +13,13 @@ const ShopItem: React.FC<Props> = ({ item }) => {
     const onClick = () => {
         setSelected((prev) => !prev);
     };
-
+    const history = useHistory();
     return (
-        <ShopItemWithQuickAdd>
+        <ShopItemWithQuickAdd
+            onClick={() => {
+                history.push(`/shop/product/${item.product_id}`);
+            }}
+        >
             <img
                 width="100%"
                 height="100%"
@@ -104,6 +109,7 @@ export const ShopItemWithQuickAdd = styled.div`
     margin: ${MyTheme.margins.m20};
     position: relative;
     margin-bottom: ${MyTheme.margins.m80};
+    cursor: pointer;
     //이미지 내부에 위치한 카트 관련 기능
     & div.cart {
         display: inline-block;

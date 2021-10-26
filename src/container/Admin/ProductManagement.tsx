@@ -7,18 +7,18 @@ import styled from 'styled-components';
 interface ProductContent {
     product_name: string;
     sub_product_name: string;
-    price: number;
+    price?: number;
     depscription: string;
     keyword: string;
     product_image: string;
     product_date: string;
 }
 
-const ProductManagement = () => {
+const ProductManagement: React.FC = () => {
     const [product, setProduct] = useState<any>({
         product_name: '',
         sub_product_name: '',
-        price: null,
+        price: undefined,
         depscription: '',
         keyword: '',
         product_image: '',
@@ -26,7 +26,7 @@ const ProductManagement = () => {
     });
     const ObjectArray = (item: object) => {
         let result: any = [];
-        Object.entries(item).forEach(([key, value]) =>
+        Object.entries(item).forEach(([key]) =>
             result.push(
                 <Input
                     id={key}

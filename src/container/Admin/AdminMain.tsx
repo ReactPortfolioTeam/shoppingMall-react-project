@@ -6,7 +6,7 @@ import AdminSideMenu from './AdminSideMenu';
 import ProductManagement from './ProductManagement';
 import UserAccountManagement from './UserAccountManagement';
 
-const AdminMain = () => {
+const AdminMain: React.FC = () => {
     return (
         <AdminMainContainer>
             <AdminHeader />

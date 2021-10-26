@@ -1,20 +1,18 @@
-import React from 'react';
 import { MyTheme } from 'assets/css/global/theme.style';
 import styled from 'styled-components';
 import MainCollectionSidebar from '../Main/MainCollectionSidebar';
-import ShopContent from "./ShopContent";
+import ShopContent from './ShopContent';
 
-const Shop = ()=>{
-    return(
+const Shop = () => {
+    return (
         <ShopMainStyle>
             <ShopContainerStyle>
                 <MainCollectionSidebar />
-                <ShopContent/>
+                <ShopContent />
             </ShopContainerStyle>
         </ShopMainStyle>
-    )
-}
-
+    );
+};
 
 const ShopMainStyle = styled.div`
     width: 100%;

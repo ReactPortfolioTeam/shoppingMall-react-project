@@ -1,26 +1,19 @@
-import React, { useEffect } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { ProductFilter } from 'state/atom/dummy/ProductFilter';
+import { useRecoilValue } from 'recoil';
 import { FilterProductList } from 'state/selector/dummy/FilterProductList';
 import styled from 'styled-components';
 import ShopItem from './ShopItem';
 
 const ShopContent = () => {
-    const [filter, setFilter] = useRecoilState(ProductFilter);
-    useEffect(() => {
-        setFilter('Bottoms');
-    }, []);
     const Item = useRecoilValue(FilterProductList);
-    console.log(Item);
+
     return (
         <ShopContents>
-            <ShopItem />
-            <ShopItem />
-            <ShopItem />
-            <ShopItem />
-            <ShopItem />
-            <ShopItem />
-            <ShopItem />
+            {Item.map((item) => (
+                <ShopItem item={item} key={item.product_id} />
+            ))}
+            {Item.length === 0 && (
+                <h2>해당 카테고리 상품이 존재하지 않습니다.</h2>
+            )}
         </ShopContents>
     );
 };
@@ -45,6 +38,9 @@ export const ShopContents = styled.div`
         box-shadow: inset 0px 0px 5px white;
     }
     display: flex;
+    & > h2 {
+        margin-top: 30px;
+    }
 `;
 
 export default ShopContent;

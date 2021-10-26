@@ -14,6 +14,7 @@ import AdminMain from 'container/Admin/AdminMain';
 import MiniCart from 'container/MiniCart/MiniCart';
 import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
+import ShopDetail from 'container/Shop/ShopDetail';
 
 function App() {
     let isAdmin = false;
@@ -38,7 +39,7 @@ function App() {
                         <Route path="/login">
                             <Login />
                         </Route>
-                        <Route path="/shop">
+                        <Route path="/shop" exact>
                             <Shop />
                         </Route>
                         <Route path="/about">
@@ -46,6 +47,9 @@ function App() {
                         </Route>
                         <Route path="/admin">
                             <AdminMain />
+                        </Route>
+                        <Route path="/shop/product/:id">
+                            <ShopDetail />
                         </Route>
                     </Switch>
                     {!isAdmin && <Footer />}

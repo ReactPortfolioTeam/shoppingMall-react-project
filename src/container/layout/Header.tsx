@@ -4,7 +4,7 @@ import Button from 'component/Button/Button';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import MiniCart from 'container/MiniCart/MiniCart';
 

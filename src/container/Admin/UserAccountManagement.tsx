@@ -4,7 +4,7 @@ import TextButton from 'component/Button/TextButton';
 import React from 'react';
 import styled from 'styled-components';
 
-const UserAccountManagement = () => {
+const UserAccountManagement: React.FC = () => {
     return (
         <UserAccountManagementContainer>
             <h1>회원목록</h1>

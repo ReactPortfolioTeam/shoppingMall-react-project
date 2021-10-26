@@ -65,5 +65,6 @@ module.exports = {
             },
         ],
         camelcase: 0,
+        'react/react-in-jsx-scope': 'off',
     },
 };

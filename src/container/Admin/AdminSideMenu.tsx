@@ -1,12 +1,10 @@
-import Button from 'component/Button/Button';
 import { ButtonHover } from 'component/Button/ButtonHover';
 
-import TextButton from 'component/Button/TextButton';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const AdminSideMenu = () => {
+const AdminSideMenu: React.FC = () => {
     return (
         <AdminSideMenuContainer>
             <ul>

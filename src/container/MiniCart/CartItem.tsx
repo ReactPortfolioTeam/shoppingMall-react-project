@@ -9,6 +9,8 @@ interface IAppProps {
     product_image: string;
     quantity: number;
     size: string;
+    onRemove: any;
+    id: number;
 }
 
 const CartItem: React.FC<IAppProps> = ({
@@ -20,6 +22,8 @@ const CartItem: React.FC<IAppProps> = ({
     product_image,
     quantity,
     size,
+    onRemove,
+    id,
 }) => {
     return (
         <div
@@ -30,6 +34,7 @@ const CartItem: React.FC<IAppProps> = ({
             data-product-title={product_name} // product_name
             // tabIndex={0}
             aria-label="1 of Patchwork BD Shirt ~ Earth Khadi L for a price of 24000"
+            key={id}
         >
             <div className="line-item-inner">
                 <div className="line-image">
@@ -66,16 +71,12 @@ const CartItem: React.FC<IAppProps> = ({
                     <div className="main-product-info line-info">
                         <div className="title-and-options">
                             <span className="h4 product-title">
-                                <span className="title">
-                                    {/* product_name */}
-                                    {product_name}
-                                </span>
+                                <span className="title">{product_name}</span>
                                 <span className="title-sub">
-                                    {/* sub_product_name */}
                                     {sub_product_name}
                                 </span>
                             </span>
-                            <span className="h5 item-options"></span>
+                            <span className="h5 item-options" />
                         </div>
                         <div className="size">
                             <span className="h5 size-label text-light-grey no-medium-up">
@@ -109,7 +110,19 @@ const CartItem: React.FC<IAppProps> = ({
                 <div className="line-remove no-small">
                     <a
                         className="remove-line-item js-remove-line-item no-ajax"
-                        href="/cart/change?line=3&amp;quantity=0"
+                        // href="/cart/change?line=3&amp;quantity=0"
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            // e.stopPropagation();
+                            return onRemove(id);
+                            // return console.log(e.currentTarget.id);
+                        }}
+                        onClick={(e) => {
+                            // e.stopPropagation();
+                            return onRemove(id);
+                            // return console.log(e.currentTarget.id);
+                        }}
                         title="Remove"
                     >
                         <span className="remove-text">Remove</span>

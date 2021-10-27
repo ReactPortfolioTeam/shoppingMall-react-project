@@ -21,7 +21,6 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
     const carts = useRecoilValue(Carts);
     const productInfo = useRecoilValue(ProductInformation);
     const products = useRecoilValue(Products);
-    React.useEffect(() => console.log(initialCartList), []);
     const initialCartList = [
         {
             product_id: products[0].product_id,
@@ -62,6 +61,7 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
             size: productInfo.filter(
                 (info) => info.product_id === products[0].product_id
             )[2].size,
+            id: 1,
         },
         {
             product_id: products[3].product_id,
@@ -102,6 +102,7 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
             size: productInfo.filter(
                 (info) => info.product_id === products[3].product_id
             )[1].size,
+            id: 2,
         },
         {
             product_id: products[8].product_id,
@@ -142,8 +143,14 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
             size: productInfo.filter(
                 (info) => info.product_id === products[8].product_id
             )[3].size,
+            id: 3,
         },
     ];
+    const [cartList, setCartList] = React.useState(initialCartList);
+    const onRemove = React.useCallback(
+        (id: number) => setCartList(cartList.filter((item) => item.id !== id)),
+        [initialCartList]
+    );
     // const [selectedCartList, setSelectedCartList] = React.useState<CartList[]>(
     //     []
     // );
@@ -179,7 +186,7 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
     return (
         <div className="cart-items-wrap">
             <div className="cart-items js-cart-items">
-                {initialCartList.map((cartItem) => (
+                {cartList.map((cartItem) => (
                     <CartItem
                         product_id={cartItem.product_id}
                         product_option_id={cartItem.product_option_id}
@@ -189,6 +196,8 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
                         product_image={cartItem.product_image}
                         quantity={cartItem.quantity}
                         size={cartItem.size}
+                        onRemove={onRemove}
+                        id={cartItem.id}
                     />
                 ))}
             </div>

@@ -1,3 +1,5 @@
+import { MyTheme } from 'assets/css/global/theme.style';
+import { ButtonHover } from 'component/Button/ButtonHover';
 import * as React from 'react';
 
 interface IAppProps {}
@@ -19,13 +21,13 @@ const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
                     <span className="text">
                         Check out
                         <span className="inline-icon">
-                            <svg viewBox="0 0 14 14">
-                                <path
-                                    d="M11.815 6.527L9.182 3.894l.707-.707 3.89 3.89-3.89 3.888-.707-.707 2.731-2.73H0v-1h11.815z"
-                                    fill="#000"
-                                    fillRule="nonzero"
-                                ></path>
-                            </svg>
+                            <img
+                                src="/images/icon/arrow-top.svg"
+                                alt="arrow-right"
+                                width="14px"
+                                height="14px"
+                                className="filter-gray rotate90"
+                            />
                         </span>
                     </span>
                 </button>

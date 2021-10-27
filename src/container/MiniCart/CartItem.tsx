@@ -40,7 +40,7 @@ const CartItem: React.FC<IAppProps> = ({
                 <div className="line-image">
                     <a
                         className="link-to-product"
-                        href="/collections/complete-the-fit-bottoms/products/block-bd-shirt-earth?variant=41093542248601"
+                        href="#"
                         // 추후 shop 연결 필요
                     >
                         <span className="visually-hidden">
@@ -53,12 +53,8 @@ const CartItem: React.FC<IAppProps> = ({
                                     <img
                                         className="lazy-img lazyload lazy-preload lazyautosizes lazy-loaded"
                                         src={product_image}
-                                        // product_image[1]
                                         width="100"
                                         height="66"
-                                        data-widths="[180, 330, 540, 900, 1280, 1440, 1800, 2048, 2560]"
-                                        data-aspectratio=""
-                                        data-sizes="auto"
                                         alt={product_name}
                                         sizes="86px"
                                     />
@@ -89,39 +85,13 @@ const CartItem: React.FC<IAppProps> = ({
                         </div>
                     </div>
                 </div>
-                <div className="line-price-and-remove-small">
-                    <span className="h6 item-price">{price}</span>
-
-                    <a
-                        className="remove-line-item js-remove-line-item no-ajax"
-                        href="/cart/change?line=3&amp;quantity=0"
-                    >
-                        <span className="remove-text">
-                            translation missing: en.lineItem.remove
-                        </span>
-                        <span className="inline-icon" aria-hidden="true">
-                            <svg viewBox="0 0 14 14">
-                                <path d="M8.3 7.1l4 4-.7.7-4-4-4 4-.7-.7 4-4-4-4 .7-.7 4 4 4-4 .7.7-4 4z"></path>
-                            </svg>
-                        </span>
-                    </a>
-                </div>
-
                 <div className="line-remove no-small">
-                    <a
+                    <button
                         className="remove-line-item js-remove-line-item no-ajax"
-                        // href="/cart/change?line=3&amp;quantity=0"
-                        role="button"
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                            // e.stopPropagation();
-                            return onRemove(id);
-                            // return console.log(e.currentTarget.id);
-                        }}
+                        type="button"
                         onClick={(e) => {
-                            // e.stopPropagation();
+                            e.stopPropagation();
                             return onRemove(id);
-                            // return console.log(e.currentTarget.id);
                         }}
                         title="Remove"
                     >
@@ -131,7 +101,7 @@ const CartItem: React.FC<IAppProps> = ({
                                 <path d="M8.3 7.1l4 4-.7.7-4-4-4 4-.7-.7 4-4-4-4 .7-.7 4 4 4-4 .7.7-4 4z"></path>
                             </svg>
                         </span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
+import MiniCart from './MiniCart';
 
 const MiniCartHeader: React.FC = () => {
     const setModal = useSetRecoilState(Modal);
@@ -18,7 +19,7 @@ const MiniCartHeader: React.FC = () => {
                     onClick={() =>
                         setModal({
                             isOpen: false,
-                            ModalComponent: undefined,
+                            ModalComponent: MiniCart,
                         })
                     }
                 >
@@ -39,7 +40,7 @@ const MiniCartHeader: React.FC = () => {
                     onClick={() =>
                         setModal({
                             isOpen: false,
-                            ModalComponent: undefined,
+                            ModalComponent: MiniCart,
                         })
                     }
                 >

@@ -78,6 +78,7 @@ const InputContainer = styled.div<StyleProps>`
     position: relative;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
+    margin: 0.4285714286em 0;
     cursor: pointer;
     & > label {
         position: absolute;

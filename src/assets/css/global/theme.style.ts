@@ -41,6 +41,7 @@ declare module 'styled-components' {
             weight: {
                 light: number;
                 normal: number;
+                semiBold: number;
                 bold: number;
             };
         };
@@ -56,6 +57,7 @@ declare module 'styled-components' {
             blue: string;
             dark: string;
             gray: string;
+            lightGray: string;
             darkGray: string;
             gold: string;
         };
@@ -102,6 +104,7 @@ const fonts = {
     weight: {
         light: 100,
         normal: 400,
+        semiBold: 500,
         bold: 700,
     },
 };
@@ -113,6 +116,7 @@ const colors = {
     blue: '#4d90fe',
     dark: '#1f1f1f',
     gray: '#666',
+    lightGray: '#b2b2b2',
     darkGray: '#333',
     gold: '#877551',
 };

@@ -14,6 +14,7 @@ import AdminMain from 'container/Admin/AdminMain';
 import MiniCart from 'container/MiniCart/MiniCart';
 import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
+import Checkout from 'container/Checkout/Checkout';
 
 function App() {
     let isAdmin = false;
@@ -46,6 +47,9 @@ function App() {
                         </Route>
                         <Route path="/admin">
                             <AdminMain />
+                        </Route>
+                        <Route path="/checkout">
+                            <Checkout />
                         </Route>
                     </Switch>
                     {!isAdmin && <Footer />}

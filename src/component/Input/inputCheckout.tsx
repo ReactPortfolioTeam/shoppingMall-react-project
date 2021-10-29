@@ -107,6 +107,7 @@ const InputContainer = styled.div<StyleProps>`
         & > label {
             transition: all 0.25s;
             top: 2px;
+            font-size: smaller;
         }
         & > input {
             ::placeholder {

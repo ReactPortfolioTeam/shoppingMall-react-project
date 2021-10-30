@@ -3,9 +3,8 @@ import { FilterProductList } from 'state/selector/dummy/FilterProductList';
 import styled from 'styled-components';
 import ShopItem from './ShopItem';
 
-const ShopContent = () => {
+const ShopContent: React.FC = () => {
     const Item = useRecoilValue(FilterProductList);
-
     return (
         <ShopContents>
             {Item.map((item) => (

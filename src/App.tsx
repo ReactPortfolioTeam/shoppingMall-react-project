@@ -14,6 +14,7 @@ import AdminMain from 'container/Admin/AdminMain';
 import MiniCart from 'container/MiniCart/MiniCart';
 import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
+import ShopDetail from 'container/Shop/ShopDetail';
 import Checkout from 'container/Checkout/Checkout';
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
                         <Route path="/login">
                             <Login />
                         </Route>
-                        <Route path="/shop">
+                        <Route path="/shop" exact>
                             <Shop />
                         </Route>
                         <Route path="/about">
@@ -47,6 +48,9 @@ function App() {
                         </Route>
                         <Route path="/admin">
                             <AdminMain />
+                        </Route>
+                        <Route path="/shop/product/:id">
+                            <ShopDetail />
                         </Route>
                         <Route path="/checkout">
                             <Checkout />

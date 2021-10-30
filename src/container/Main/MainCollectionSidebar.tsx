@@ -13,12 +13,9 @@ export interface IAppProps {}
 const MainCollectionSidebar = (props: IAppProps) => {
     const setFilter = useSetRecoilState(ProductFilter);
 
-    const getSearch = () => {
-        const { search } = window.location;
-
-        if (search) {
-            setFilter(search.split('menu=')[1]);
-        }
+    const getSearch = (item: string) => {
+        setFilter(item);
+        console.log('변경', item);
     };
 
     return (
@@ -29,7 +26,8 @@ const MainCollectionSidebar = (props: IAppProps) => {
                 <Link
                     to={{ pathname: '/shop', search: `?menu=${item}` }}
                     key={item}
-                    onClick={getSearch}
+                    replace
+                    onClick={() => getSearch(item)}
                 >
                     <TextButton>{item}</TextButton>
                 </Link>

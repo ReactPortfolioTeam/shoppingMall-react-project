@@ -20,7 +20,7 @@ const MainView: React.FC<ContainerProps> = (p: ContainerProps) => {
 };
 
 export const MainViewStyle = styled.main`
-    padding: ${MyTheme.paddings.p5};
+    /* padding: ${MyTheme.paddings.p5}; */
     margin: 0 0 ${MyTheme.margins.m10} 0;
     width: 100%;
 `;

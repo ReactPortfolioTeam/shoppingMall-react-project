@@ -82,6 +82,7 @@ const InputContainer = styled.div<StyleProps>`
     cursor: pointer;
     & > label {
         position: absolute;
+        margin-top: ${(props) => props.theme.margins.m2_5};
         left: 10px;
         top: 13px;
         transition: all 0.25s;

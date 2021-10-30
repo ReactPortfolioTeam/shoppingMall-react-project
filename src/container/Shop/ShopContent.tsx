@@ -5,7 +5,6 @@ import ShopItem from './ShopItem';
 
 const ShopContent: React.FC = () => {
     const Item = useRecoilValue(FilterProductList);
-    console.log(Item);
     return (
         <ShopContents>
             {Item.map((item) => (

@@ -1,5 +1,5 @@
 import { MyTheme } from 'assets/css/global/theme.style';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import styled from 'styled-components';
 
@@ -10,16 +10,16 @@ interface Props {
 const ShopItem: React.FC<Props> = ({ item }) => {
     const [selected, setSelected] = useState(false);
 
-    const onClick = () => {
+    const onClickCapture = (e: React.MouseEvent) => {
+        e.stopPropagation();
         setSelected((prev) => !prev);
+    };
+    const onClickItem = (e: any) => {
+        history.push(`/shop/product/${item.product_id}`);
     };
     const history = useHistory();
     return (
-        <ShopItemWithQuickAdd
-            onClick={() => {
-                history.push(`/shop/product/${item.product_id}`);
-            }}
-        >
+        <ShopItemWithQuickAdd onClick={onClickItem}>
             <img
                 width="100%"
                 height="100%"
@@ -36,14 +36,14 @@ const ShopItem: React.FC<Props> = ({ item }) => {
                 {selected && (
                     <div className="display-option-container">
                         <button
-                            onClick={onClick}
+                            onClickCapture={onClickCapture}
                             type="button"
                             className="option"
                         >
                             X
                         </button>
                         <input
-                            onClick={() => alert('구현 필요')}
+                            onClickCapture={() => alert('구현 필요')}
                             className="add-cart"
                             id="add"
                             type="submit"
@@ -57,35 +57,35 @@ const ShopItem: React.FC<Props> = ({ item }) => {
                         <div>
                             <button
                                 type="button"
-                                onClick={onClick}
+                                onClickCapture={onClickCapture}
                                 className="soldout"
                             >
                                 S
                             </button>
                             <button
                                 type="button"
-                                onClick={onClick}
+                                onClickCapture={onClickCapture}
                                 className=""
                             >
                                 S
                             </button>
                             <button
                                 type="button"
-                                onClick={onClick}
+                                onClickCapture={onClickCapture}
                                 className=""
                             >
                                 S
                             </button>
                             <button
                                 type="button"
-                                onClick={onClick}
+                                onClickCapture={onClickCapture}
                                 className=""
                             >
                                 S
                             </button>
                             <button
                                 type="button"
-                                onClick={onClick}
+                                onClickCapture={onClickCapture}
                                 className=""
                             >
                                 S

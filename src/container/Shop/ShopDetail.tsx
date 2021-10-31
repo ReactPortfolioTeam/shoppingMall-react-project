@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable react/no-array-index-key */
 import { MyTheme } from 'assets/css/global/theme.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
@@ -9,7 +10,7 @@ import { Products } from 'state/atom/dummy/Products';
 import styled from 'styled-components';
 
 interface Product {
-    product_id: string;
+    product_id: number;
     category_id: number;
     product_name: string;
     sub_product_name: string;
@@ -32,7 +33,7 @@ const ShopDetail: React.FC = () => {
             itemList.filter(
                 (innerItem) =>
                     innerItem.product_id ===
-                    window.location.pathname.split('product/')[1]
+                    parseInt(window.location.pathname.split('product/')[1], 10)
             )
         );
     }, []);

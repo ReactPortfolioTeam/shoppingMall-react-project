@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 interface IAppProps {
-    product_id: string;
+    product_id: number;
     product_option_id: number;
     product_name: string;
     sub_product_name: string;

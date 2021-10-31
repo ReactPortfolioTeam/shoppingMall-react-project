@@ -4,7 +4,7 @@ export const Products = atom({
     key: 'Products',
     default: [
         {
-            product_id: '0001',
+            product_id: 1,
             category_id: 2,
             product_name: 'Patchwork BD Shirt',
             sub_product_name: 'Earth Khadi',
@@ -21,7 +21,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0002',
+            product_id: 2,
             category_id: 2,
             product_name: 'BVFKV KKD - BD Shirt',
             sub_product_name: 'Earth Khadi',
@@ -38,7 +38,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0003',
+            product_id: 3,
             category_id: 2,
             product_name: 'PCAO NGI - BD Shirt',
             sub_product_name: 'Earth Khadi',
@@ -55,7 +55,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0004',
+            product_id: 4,
             category_id: 2,
             product_name: 'TODOVBL BD Shirt',
             sub_product_name: 'Earth Khadi',
@@ -72,7 +72,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0005',
+            product_id: 5,
             category_id: 2,
             product_name: 'DD-Shirt',
             sub_product_name: 'Earth Khadi',
@@ -89,7 +89,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0006',
+            product_id: 6,
             category_id: 2,
             product_name: 'Pk BD Shirt',
             sub_product_name: 'Earth Khadi',
@@ -106,7 +106,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0007',
+            product_id: 7,
             category_id: 1,
             product_name: 'CS⁠-⁠120xk',
             sub_product_name: 'Classic Straight ⁠-⁠ Rinsed Shadow Kibata',
@@ -123,7 +123,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0008',
+            product_id: 8,
             category_id: 1,
             product_name: 'SCV-130',
             sub_product_name: 'Classic Straight ⁠-⁠ Rinsed Shadow Kibata',
@@ -140,7 +140,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0009',
+            product_id: 9,
             category_id: 1,
             product_name: 'MADIN-20',
             sub_product_name: 'Classic Straight ⁠-⁠ Rinsed Shadow Kibata',
@@ -157,7 +157,7 @@ export const Products = atom({
             product_date: '2021-10-24',
         },
         {
-            product_id: '0010',
+            product_id: 10,
             category_id: 1,
             product_name: 'MADIN-CK2020',
             sub_product_name: 'Classic Straight ⁠-⁠ Rinsed Shadow Kibata',

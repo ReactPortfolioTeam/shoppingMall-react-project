@@ -2,19 +2,46 @@ import { MyTheme } from 'assets/css/global/theme.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import Cart from 'state/atom/Cart';
+import { ProductInformation } from 'state/atom/dummy/ProductInformation';
+import { Products } from 'state/atom/dummy/Products';
 import { Modal } from 'state/atom/modal/Modal';
 import MiniCart from './MiniCart';
 
 interface IAppProps {}
+type CartPriceList = {
+    price: number | undefined;
+};
 
 const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
     const setModal = useSetRecoilState(Modal);
+    const cart = useRecoilValue(Cart);
+    const products = useRecoilValue(Products);
+    const productInfo = useRecoilValue(ProductInformation);
+    const cartPriceList: CartPriceList[] = cart.map((item) => ({
+        price: products.find(
+            (index) =>
+                index.product_id ===
+                productInfo[
+                    productInfo.findIndex(
+                        (index) =>
+                            index.product_option_id === item.product_option_id
+                    )
+                ].product_id
+        )?.price,
+    }));
+    const totalPrice = React.useMemo(
+        () => cartPriceList.reduce((acc, crr) => acc + crr.price!, 0),
+        [cart]
+    );
+    // React.useEffect(() => console.log(totalPrice), [totalPrice]);
+
     return (
         <div className="cart-totals">
             <div className="subtotal-row flex-space-between">
                 <h4>Subtotal</h4>
-                <h5 className="js-cart-price">$710.00</h5>
+                <h5 className="js-cart-price">${totalPrice}</h5>
             </div>
             <div className="cart-row">
                 <Link to="/checkout">

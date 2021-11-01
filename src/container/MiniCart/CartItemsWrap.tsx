@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import Cart from 'state/atom/Cart';
 import { Carts } from 'state/atom/dummy/Carts';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
@@ -20,7 +20,7 @@ type CartList = {
 };
 
 const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
-    const cart = useRecoilValue(Cart);
+    const [cart, setCart] = useRecoilState(Cart);
     const productInfo = useRecoilValue(ProductInformation);
     const products = useRecoilValue(Products);
 
@@ -85,8 +85,11 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
     }));
     const [cartList, setCartList] = React.useState<CartList[]>(selectedList);
     const onRemove = React.useCallback(
-        (id: number) => setCartList(cartList?.filter((item) => item.id !== id)),
-        [cartList]
+        (id: number) => {
+            setCart(cart.filter((item) => item.product_option_id !== id));
+            return setCartList(cartList?.filter((item) => item.id !== id));
+        },
+        [cart, cartList]
     );
     // React.useEffect(() => console.log(cartList), [cartList]);
 

@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 interface IAppProps {
-    product_id?: number;
-    product_option_id?: number;
-    product_name?: string;
-    sub_product_name?: string;
-    price?: number;
-    product_image?: string;
-    quantity?: number;
-    size?: string;
-    onRemove?: any;
-    id?: number;
+    product_id: number;
+    product_option_id: number;
+    product_name: string;
+    sub_product_name: string;
+    price: number;
+    product_image: string;
+    quantity: number;
+    size: string;
+    onRemove: any;
+    id: number;
 }
 
 const CartItem: React.FC<IAppProps> = ({
@@ -43,10 +43,10 @@ const CartItem: React.FC<IAppProps> = ({
                         href="#"
                         // 추후 shop 연결 필요
                     >
-                        <span className="visually-hidden">
+                        {/* <span className="visually-hidden">
                             Go to product page for `{product_name}` <br />`
                             {sub_product_name}`
-                        </span>
+                        </span> */}
                         <div className="portrait-product-image">
                             <div className="landscape-image-wrap">
                                 <div className="lazy js-lazy image-landscape">

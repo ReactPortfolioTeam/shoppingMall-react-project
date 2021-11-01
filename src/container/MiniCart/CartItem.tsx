@@ -1,16 +1,16 @@
 import * as React from 'react';
 
 interface IAppProps {
-    product_id: number;
-    product_option_id: number;
-    product_name: string;
-    sub_product_name: string;
-    price: number;
-    product_image: string;
-    quantity: number;
-    size: string;
-    onRemove: any;
-    id: number;
+    product_id?: number;
+    product_option_id?: number;
+    product_name?: string;
+    sub_product_name?: string;
+    price?: number;
+    product_image?: string;
+    quantity?: number;
+    size?: string;
+    onRemove?: any;
+    id?: number;
 }
 
 const CartItem: React.FC<IAppProps> = ({

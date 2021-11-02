@@ -12,6 +12,7 @@ import MiniCart from './MiniCart';
 interface IAppProps {}
 type CartPriceList = {
     price: number | undefined;
+    quantity: number | undefined;
 };
 
 const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
@@ -19,23 +20,27 @@ const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
     const cart = useRecoilValue(Cart);
     const products = useRecoilValue(Products);
     const productInfo = useRecoilValue(ProductInformation);
-    const cartPriceList: CartPriceList[] = cart.map((item) => ({
-        price: products.find(
-            (index) =>
-                index.product_id ===
-                productInfo[
-                    productInfo.findIndex(
-                        (index) =>
-                            index.product_option_id === item.product_option_id
-                    )
-                ].product_id
-        )?.price,
-    }));
+    const cartPriceList: CartPriceList[] = cart.map((item) => {
+        const resultInfo = productInfo.find(
+            (index) => index.product_option_id === item.product_option_id
+        );
+        const resultProduct = products.find(
+            (index) => index.product_id === resultInfo?.product_id
+        );
+        const result = {
+            price: resultProduct?.price,
+            quantity: item.quantity,
+        };
+        return result;
+    });
     const totalPrice = React.useMemo(
-        () => cartPriceList.reduce((acc, crr) => acc + crr.price!, 0),
+        () =>
+            cartPriceList.reduce(
+                (acc, crr) => acc + crr.price! * crr.quantity!,
+                0
+            ),
         [cart]
     );
-    // React.useEffect(() => console.log(totalPrice), [totalPrice]);
 
     return (
         <div className="cart-totals">

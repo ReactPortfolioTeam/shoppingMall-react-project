@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styled from 'styled-components';
 
 interface IAppProps {
     product_id: number;
@@ -26,16 +27,7 @@ const CartItem: React.FC<IAppProps> = ({
     id,
 }) => {
     return (
-        <div
-            className="line-item js-line-item"
-            data-option-id={product_option_id} // poduct_option_id
-            data-product-id={product_id} // product_id
-            data-quantity={quantity} // quantity
-            data-product-title={product_name} // product_name
-            // tabIndex={0}
-            aria-label="1 of Patchwork BD Shirt ~ Earth Khadi L for a price of 24000"
-            key={id}
-        >
+        <CartItemStyle className="line-item js-line-item" key={id}>
             <div className="line-item-inner">
                 <div className="line-image">
                     <a
@@ -43,10 +35,6 @@ const CartItem: React.FC<IAppProps> = ({
                         href="#"
                         // 추후 shop 연결 필요
                     >
-                        {/* <span className="visually-hidden">
-                            Go to product page for `{product_name}` <br />`
-                            {sub_product_name}`
-                        </span> */}
                         <div className="portrait-product-image">
                             <div className="landscape-image-wrap">
                                 <div className="lazy js-lazy image-landscape">
@@ -59,6 +47,12 @@ const CartItem: React.FC<IAppProps> = ({
                                         sizes="86px"
                                     />
                                 </div>
+                                <span
+                                    className="product-thumbnail__purchase_quantity"
+                                    aria-hidden="true"
+                                >
+                                    {quantity}
+                                </span>
                             </div>
                         </div>
                     </a>
@@ -81,7 +75,7 @@ const CartItem: React.FC<IAppProps> = ({
                             <span className="h6 item-size">{size}</span>
                         </div>
                         <div className="price">
-                            <span className="h6 item-price">{price}</span>
+                            <span className="h6 item-price">${price}</span>
                         </div>
                     </div>
                 </div>
@@ -104,8 +98,32 @@ const CartItem: React.FC<IAppProps> = ({
                     </button>
                 </div>
             </div>
-        </div>
+        </CartItemStyle>
     );
 };
+
+const CartItemStyle = styled.div`
+    .landscape-image-wrap {
+        position: relative;
+        & > .product-thumbnail__purchase_quantity {
+            font-size: 0.8571428571em;
+            font-weight: 400;
+            line-height: 1.75em;
+            white-space: nowrap;
+            text-align: center;
+            border-radius: 1.75em;
+            background-color: #585656;
+            color: #fff;
+            box-sizing: border-box;
+            min-width: 1.75em;
+            height: 1.75em;
+            padding: 0 0.5833333333em;
+            position: absolute;
+            left: 0.15rem;
+            top: 0.15rem;
+            z-index: 3;
+        }
+    }
+`;
 
 export default CartItem;

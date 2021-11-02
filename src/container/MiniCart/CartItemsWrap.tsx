@@ -24,65 +24,26 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
     const productInfo = useRecoilValue(ProductInformation);
     const products = useRecoilValue(Products);
 
-    const selectedList: CartList[] = cart.map((item) => ({
-        product_id:
-            productInfo[
-                productInfo.findIndex(
-                    (index) =>
-                        index.product_option_id === item.product_option_id
-                )
-            ].product_id,
-        product_option_id: item.product_option_id,
-        product_name: products.find(
-            (index) =>
-                index.product_id ===
-                productInfo[
-                    productInfo.findIndex(
-                        (index) =>
-                            index.product_option_id === item.product_option_id
-                    )
-                ].product_id
-        )?.product_name,
-        sub_product_name: products.find(
-            (index) =>
-                index.product_id ===
-                productInfo[
-                    productInfo.findIndex(
-                        (index) =>
-                            index.product_option_id === item.product_option_id
-                    )
-                ].product_id
-        )?.sub_product_name,
-        price: products.find(
-            (index) =>
-                index.product_id ===
-                productInfo[
-                    productInfo.findIndex(
-                        (index) =>
-                            index.product_option_id === item.product_option_id
-                    )
-                ].product_id
-        )?.price,
-        product_image: products.find(
-            (index) =>
-                index.product_id ===
-                productInfo[
-                    productInfo.findIndex(
-                        (index) =>
-                            index.product_option_id === item.product_option_id
-                    )
-                ].product_id
-        )?.product_image[0],
-        quantity: item.quantity,
-        size:
-            productInfo[
-                productInfo.findIndex(
-                    (index) =>
-                        index.product_option_id === item.product_option_id
-                )
-            ].size,
-        id: item.product_option_id,
-    }));
+    const selectedList: CartList[] = cart.map((item) => {
+        const resultInfo = productInfo.find(
+            (index) => index.product_option_id === item.product_option_id
+        );
+        const resultProduct = products.find(
+            (index) => index.product_id === resultInfo?.product_id
+        );
+        const result: CartList = {
+            product_id: resultProduct?.product_id,
+            product_option_id: resultInfo?.product_option_id,
+            product_name: resultProduct?.product_name,
+            sub_product_name: resultProduct?.sub_product_name,
+            price: resultProduct?.price,
+            product_image: resultProduct?.product_image[0],
+            quantity: item.quantity,
+            size: resultInfo?.size,
+            id: resultInfo?.product_option_id,
+        };
+        return result;
+    });
     const [cartList, setCartList] = React.useState<CartList[]>(selectedList);
     const onRemove = React.useCallback(
         (id: number) => {

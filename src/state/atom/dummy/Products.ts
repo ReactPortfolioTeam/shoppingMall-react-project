@@ -1,5 +1,17 @@
 import { atom } from 'recoil';
 
+export interface ProductsType {
+    product_id: number;
+    category_id: number;
+    product_name: string;
+    sub_product_name: string;
+    price: number;
+    depscription: string;
+    keyword: string;
+    product_image: string[];
+    product_date: string;
+}
+
 export const Products = atom({
     key: 'Products',
     default: [

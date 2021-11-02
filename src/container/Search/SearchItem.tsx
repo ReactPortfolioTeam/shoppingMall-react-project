@@ -1,5 +1,6 @@
 import { MyTheme } from 'assets/css/global/theme.style';
 import React, { useState } from 'react';
+import { ProductsType } from 'state/atom/dummy/Products';
 import styled from 'styled-components';
 
 // type Props={
@@ -42,9 +43,11 @@ StockSPerSize =
 *
 */
 
-export interface IAppProps {}
+export interface IAppProps {
+    item: ProductsType;
+}
 
-const SearchItem: React.FC<IAppProps> = () => {
+const SearchItem: React.FC<IAppProps> = ({ item }) => {
     const [selected, setSelected] = useState(false);
 
     const onClick = () => {
@@ -56,8 +59,8 @@ const SearchItem: React.FC<IAppProps> = () => {
             <img
                 width="100%"
                 height="100%"
-                src="https://picsum.photos/300?random=1"
-                alt="sample"
+                src={item.product_image[0]}
+                alt={item.product_name}
             />
             <div className="cart">
                 {!selected && (

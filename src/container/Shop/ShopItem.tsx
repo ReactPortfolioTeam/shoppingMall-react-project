@@ -9,11 +9,12 @@ import {
     ProductInformation,
     ProductInformationItem,
 } from 'state/atom/dummy/ProductInformation';
+import { ProductsType } from 'state/atom/dummy/Products';
 
 import styled from 'styled-components';
 
 interface Props {
-    item: any;
+    item: ProductsType;
 }
 
 const ShopItem: React.FC<Props> = ({ item }) => {
@@ -25,7 +26,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
         (filterItem) => filterItem.product_id === item.product_id
     );
     const history = useHistory();
-
+    console.log(cart);
     const onClickCapture = (e: React.MouseEvent) => {
         e.stopPropagation();
 
@@ -53,7 +54,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
             (item) => item.product_option_id === ProductOptionId
         );
 
-        if (equalItem) {
+        if (!equalItem) {
             setCart([
                 ...cart,
                 {

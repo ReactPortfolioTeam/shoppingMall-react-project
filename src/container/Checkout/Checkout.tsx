@@ -18,6 +18,11 @@ export const StyledLink = styled(Link)`
     text-decoration: none;
     color: #877551;
 `;
+export const StyledButton = styled.span`
+    text-decoration: none;
+    cursor: pointer;
+    color: #877551;
+`;
 
 const CheckoutStyle = styled.body`
     width: 100%;

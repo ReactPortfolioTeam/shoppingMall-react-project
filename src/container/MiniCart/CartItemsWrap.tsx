@@ -52,7 +52,6 @@ const CartItemsWrap: React.FunctionComponent<IAppProps> = (props) => {
         },
         [cart, cartList]
     );
-    // React.useEffect(() => console.log(cartList), [cartList]);
 
     return (
         <div className="cart-items-wrap">

@@ -1,135 +1,63 @@
 import * as React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
 import { Products } from 'state/atom/dummy/Products';
 import styled from 'styled-components';
 
 interface CheckoutSidebarProps {}
 
+type CartList = {
+    product_id?: number;
+    product_option_id?: number;
+    product_name?: string;
+    sub_product_name?: string;
+    price?: number;
+    product_image?: string;
+    quantity?: number;
+    size?: string;
+    id?: number;
+};
+
 const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
     props: CheckoutSidebarProps
 ) => {
+    const cart = useRecoilValue(Cart);
     const productInfo = useRecoilValue(ProductInformation);
     const products = useRecoilValue(Products);
-    const initialCartList = [
-        {
-            product_id: products[0].product_id,
-            product_option_id: productInfo.filter(
-                (info) => info.product_id === products[0].product_id
-            )[2].product_option_id,
-            product_name:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[0].product_id
-                    )
-                ].product_name,
-            sub_product_name:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[0].product_id
-                    )
-                ].sub_product_name,
-            price:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[0].product_id
-                    )
-                ].price,
-            product_image:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[0].product_id
-                    )
-                ].product_image[0],
-
-            size: productInfo.filter(
-                (info) => info.product_id === products[0].product_id
-            )[2].size,
-            purchase_quantity: 1,
-            id: 1,
-        },
-        {
-            product_id: products[3].product_id,
-            product_option_id: productInfo.filter(
-                (info) => info.product_id === products[3].product_id
-            )[1].product_option_id,
-            product_name:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[3].product_id
-                    )
-                ].product_name,
-            sub_product_name:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[3].product_id
-                    )
-                ].sub_product_name,
-            price:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[3].product_id
-                    )
-                ].price,
-            product_image:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[3].product_id
-                    )
-                ].product_image[0],
-
-            size: productInfo.filter(
-                (info) => info.product_id === products[3].product_id
-            )[1].size,
-            purchase_quantity: 2,
-            id: 2,
-        },
-        {
-            product_id: products[8].product_id,
-            product_option_id: productInfo.filter(
-                (info) => info.product_id === products[8].product_id
-            )[3].product_option_id,
-            product_name:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[8].product_id
-                    )
-                ].product_name,
-            sub_product_name:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[8].product_id
-                    )
-                ].sub_product_name,
-            price:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[8].product_id
-                    )
-                ].price,
-            product_image:
-                products[
-                    products.findIndex(
-                        (info) => info.product_id === products[8].product_id
-                    )
-                ].product_image[0],
-
-            size: productInfo.filter(
-                (info) => info.product_id === products[8].product_id
-            )[3].size,
-            purchase_quantity: 4,
-            id: 3,
-        },
-    ];
-    const TotoalPrice = initialCartList.reduce(
-        (acc, curr) => acc + curr.price,
-        0
+    const selectedList: CartList[] = cart.map((item) => {
+        const resultInfo = productInfo.find(
+            (index) => index.product_option_id === item.product_option_id
+        );
+        const resultProduct = products.find(
+            (index) => index.product_id === resultInfo?.product_id
+        );
+        const result: CartList = {
+            product_id: resultProduct?.product_id,
+            product_option_id: resultInfo?.product_option_id,
+            product_name: resultProduct?.product_name,
+            sub_product_name: resultProduct?.sub_product_name,
+            price: resultProduct?.price,
+            product_image: resultProduct?.product_image[0],
+            quantity: item.quantity,
+            size: resultInfo?.size,
+            id: resultInfo?.product_option_id,
+        };
+        return result;
+    });
+    const [cartList, setCartList] = React.useState<CartList[]>(selectedList);
+    const TotoalPrice = React.useMemo(
+        () =>
+            cartList.reduce(
+                (acc, curr) => acc + curr.price! * curr.quantity!,
+                0
+            ),
+        [cart]
     );
-    // React.useEffect(() => console.log(TotoalPrice), []);
     return (
         <CheckoutSidebarStyle className="sidebar" role="complementary">
             <div className="order-summary__section order-summary__section--product-list">
-                {initialCartList.map((item) => (
+                {cartList.map((item) => (
                     <div className="product-list--item">
                         <div className="product-inner--wrapper product-image--wrapper">
                             <img
@@ -141,7 +69,7 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
                                 className="product-thumbnail__purchase_quantity"
                                 aria-hidden="true"
                             >
-                                {item.purchase_quantity}
+                                {item.quantity}
                             </span>
                         </div>
                         <div className="product-inner--wrapper product-description--wrapper">
@@ -259,15 +187,15 @@ const CheckoutSidebarStyle = styled.aside`
                 }
             }
         }
+        & > .total--wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
         &.order-summary__section--sub-total-lines {
             height: 18%;
             justify-content: space-between;
             width: 100%;
-            .total--wrapper {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-            }
         }
         &.order-summary__section--total-lines {
             height: 14%;

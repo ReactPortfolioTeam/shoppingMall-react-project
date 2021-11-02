@@ -7,7 +7,7 @@ interface IAppProps {}
 
 const CartForm: React.FunctionComponent<IAppProps> = (props) => {
     return (
-        <form className="cart-form" action="/cart" method="post">
+        <form className="cart-form">
             <CartItemHeader />
             <CartItemsWrap />
             <CartTotals />

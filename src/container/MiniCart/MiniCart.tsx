@@ -262,6 +262,10 @@ const MiniCartStyle = styled.div<MiniCartStyleProps>`
                             .remove-line-item {
                                 margin-top: auto;
                                 color: #9a9a9a;
+                                background: none !important;
+                                border: none;
+                                padding: 0 !important;
+                                cursor: pointer;
                                 path {
                                     fill: #9a9a9a;
                                 }

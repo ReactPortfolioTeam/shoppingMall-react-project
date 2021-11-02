@@ -1,6 +1,15 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
 import { MyTheme } from 'assets/css/global/theme.style';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import Cart from 'state/atom/Cart';
+import {
+    ProductInformation,
+    ProductInformationItem,
+} from 'state/atom/dummy/ProductInformation';
+
 import styled from 'styled-components';
 
 interface Props {
@@ -8,17 +17,71 @@ interface Props {
 }
 
 const ShopItem: React.FC<Props> = ({ item }) => {
-    const [selected, setSelected] = useState(false);
+    const [selected, setSelected] = useState<boolean>(false);
+    const [selectItem, setSelectItem] = useState<string>('');
+    const productInformation = useRecoilValue(ProductInformation);
+    const [cart, setCart] = useRecoilState(Cart);
+    const size = productInformation.filter(
+        (filterItem) => filterItem.product_id === item.product_id
+    );
+    const history = useHistory();
 
-    const onClick = () => {
+    const onClickCapture = (e: React.MouseEvent) => {
+        e.stopPropagation();
+
         setSelected((prev) => !prev);
     };
-    const history = useHistory();
+
+    const onClickItem = (e: any) => {
+        history.push(`/shop/product/${item.product_id}`);
+    };
+
+    const onClickSize = (e: React.MouseEvent, item: string) => {
+        e.stopPropagation();
+
+        setSelected((prev) => !prev);
+        setSelectItem(item);
+    };
+
+    const onClickAddToBag = (e: React.MouseEvent) => {
+        e.stopPropagation();
+
+        const ProductOptionId = size.filter(
+            (item: ProductInformationItem) => item.size === selectItem
+        )[0].product_option_id;
+        const isEqual = cart.filter(
+            (item) => item.product_option_id === ProductOptionId
+        );
+
+        if (isEqual.length === 0) {
+            setCart([
+                ...cart,
+                {
+                    product_option_id: ProductOptionId,
+                    quantity: 1,
+                },
+            ]);
+        } else {
+            // 똑같은 값이 존재하는 경우
+            const result = cart.map((item, i) => {
+                const arrayResult =
+                    item.product_option_id === ProductOptionId
+                        ? {
+                              product_option_id: ProductOptionId,
+                              quantity: cart[i].quantity + 1,
+                          }
+                        : item;
+
+                return arrayResult;
+            });
+            setCart(result);
+        }
+    };
+
     return (
         <ShopItemWithQuickAdd
-            onClick={() => {
-                history.push(`/shop/product/${item.product_id}`);
-            }}
+            onClick={onClickItem}
+            onMouseLeave={() => setSelected(false)}
         >
             <img
                 width="100%"
@@ -36,18 +99,18 @@ const ShopItem: React.FC<Props> = ({ item }) => {
                 {selected && (
                     <div className="display-option-container">
                         <button
-                            onClick={onClick}
+                            onClickCapture={onClickCapture}
                             type="button"
                             className="option"
                         >
-                            X
+                            {selectItem}
                         </button>
                         <input
-                            onClick={() => alert('구현 필요')}
+                            onClickCapture={onClickAddToBag}
                             className="add-cart"
                             id="add"
                             type="submit"
-                            value="Add to "
+                            value="Add to Bag"
                         />
                     </div>
                 )}
@@ -55,41 +118,22 @@ const ShopItem: React.FC<Props> = ({ item }) => {
                 <div className="container">
                     {!selected && (
                         <div>
-                            <button
-                                type="button"
-                                onClick={onClick}
-                                className="soldout"
-                            >
-                                S
-                            </button>
-                            <button
-                                type="button"
-                                onClick={onClick}
-                                className=""
-                            >
-                                S
-                            </button>
-                            <button
-                                type="button"
-                                onClick={onClick}
-                                className=""
-                            >
-                                S
-                            </button>
-                            <button
-                                type="button"
-                                onClick={onClick}
-                                className=""
-                            >
-                                S
-                            </button>
-                            <button
-                                type="button"
-                                onClick={onClick}
-                                className=""
-                            >
-                                S
-                            </button>
+                            {size.map((filterItem: ProductInformationItem) => {
+                                return (
+                                    <button
+                                        type="button"
+                                        key={filterItem.product_option_id}
+                                        onClickCapture={(e) =>
+                                            onClickSize(e, filterItem.size)
+                                        }
+                                        className={`${
+                                            filterItem.stock === 0 && 'soldout'
+                                        }`}
+                                    >
+                                        {filterItem.size}
+                                    </button>
+                                );
+                            })}
                         </div>
                     )}
                 </div>

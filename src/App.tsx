@@ -15,6 +15,7 @@ import MiniCart from 'container/MiniCart/MiniCart';
 import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
 import ShopDetail from 'container/Shop/ShopDetail';
+import Checkout from 'container/Checkout/Checkout';
 
 function App() {
     let isAdmin = false;
@@ -50,6 +51,9 @@ function App() {
                         </Route>
                         <Route path="/shop/product/:id">
                             <ShopDetail />
+                        </Route>
+                        <Route path="/checkout">
+                            <Checkout />
                         </Route>
                     </Switch>
                     {!isAdmin && <Footer />}

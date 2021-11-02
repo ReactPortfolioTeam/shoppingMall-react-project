@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import { MyTheme } from 'assets/css/global/theme.style';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Cart from 'state/atom/Cart';
@@ -49,11 +49,11 @@ const ShopItem: React.FC<Props> = ({ item }) => {
         const ProductOptionId = size.filter(
             (item: ProductInformationItem) => item.size === selectItem
         )[0].product_option_id;
-        const isEqual = cart.filter(
+        const equalItem = cart.find(
             (item) => item.product_option_id === ProductOptionId
         );
 
-        if (isEqual.length === 0) {
+        if (equalItem) {
             setCart([
                 ...cart,
                 {

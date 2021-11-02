@@ -6,31 +6,19 @@ import { useScroll } from 'hooks/useScroll';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { Products } from 'state/atom/dummy/Products';
+import { Products, ProductsType } from 'state/atom/dummy/Products';
 import styled from 'styled-components';
-
-interface Product {
-    product_id: number;
-    category_id: number;
-    product_name: string;
-    sub_product_name: string;
-    price: number;
-    depscription: string;
-    keyword: string;
-    product_image: string[];
-    product_date: string;
-}
 
 const ShopDetail: React.FC = () => {
     const itemList = useRecoilValue(Products);
     const size = ['S', 'M', 'L', 'XL', 'XXL'];
-    const [item, setItem] = useState<Product[]>();
+    const [item, setItem] = useState<ProductsType>();
     const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
     const { scrollY } = useScroll();
 
     useEffect(() => {
         setItem(
-            itemList.filter(
+            itemList.find(
                 (innerItem) =>
                     innerItem.product_id ===
                     parseInt(window.location.pathname.split('product/')[1], 10)
@@ -78,13 +66,13 @@ const ShopDetail: React.FC = () => {
         <ContainerDiv>
             <div className="sticky-container__div">
                 <div className="sticky__div">
-                    <Link to={`shop?menu=${item[0].keyword}`}>
-                        Shop &gt; {item[0].keyword}
+                    <Link to={`shop?menu=${item.keyword}`}>
+                        Shop &gt; {item.keyword}
                     </Link>
-                    <h1>{item[0].product_name}</h1>
-                    <p className="sub-title__p">{item[0].sub_product_name}</p>
+                    <h1>{item.product_name}</h1>
+                    <p className="sub-title__p">{item.sub_product_name}</p>
                     <div>
-                        <p>$ {item[0].price}</p>
+                        <p>$ {item.price}</p>
                         <div>
                             <button type="button">+ Wishlist</button>
                             <button type="button">Sizing</button>
@@ -92,7 +80,7 @@ const ShopDetail: React.FC = () => {
                     </div>
                     <hr className="line" />
                     <div>
-                        <p>{item[0].depscription}</p>
+                        <p>{item.depscription}</p>
                         <a href="">Read more</a>
                     </div>
                     <hr className="line" />
@@ -119,24 +107,22 @@ const ShopDetail: React.FC = () => {
                     </div>
                 </div>
                 <div className="image-container__div">
-                    {item[0].product_image.map(
-                        (image: string, index: number) => {
-                            return (
-                                <div key={image + index}>
-                                    <img
-                                        src={image}
-                                        alt={image}
-                                        id={`image${index}`}
-                                    />
-                                </div>
-                            );
-                        }
-                    )}
+                    {item.product_image.map((image: string, index: number) => {
+                        return (
+                            <div key={image + index}>
+                                <img
+                                    src={image}
+                                    alt={image}
+                                    id={`image${index}`}
+                                />
+                            </div>
+                        );
+                    })}
                     <div>
                         <p>
                             <strong>Information</strong>
                         </p>
-                        <p>{item[0].depscription}</p>
+                        <p>{item.depscription}</p>
                     </div>
                 </div>
             </div>

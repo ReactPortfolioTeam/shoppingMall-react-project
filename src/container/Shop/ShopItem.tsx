@@ -22,11 +22,10 @@ const ShopItem: React.FC<Props> = ({ item }) => {
     const [selectItem, setSelectItem] = useState<string>('');
     const productInformation = useRecoilValue(ProductInformation);
     const [cart, setCart] = useRecoilState(Cart);
-    const size = productInformation.filter(
+    const size: ProductInformationItem[] = productInformation.filter(
         (filterItem) => filterItem.product_id === item.product_id
     );
     const history = useHistory();
-    console.log(cart);
     const onClickCapture = (e: React.MouseEvent) => {
         e.stopPropagation();
 
@@ -47,9 +46,9 @@ const ShopItem: React.FC<Props> = ({ item }) => {
     const onClickAddToBag = (e: React.MouseEvent) => {
         e.stopPropagation();
 
-        const ProductOptionId = size.filter(
-            (item: ProductInformationItem) => item.size === selectItem
-        )[0].product_option_id;
+        const ProductOptionId = size.find((item) => item.size === selectItem)
+            ?.product_option_id;
+
         const equalItem = cart.find(
             (item) => item.product_option_id === ProductOptionId
         );
@@ -64,12 +63,12 @@ const ShopItem: React.FC<Props> = ({ item }) => {
             ]);
         } else {
             // 똑같은 값이 존재하는 경우
-            const result = cart.map((item, i) => {
+            const result = cart.map((item) => {
                 const arrayResult =
                     item.product_option_id === ProductOptionId
                         ? {
                               product_option_id: ProductOptionId,
-                              quantity: cart[i].quantity + 1,
+                              quantity: item.quantity! + 1,
                           }
                         : item;
 

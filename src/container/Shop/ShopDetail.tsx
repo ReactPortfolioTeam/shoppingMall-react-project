@@ -2,12 +2,12 @@
 /* eslint-disable react/no-array-index-key */
 import { MyTheme } from 'assets/css/global/theme.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
-import AddCartItem from 'hooks/useAddCart';
+import AddCartItem from 'container/Shop/AddCart';
 import { useScroll } from 'hooks/useScroll';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import Cart, { CartItem } from 'state/atom/Cart';
+import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
 import { Products, ProductsType } from 'state/atom/dummy/Products';
 import styled from 'styled-components';

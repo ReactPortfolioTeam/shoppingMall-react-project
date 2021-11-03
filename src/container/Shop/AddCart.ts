@@ -1,9 +1,5 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
-import Cart, { CartItem } from 'state/atom/Cart';
-import {
-    ProductInformation,
-    ProductInformationItem,
-} from 'state/atom/dummy/ProductInformation';
+import { CartItem } from 'state/atom/Cart';
+import { ProductInformationItem } from 'state/atom/dummy/ProductInformation';
 import { ProductsType } from 'state/atom/dummy/Products';
 
 const AddCartItem = (

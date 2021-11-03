@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import { MyTheme } from 'assets/css/global/theme.style';
-import AddCartItem from 'hooks/useAddCart';
+import AddCartItem from 'container/Shop/AddCart';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState, useRecoilValue } from 'recoil';

@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import { MyTheme } from 'assets/css/global/theme.style';
+import AddCartItem from 'hooks/useAddCart';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -22,7 +23,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
     const [selectItem, setSelectItem] = useState<string>('');
     const productInformation = useRecoilValue(ProductInformation);
     const [cart, setCart] = useRecoilState(Cart);
-    const size: ProductInformationItem[] = productInformation.filter(
+    const size = productInformation.filter(
         (filterItem) => filterItem.product_id === item.product_id
     );
     const history = useHistory();
@@ -45,37 +46,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
 
     const onClickAddToBag = (e: React.MouseEvent) => {
         e.stopPropagation();
-
-        const ProductOptionId = size.find((item) => item.size === selectItem)
-            ?.product_option_id;
-
-        const equalItem = cart.find(
-            (item) => item.product_option_id === ProductOptionId
-        );
-
-        if (!equalItem) {
-            setCart([
-                ...cart,
-                {
-                    product_option_id: ProductOptionId,
-                    quantity: 1,
-                },
-            ]);
-        } else {
-            // 똑같은 값이 존재하는 경우
-            const result = cart.map((item) => {
-                const arrayResult =
-                    item.product_option_id === ProductOptionId
-                        ? {
-                              product_option_id: ProductOptionId,
-                              quantity: item.quantity! + 1,
-                          }
-                        : item;
-
-                return arrayResult;
-            });
-            setCart(result);
-        }
+        AddCartItem(item, selectItem, productInformation, cart, setCart);
     };
 
     return (
@@ -148,6 +119,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
         </ShopItemWithQuickAdd>
     );
 };
+
 export const ShopItemWithQuickAdd = styled.div`
     width: 45%;
     margin: ${MyTheme.margins.m20};

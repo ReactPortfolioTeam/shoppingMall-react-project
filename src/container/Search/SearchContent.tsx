@@ -1,24 +1,22 @@
 import { MyTheme } from 'assets/css/global/theme.style';
+import ShopItem from 'container/Shop/ShopItem';
 import React from 'react';
+import { ProductsType } from 'state/atom/dummy/Products';
 import styled from 'styled-components';
-import SearchItem from './SearchItem';
 import SearchResultCount from './SearchResultCount';
 
-export interface IAppProps {}
+export interface IAppProps {
+    searchItems: ProductsType[];
+}
 
-const SearchContent: React.FC<IAppProps> = () => {
+const SearchContent: React.FC<IAppProps> = ({ searchItems }) => {
     return (
         <SearchContentStyle>
-            <SearchResultCount count={10} />
+            <SearchResultCount count={searchItems.length} />
             <ItemContainerStyle>
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
-                <SearchItem />
+                {searchItems.map((item) => (
+                    <ShopItem item={item} />
+                ))}
             </ItemContainerStyle>
         </SearchContentStyle>
     );

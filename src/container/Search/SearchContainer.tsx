@@ -1,24 +1,39 @@
+import { useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import Button from 'component/Button/Button';
-import * as React from 'react';
 import styled from 'styled-components';
+import { Products, ProductsType } from 'state/atom/dummy/Products';
 import SearchForm from './SearchForm';
 import SearchContent from './SearchContent';
 
 export interface IAppProps {}
 
 const SearchContainer: React.FC<IAppProps> = () => {
-    const [isSubmit, setIsSubmit] = React.useState<boolean>(false);
+    const [isSubmit, setIsSubmit] = useState<boolean>(false);
+    const products = useRecoilValue(Products);
+    const [searchInput, setSeartchInput] = useState<string>('');
+    const changeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSeartchInput(e.target.value);
+    };
+    const searchItems: ProductsType[] = products.filter((item) => {
+        return Object.values(item).toString().includes(searchInput);
+    });
+
     return (
         <>
             {isSubmit ? (
                 <ResultContainerStyle>
-                    <SearchContent />
+                    <SearchContent searchItems={searchItems} />
                 </ResultContainerStyle>
             ) : (
                 <SearchContainerStyle>
                     <aside id="search__sidebar-section">sidebar section</aside>
                     <div id="search__input-section">
-                        <SearchForm setSubmit={setIsSubmit} />
+                        <SearchForm
+                            setSubmit={setIsSubmit}
+                            searchInput={searchInput}
+                            changeSearchInput={changeSearchInput}
+                        />
                     </div>
                 </SearchContainerStyle>
             )}

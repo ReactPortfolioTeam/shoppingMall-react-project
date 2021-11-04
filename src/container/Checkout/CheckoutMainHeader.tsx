@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
-import { StyledButton, StyledLink } from './Checkout';
+import { StyledButton } from './Checkout';
 
 interface IAppProps {}
 

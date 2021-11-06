@@ -1,6 +1,8 @@
 import ButtonBlack from 'component/Button/ButtonBg_black';
 import MiniCart from 'container/MiniCart/MiniCart';
 import * as React from 'react';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
@@ -10,9 +12,15 @@ interface SectionFooterProps {}
 
 const SectionFooter: React.FC<SectionFooterProps> = (props) => {
     const setModal = useSetRecoilState(Modal);
+    const history = useHistory();
     return (
         <SectionFooterStyle className="section section__footer">
-            <ButtonBlack width="30%" height="3rem" type="submit">
+            <ButtonBlack
+                width="160px"
+                height="3rem"
+                type="submit"
+                onClick={() => history.push('/checkout/payment')}
+            >
                 Continue to shipping
             </ButtonBlack>
             <StyledButton

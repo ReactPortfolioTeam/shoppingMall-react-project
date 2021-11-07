@@ -2,10 +2,13 @@
 /* eslint-disable react/no-array-index-key */
 import { MyTheme } from 'assets/css/global/theme.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
+import AddCartItem from 'container/Shop/AddCart';
 import { useScroll } from 'hooks/useScroll';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import Cart from 'state/atom/Cart';
+import { ProductInformation } from 'state/atom/dummy/ProductInformation';
 import { Products, ProductsType } from 'state/atom/dummy/Products';
 import styled from 'styled-components';
 
@@ -13,7 +16,10 @@ const ShopDetail: React.FC = () => {
     const itemList = useRecoilValue(Products);
     const size = ['S', 'M', 'L', 'XL', 'XXL'];
     const [item, setItem] = useState<ProductsType>();
+    const [cart, setCart] = useRecoilState(Cart);
+    const [selectItem, setSelectItem] = useState<string>();
     const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
+    const productInformation = useRecoilValue(ProductInformation);
     const { scrollY } = useScroll();
 
     useEffect(() => {
@@ -58,6 +64,19 @@ const ShopDetail: React.FC = () => {
         }
     };
 
+    const onClickAddToBag = () => {
+        if (selectItem) {
+            AddCartItem(
+                item as ProductsType,
+                selectItem,
+                productInformation,
+                cart,
+                setCart
+            );
+            setSelectItem('');
+        }
+    };
+
     if (!item) {
         return null;
     }
@@ -88,7 +107,17 @@ const ShopDetail: React.FC = () => {
                         <p>Size</p>
                         <div>
                             {size.map((item) => (
-                                <ButtonHover height="40px" key={item}>
+                                <ButtonHover
+                                    onClick={() => setSelectItem(item)}
+                                    height="40px"
+                                    key={item}
+                                    isOverrlay
+                                    backgroundColor={
+                                        selectItem === item
+                                            ? MyTheme.colors.darkGray
+                                            : undefined
+                                    }
+                                >
                                     {item}
                                 </ButtonHover>
                             ))}
@@ -100,6 +129,7 @@ const ShopDetail: React.FC = () => {
                             width="100%"
                             backgroundColor={MyTheme.colors.dark}
                             color="white"
+                            onClick={onClickAddToBag}
                         >
                             Add to bag
                         </ButtonHover>

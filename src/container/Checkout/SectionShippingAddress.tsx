@@ -1,5 +1,7 @@
 import InputCheckout from 'component/Input/inputCheckout';
 import * as React from 'react';
+import { useRecoilState } from 'recoil';
+import OrderInfo from 'state/atom/orderInfo/OrderInfo';
 import styled from 'styled-components';
 
 interface SectionShippingProps {
@@ -17,6 +19,7 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
     props: SectionShippingProps
 ) => {
     const { inputValue, handleChange } = props;
+
     return (
         <SectionShippingAddressStyle className="section section--shipping-address">
             <div className="section__header">
@@ -96,11 +99,6 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
     );
 };
 const SectionShippingAddressStyle = styled.section`
-    .doubleInput-row {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
     .with-icon {
         position: relative;
         .tooltipBox {

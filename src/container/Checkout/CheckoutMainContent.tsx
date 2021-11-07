@@ -1,8 +1,7 @@
-import Input from 'component/Input/Input';
-import InputCheckout from 'component/Input/inputCheckout';
 import * as React from 'react';
+import { useRecoilState } from 'recoil';
+import OrderInfo from 'state/atom/orderInfo/OrderInfo';
 import styled from 'styled-components';
-import { StyledLink } from './Checkout';
 import SectionContactInfo from './SectionContactInfo';
 import SectionFooter from './SectionFooter';
 import SectionShippingAddress from './SectionShippingAddress';
@@ -10,23 +9,17 @@ import SectionShippingAddress from './SectionShippingAddress';
 interface IAppProps {}
 
 const CheckoutMainContent: React.FC<IAppProps> = (props) => {
-    const [inputValue, setInputValue] = React.useState({
-        email: '',
-        firstName: '',
-        lastName: '',
-        address: '',
-        detailedAddress: '',
-        phone: '',
-    });
+    const [orderInfo, setOrderInfo] = useRecoilState(OrderInfo);
     const handleChange = React.useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             const { value, name } = e.target;
-            setInputValue({
-                ...inputValue,
+            setOrderInfo({
+                ...orderInfo,
                 [name]: value,
             });
+            // console.log(orderInfo);
         },
-        [inputValue]
+        [orderInfo]
     );
     return (
         <form
@@ -38,11 +31,11 @@ const CheckoutMainContent: React.FC<IAppProps> = (props) => {
             <CheckoutMainContentStyle>
                 <SectionContactInfo
                     handleChange={handleChange}
-                    inputValue={inputValue}
+                    inputValue={orderInfo}
                 />
                 <SectionShippingAddress
                     handleChange={handleChange}
-                    inputValue={inputValue}
+                    inputValue={orderInfo}
                 />
                 <SectionFooter />
             </CheckoutMainContentStyle>
@@ -63,6 +56,11 @@ const CheckoutMainContentStyle = styled.div`
             flex-direction: column;
             .checkbox-wrapper {
                 display: flex;
+            }
+            &.doubleInput-row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
             }
         }
     }

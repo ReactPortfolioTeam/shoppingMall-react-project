@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface InputProps {
     id: string;
@@ -36,7 +36,7 @@ const InputCheckout: React.FC<InputProps> = (props: InputProps) => {
     const focusDiv = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value !== '' && label.current !== null) {
             label.current.style.top = '2px';
-            // label.current.style.left = '0px';
+            label.current.style.left = '2px';
         } else if (label.current !== null) {
             label.current.style.removeProperty('top');
             label.current.style.removeProperty('left');
@@ -88,6 +88,12 @@ const InputContainer = styled.div<StyleProps>`
         transition: all 0.25s;
         cursor: pointer;
         color: ${(props) => props.theme.colors.gray};
+        ${(props) =>
+            props.value &&
+            css`
+                top: 2px;
+                left: 2px;
+            `}
     }
     & > input {
         padding-top: ${(props) => props.theme.paddings.p10};
@@ -108,6 +114,7 @@ const InputContainer = styled.div<StyleProps>`
         & > label {
             transition: all 0.25s;
             top: 2px;
+            left: 2px;
             font-size: smaller;
         }
         & > input {

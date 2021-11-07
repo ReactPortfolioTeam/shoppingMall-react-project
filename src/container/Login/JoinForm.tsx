@@ -1,4 +1,6 @@
+import { API } from 'api/API';
 import { MyTheme } from 'assets/css/global/theme.style';
+import axios from 'axios';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import Input from 'component/Input/Input';
 import React, { useState } from 'react';
@@ -28,16 +30,15 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
         setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     };
 
-    const onSubmit = (e: React.MouseEvent) => {
+    const onSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
+        API.post('signup', JSON.stringify(user))
+            .then((res) => console.log('res', res))
+            .catch((err) => console.log('err', err.response.data.msg));
     };
 
     return (
-        <JoinFormContainer
-            action="http://localhost:8080/api/v1/signup"
-            method="POST"
-            encType="application/json"
-        >
+        <JoinFormContainer>
             {isView ? (
                 <fieldset>
                     <legend>

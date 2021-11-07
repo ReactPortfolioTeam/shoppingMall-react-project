@@ -25,6 +25,7 @@ const SearchForm: React.FC<IAppProps> = ({
                     onChange={changeSearchInput}
                     width="100%"
                     height="2rem"
+                    type="text"
                     placeholder="Search anything"
                     content="Search"
                 />

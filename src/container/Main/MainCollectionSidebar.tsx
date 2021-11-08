@@ -15,7 +15,7 @@ const MainCollectionSidebar = (props: IAppProps) => {
 
     const getSearch = (item: string) => {
         setFilter(item);
-        console.log('변경', item);
+        // console.log('변경', item);
     };
 
     return (
@@ -37,13 +37,17 @@ const MainCollectionSidebar = (props: IAppProps) => {
 };
 
 const CollectionSidebarStyle = styled.aside`
+    width: auto;
     display: flex;
     flex-direction: column;
-    width: auto;
+    position: sticky;
+    height: max-content;
+    top: calc(50vh - 10rem);
+    left: 10px;
     padding: ${MyTheme.paddings.p5};
     padding-right: ${MyTheme.paddings.p40};
+    padding-bottom: ${(props) => props.theme.paddings.p80};
     margin: 0 ${MyTheme.margins.m80} 0 ${MyTheme.margins.m5};
-    border-right: 1px solid black;
     & > h2 {
         margin-bottom: ${MyTheme.margins.m5};
     }

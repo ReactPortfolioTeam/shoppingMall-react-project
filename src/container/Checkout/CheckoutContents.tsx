@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { useLocation } from 'react-router';
 import CheckoutMainContent from './CheckoutMainContent';
 import CheckoutMainHeader from './CheckoutMainHeader';
+import CheckoutPayment from './CheckoutPayment';
 
 interface IAppProps {}
 
@@ -10,7 +12,14 @@ const CheckoutContents: React.FC<IAppProps> = (props) => {
     return (
         <CheckoutContentsStyle>
             <CheckoutMainHeader />
-            <CheckoutMainContent />
+            <Switch>
+                <Route exact path="/checkout">
+                    <CheckoutMainContent />
+                </Route>
+                <Route path="/checkout/payment">
+                    <CheckoutPayment />
+                </Route>
+            </Switch>
         </CheckoutContentsStyle>
     );
 };

@@ -1,7 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import { MyTheme } from 'assets/css/global/theme.style';
-import React, { useState, useEffect } from 'react';
+import AddCartItem from 'container/Shop/AddCart';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Cart from 'state/atom/Cart';
@@ -9,11 +10,12 @@ import {
     ProductInformation,
     ProductInformationItem,
 } from 'state/atom/dummy/ProductInformation';
+import { ProductsType } from 'state/atom/dummy/Products';
 
 import styled from 'styled-components';
 
 interface Props {
-    item: any;
+    item: ProductsType;
 }
 
 const ShopItem: React.FC<Props> = ({ item }) => {
@@ -25,7 +27,6 @@ const ShopItem: React.FC<Props> = ({ item }) => {
         (filterItem) => filterItem.product_id === item.product_id
     );
     const history = useHistory();
-
     const onClickCapture = (e: React.MouseEvent) => {
         e.stopPropagation();
 
@@ -45,37 +46,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
 
     const onClickAddToBag = (e: React.MouseEvent) => {
         e.stopPropagation();
-
-        const ProductOptionId = size.filter(
-            (item: ProductInformationItem) => item.size === selectItem
-        )[0].product_option_id;
-        const isEqual = cart.filter(
-            (item) => item.product_option_id === ProductOptionId
-        );
-
-        if (isEqual.length === 0) {
-            setCart([
-                ...cart,
-                {
-                    product_option_id: ProductOptionId,
-                    quantity: 1,
-                },
-            ]);
-        } else {
-            // 똑같은 값이 존재하는 경우
-            const result = cart.map((item, i) => {
-                const arrayResult =
-                    item.product_option_id === ProductOptionId
-                        ? {
-                              product_option_id: ProductOptionId,
-                              quantity: cart[i].quantity + 1,
-                          }
-                        : item;
-
-                return arrayResult;
-            });
-            setCart(result);
-        }
+        AddCartItem(item, selectItem, productInformation, cart, setCart);
     };
 
     return (
@@ -148,6 +119,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
         </ShopItemWithQuickAdd>
     );
 };
+
 export const ShopItemWithQuickAdd = styled.div`
     width: 45%;
     margin: ${MyTheme.margins.m20};

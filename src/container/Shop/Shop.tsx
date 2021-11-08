@@ -15,14 +15,12 @@ const Shop = () => {
 };
 
 const ShopMainStyle = styled.div`
-    width: 100%;
     h3 {
         text-align: left;
     }
 `;
 
 const ShopContainerStyle = styled.section`
-    height: max-content;
     display: flex;
     flex-direction: row;
     padding: ${MyTheme.paddings.p1};

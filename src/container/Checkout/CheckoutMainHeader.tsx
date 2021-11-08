@@ -1,32 +1,71 @@
-import * as React from 'react';
+import MiniCart from 'container/MiniCart/MiniCart';
+import { useCallback, useEffect, FunctionComponent } from 'react';
+import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
-import { StyledLink } from './Checkout';
+import { StyledButton } from './Checkout';
 
 interface IAppProps {}
 
-const CheckoutMainHeader: React.FunctionComponent<IAppProps> = (props) => {
+const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
+    const setModal = useSetRecoilState(Modal);
+    const location = useLocation();
+    const history = useHistory();
+    const isInfo = location.pathname === '/checkout';
+    const isPayment = location.pathname === '/checkout/payment';
+    // useEffect(() => console.log(location, isInfo, isPayment), [location]);
     return (
         <CheckoutMainHeaderStyle>
             <Link to="/" className="logo">
                 <img src="images/Logo.png" alt="" className="logoImg" />
             </Link>
             <ol className="checkoutProgressBar">
-                <StyledLink to="/">
+                <StyledButton
+                    onClick={() =>
+                        setModal({
+                            isOpen: true,
+                            ModalComponent: MiniCart,
+                        })
+                    }
+                >
                     <li className="progressBar__item visited">Cart</li>
-                </StyledLink>
+                </StyledButton>
                 <li className="progressBar__item">
                     <img src="images/icon/arrow-right.svg" alt="arrow-right" />
                 </li>
-                <li className="progressBar__item current">Information</li>
+                {isInfo ? (
+                    <li
+                        className={`progressBar__item ${
+                            isInfo ? 'current' : 'visited'
+                        }`}
+                    >
+                        Information
+                    </li>
+                ) : (
+                    isPayment && (
+                        <StyledButton onClick={() => history.goBack()}>
+                            <li
+                                className={`progressBar__item ${
+                                    isInfo ? 'current' : 'visited'
+                                }`}
+                            >
+                                Information
+                            </li>
+                        </StyledButton>
+                    )
+                )}
                 <li className="progressBar__item">
                     <img src="images/icon/arrow-right.svg" alt="arrow-right" />
                 </li>
-                <li className="progressBar__item">shipping</li>
-                <li className="progressBar__item">
-                    <img src="images/icon/arrow-right.svg" alt="arrow-right" />
+                <li
+                    className={`progressBar__item ${
+                        isPayment ? 'current' : ''
+                    }`}
+                >
+                    Payment
                 </li>
-                <li className="progressBar__item">Payment</li>
             </ol>
         </CheckoutMainHeaderStyle>
     );

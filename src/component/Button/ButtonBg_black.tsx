@@ -6,6 +6,7 @@ export interface ButtonProps {
     width?: string;
     height?: string;
     type?: 'button' | 'reset' | 'submit';
+    // onClick?: MouseEvent;
 }
 
 const ButtonBlack = styled.button<ButtonProps>`
@@ -18,6 +19,7 @@ const ButtonBlack = styled.button<ButtonProps>`
     background-color: ${(props) => props.theme.colors.dark};
     border-radius: 3px;
     cursor: pointer;
+    white-space: nowrap;
 `;
 
 ButtonBlack.defaultProps = {

@@ -5,13 +5,15 @@ import styled from 'styled-components';
 
 export interface IAppProps {
     setSubmit: any;
+    searchInput: string;
+    changeSearchInput: React.ChangeEventHandler;
 }
 
-const SearchForm: React.FC<IAppProps> = ({ setSubmit }) => {
-    const [searchInput, setSeartchInput] = React.useState<string>('');
-    const changeSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSeartchInput(e.target.value);
-    };
+const SearchForm: React.FC<IAppProps> = ({
+    setSubmit,
+    searchInput,
+    changeSearchInput,
+}) => {
     return (
         <SearchFormStyle>
             {/* <label htmlFor="input-search">
@@ -23,6 +25,7 @@ const SearchForm: React.FC<IAppProps> = ({ setSubmit }) => {
                     onChange={changeSearchInput}
                     width="100%"
                     height="2rem"
+                    type="text"
                     placeholder="Search anything"
                     content="Search"
                 />

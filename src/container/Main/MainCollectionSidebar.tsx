@@ -59,16 +59,16 @@ const CollectionSidebarStyle = styled.aside`
 
 export default MainCollectionSidebar;
 const Item = [
-    'New',
+    // 'New',
     'Bottoms',
     'Shirts',
-    'Tees',
-    'Fleece',
-    'Knits',
+    // 'Tees',
+    // 'Fleece',
+    // 'Knits',
     'Outerwear',
     'Footwear',
     'Accessories',
-    'LifeStyle',
-    'Home',
-    'Sale',
+    // 'LifeStyle',
+    // 'Home',
+    // 'Sale',
 ];

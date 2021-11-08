@@ -126,6 +126,9 @@ export const ShopItemWithQuickAdd = styled.div`
     position: relative;
     margin-bottom: ${MyTheme.margins.m80};
     cursor: pointer;
+    & > img {
+        object-fit: contain;
+    }
     //이미지 내부에 위치한 카트 관련 기능
     & div.cart {
         display: inline-block;

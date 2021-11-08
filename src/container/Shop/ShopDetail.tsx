@@ -20,8 +20,12 @@ const ShopDetail: React.FC = () => {
     const [selectItem, setSelectItem] = useState<string>();
     const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
     const productInformation = useRecoilValue(ProductInformation);
+    const productId = item?.product_id;
     const { scrollY } = useScroll();
-
+    const itemInfo = productInformation.filter(
+        (info) => info.product_id === productId
+    );
+    const itemSize = itemInfo.map((item) => item.size);
     useEffect(() => {
         setItem(
             itemList.find(
@@ -30,6 +34,7 @@ const ShopDetail: React.FC = () => {
                     parseInt(window.location.pathname.split('product/')[1], 10)
             )
         );
+        console.log(item);
     }, []);
     useEffect(() => {
         const step = Math.floor(scrollY / (innerHeight + 100));
@@ -106,7 +111,7 @@ const ShopDetail: React.FC = () => {
                     <div>
                         <p>Size</p>
                         <div>
-                            {size.map((item) => (
+                            {itemSize.map((item) => (
                                 <ButtonHover
                                     onClick={() => setSelectItem(item)}
                                     height="40px"
@@ -263,6 +268,7 @@ const ContainerDiv = styled.div`
                     width: 75vw;
                     height: 100vh;
                     transition: all 0.3;
+                    object-fit: contain;
                 }
             }
             & > div:nth-of-type(4) {

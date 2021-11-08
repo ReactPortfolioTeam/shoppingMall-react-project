@@ -13,7 +13,15 @@ export const Category = atom({
         },
         {
             category_id: 3,
-            category: 'Tees',
+            category: 'Outerwear',
+        },
+        {
+            category_id: 4,
+            category: 'Footwear',
+        },
+        {
+            category_id: 5,
+            category: 'Accessories',
         },
     ],
 });

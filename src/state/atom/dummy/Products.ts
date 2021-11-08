@@ -317,6 +317,7 @@ export const Products = atom({
                 '/images/dummy/PonCho_Sand1.jpg',
                 '/images/dummy/PonCho_Sand2.jpg',
                 '/images/dummy/PonCho_Sand3.jpg',
+                '/images/dummy/PonCho_Sand4.jpg',
             ],
             product_date: '2021-10-24',
         },
@@ -434,6 +435,8 @@ export const Products = atom({
             product_image: [
                 '/images/dummy/Watch_Cap1.jpg',
                 '/images/dummy/Watch_Cap2.jpg',
+                '/images/dummy/Watch_Cap3.jpg',
+                '/images/dummy/Watch_Cap4.jpg',
             ],
             product_date: '2021-10-24',
         },

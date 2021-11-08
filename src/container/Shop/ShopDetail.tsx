@@ -263,6 +263,7 @@ const ContainerDiv = styled.div`
                     width: 75vw;
                     height: 100vh;
                     transition: all 0.3;
+                    object-fit: contain;
                 }
             }
             & > div:nth-of-type(4) {

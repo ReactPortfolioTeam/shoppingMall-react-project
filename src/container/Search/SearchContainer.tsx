@@ -27,7 +27,7 @@ const SearchContainer: React.FC<IAppProps> = () => {
                 </ResultContainerStyle>
             ) : (
                 <SearchContainerStyle>
-                    <aside id="search__sidebar-section">sidebar section</aside>
+                    {/* <aside id="search__sidebar-section">sidebar section</aside> */}
                     <div id="search__input-section">
                         <SearchForm
                             setSubmit={setIsSubmit}

@@ -24,12 +24,18 @@ const SearchForm: React.FC<IAppProps> = ({
                     value={searchInput}
                     onChange={changeSearchInput}
                     width="100%"
-                    height="2rem"
+                    height="3rem"
                     type="text"
                     placeholder="Search anything"
                     content="Search"
                 />
-                <Button onClick={() => setSubmit(true)}>Submit</Button>
+                <Button
+                    height="3rem"
+                    type="submit"
+                    onClick={() => setSubmit(true)}
+                >
+                    Submit
+                </Button>
             </div>
         </SearchFormStyle>
     );

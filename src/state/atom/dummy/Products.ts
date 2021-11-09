@@ -311,7 +311,7 @@ export const Products = atom({
             sub_product_name: 'Indigo/Indigo 5x5 Denim',
             price: 265,
             depscription:
-                'This pant silhouette is the roomiest of all our bottoms and features a straight leg, higher rise, and roomy top block. The Cinch Fatigue includes elastic drawstrings at the cuffs that allow the wearer to tighten them up at the bottom; they can also be left loose to fit over boots or other bulkier footwear.',
+                'It utilizes a water repellant cotton fabric woven with extra-long staple yarns and no DWR coating. When the fabric gets wet, these yarns expand and create an almost impenetrable barrier against the water; the resulting fabric has the hand feel, drape, and breathability of cotton with the technical properties of a synthetic fabric. Lightweight snaps are employed on the throat closure and under the arms to adjust the fit and keep the elements out. The front features a dual functioning patch pocket that’s a kangaroo hand pocket and top entry storage pocket with hidden snap closure. Made in India.',
             keyword: 'outerwear',
             product_image: [
                 '/images/dummy/PonCho_Sand1.jpg',

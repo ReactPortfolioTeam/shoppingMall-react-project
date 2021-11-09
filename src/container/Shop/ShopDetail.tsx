@@ -14,7 +14,6 @@ import styled from 'styled-components';
 
 const ShopDetail: React.FC = () => {
     const itemList = useRecoilValue(Products);
-    const size = ['S', 'M', 'L', 'XL', 'XXL'];
     const [item, setItem] = useState<ProductsType>();
     const [cart, setCart] = useRecoilState(Cart);
     const [selectItem, setSelectItem] = useState<string>();
@@ -34,7 +33,6 @@ const ShopDetail: React.FC = () => {
                     parseInt(window.location.pathname.split('product/')[1], 10)
             )
         );
-        console.log(item);
     }, []);
     useEffect(() => {
         const step = Math.floor(scrollY / (innerHeight + 100));

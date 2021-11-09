@@ -7,7 +7,7 @@ const headers = {
 
 export const API = axios.create({
     baseURL,
-    timeout: 3000,
+    timeout: 10000,
     headers,
 });
 
@@ -18,7 +18,7 @@ API.interceptors.request.use((config) => {
 
 API.interceptors.response.use(
     (response) => {
-        //  응답 데이터 가공
+        console.dir(response);
         return response;
     },
     (error) => {

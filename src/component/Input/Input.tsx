@@ -11,6 +11,8 @@ interface InputProps {
     width?: string;
     height?: string;
     name?: string;
+    errorMessage?: string;
+    onBlur?: any;
 }
 
 interface StyleProps {
@@ -30,6 +32,8 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
         width,
         height,
         name,
+        errorMessage,
+        onBlur,
     } = props;
     const label = useRef<HTMLLabelElement>(null);
 
@@ -54,11 +58,15 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
                 placeholder={placeholder}
                 value={value}
                 name={name}
+                onBlur={(e) => {
+                    onBlur(e);
+                }}
                 onChange={(e) => {
                     onChange(e);
                     focusDiv(e);
                 }}
             />
+            {errorMessage && <span>{errorMessage}</span>}
         </InputContainer>
     );
 };
@@ -70,6 +78,8 @@ Input.defaultProps = {
     width: '380px',
     height: '40px',
     name: '',
+    errorMessage: '',
+    onBlur: () => {},
 };
 
 export default Input;
@@ -78,7 +88,6 @@ const InputContainer = styled.div<StyleProps>`
     position: relative;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
-    cursor: pointer;
     & > label {
         position: absolute;
         left: 10px;
@@ -102,7 +111,6 @@ const InputContainer = styled.div<StyleProps>`
         }
     }
     :focus-within {
-        cursor: pointer;
         & > label {
             transition: all 0.25s;
             top: -20px;
@@ -113,5 +121,10 @@ const InputContainer = styled.div<StyleProps>`
                 color: ${(props) => props.theme.colors.gray};
             }
         }
+    }
+    & > span {
+        color: red;
+        margin-top: 3px;
+        font-size: ${(p) => p.theme.fonts.size.fs12};
     }
 `;

@@ -1,13 +1,19 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-restricted-syntax */
 import { API } from 'api/API';
 import { MyTheme } from 'assets/css/global/theme.style';
-import axios from 'axios';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import Input from 'component/Input/Input';
+import Alert from 'component/Modal/Alert';
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
+import ErrorMessage from 'utils/ErrorMessage';
 import { StateToProps } from './Login';
 
 interface userObject {
+    [index: string]: string;
     name: string;
     email: string;
     password: string;
@@ -15,26 +21,70 @@ interface userObject {
     address: string;
     userid: string;
 }
-
+let timer: any;
 const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
-    const [user, setUser] = useState<userObject>({
+    const userObjectInitState: userObject = {
         userid: '',
         name: '',
         email: '',
         password: '',
         confirmPw: '',
         address: '',
-    });
+    };
+
+    const [user, setUser] = useState<userObject>(userObjectInitState);
+    const [errorMessage, setErrorMessage] = useState<userObject>(
+        userObjectInitState
+    );
+    const [duplicateCheck, setDuplicateCheck] = useState<boolean>(false);
+    const setModal = useSetRecoilState(Modal);
 
     const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+        if (e.target.id === 'userid') {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                checkDuplicateId();
+            }, 1000);
+        }
     };
-
+    const checkDuplicateId = () => {
+        if (!duplicateCheck) {
+            API.post('signup/check', JSON.stringify(user.userid))
+                .then((res: any) => setDuplicateCheck(true))
+                .catch((err) => {
+                    if (err?.response !== undefined)
+                        ErrorMessage(
+                            errorMessage,
+                            err.response.data.msg,
+                            setErrorMessage
+                        );
+                });
+        }
+    };
     const onSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
+        setErrorMessage(userObjectInitState);
         API.post('signup', JSON.stringify(user))
-            .then((res) => console.log('res', res))
-            .catch((err) => console.log('err', err.response.data.msg));
+            .then((res: any) =>
+                setModal({
+                    isOpen: true,
+                    ModalComponent: Alert,
+                    ModalClose: () => {
+                        setIsView(!isView);
+                        setModal({ isOpen: false });
+                    },
+                    ModalContent: res.data.msg,
+                })
+            )
+            .catch((err) => {
+                if (err?.response !== undefined)
+                    ErrorMessage(
+                        errorMessage,
+                        err.response.data.msg,
+                        setErrorMessage
+                    );
+            });
     };
 
     return (
@@ -54,6 +104,8 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="User id"
                         name="userid"
                         type="text"
+                        onBlur={checkDuplicateId}
+                        errorMessage={errorMessage.userid}
                     />
                     <Input
                         id="name"
@@ -64,6 +116,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="User Name"
                         name="name"
                         type="text"
+                        errorMessage={errorMessage.name}
                     />
 
                     <Input
@@ -71,7 +124,9 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         value={user.email}
                         onChange={changeUser}
                         width="100%"
+                        type="email"
                         content="Email Address"
+                        errorMessage={errorMessage.email}
                     />
                     <Input
                         width="100%"
@@ -82,6 +137,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="6 or more characters"
                         name="password"
                         type="password"
+                        errorMessage={errorMessage.password}
                     />
                     <Input
                         width="100%"
@@ -92,6 +148,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="6 or more characters"
                         name="confirmPw"
                         type="password"
+                        errorMessage={errorMessage.confirmPw}
                     />
                     <Input
                         width="100%"
@@ -102,6 +159,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="address"
                         name="address"
                         type="text"
+                        errorMessage={errorMessage.address}
                     />
                     <ButtonHover
                         width="100%"

@@ -1,20 +1,67 @@
+import { API } from 'api/API';
 import { MyTheme } from 'assets/css/global/theme.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import Input from 'component/Input/Input';
+import Alert from 'component/Modal/Alert';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
+import { useSetRecoilState } from 'recoil';
+import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
+import ErrorMessage from 'utils/ErrorMessage';
 import { StateToProps } from './Login';
 
-const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
-    const [email, setEmail] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+interface LoginFormObject {
+    userid: string;
+    password: string;
+}
 
-    const changeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(e.target.value);
+const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
+    const LoginFormInitObject: LoginFormObject = {
+        userid: '',
+        password: '',
     };
 
-    const changePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
+    const [loginUser, setLoginUser] = useState<LoginFormObject>(
+        LoginFormInitObject
+    );
+    const [errorMessage, setErrorMessage] = useState<LoginFormObject>(
+        LoginFormInitObject
+    );
+    const setModal = useSetRecoilState(Modal);
+    const history = useHistory();
+
+    const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setLoginUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    };
+    const onSubmit = (e: React.MouseEvent<HTMLElement>) => {
+        e.preventDefault();
+        setErrorMessage(LoginFormInitObject);
+        API.post('login', JSON.stringify(loginUser))
+            .then((res: any) => {
+                history.push('/');
+            })
+            .catch((err) => {
+                if (err?.response !== undefined) {
+                    const { statusCode } = err.response.data;
+                    if (statusCode === 400) {
+                        ErrorMessage(
+                            errorMessage,
+                            err.response.data.msg,
+                            setErrorMessage
+                        );
+                    } else if (statusCode === 404) {
+                        setModal({
+                            isOpen: true,
+                            ModalComponent: Alert,
+                            ModalClose: () => {
+                                setModal({ isOpen: false });
+                            },
+                            ModalContent: err.response.data.msg,
+                        });
+                    }
+                }
+            });
     };
 
     return (
@@ -25,19 +72,21 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         <h2>Sign in to your account</h2>
                     </legend>
                     <Input
-                        id="email"
-                        value={email}
-                        onChange={changeEmail}
+                        id="userid"
+                        value={loginUser.userid}
+                        onChange={changeUser}
                         width="100%"
+                        errorMessage={errorMessage.userid}
                     />
                     <Input
                         id="password"
-                        value={password}
-                        onChange={changePassword}
+                        value={loginUser.password}
+                        onChange={changeUser}
                         content="Password"
                         placeholder="Password"
                         type="password"
                         width="100%"
+                        errorMessage={errorMessage.password}
                     />
                     <a className="forward__a" href="#">
                         Forgot?
@@ -48,6 +97,7 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         height="50px"
                         type="submit"
                         backgroundColor={MyTheme.colors.dark}
+                        onClick={onSubmit}
                     >
                         <>
                             Submit

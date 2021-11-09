@@ -36,9 +36,11 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
     };
     const onSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
+
         setErrorMessage(LoginFormInitObject);
         API.post('login', JSON.stringify(loginUser))
             .then((res: any) => {
+                console.log(res);
                 history.push('/');
             })
             .catch((err) => {

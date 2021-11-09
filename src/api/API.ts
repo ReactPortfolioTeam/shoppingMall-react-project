@@ -1,6 +1,6 @@
 import axios from 'axios';
-
-const baseURL: string = 'http://localhost:8080/api/v1/';
+// http://localhost:8080
+const baseURL: string = '/api/v1/';
 const headers = {
     'Content-Type': 'application/json',
 };

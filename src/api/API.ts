@@ -18,7 +18,7 @@ API.interceptors.request.use((config) => {
 
 API.interceptors.response.use(
     (response) => {
-        //  응답 데이터 가공
+        console.dir(response);
         return response;
     },
     (error) => {

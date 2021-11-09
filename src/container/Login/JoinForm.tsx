@@ -21,27 +21,47 @@ interface userObject {
     address: string;
     userid: string;
 }
-
-const userObjectInitState: userObject = {
-    userid: '',
-    name: '',
-    email: '',
-    password: '',
-    confirmPw: '',
-    address: '',
-};
-
+let timer: any;
 const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
+    const userObjectInitState: userObject = {
+        userid: '',
+        name: '',
+        email: '',
+        password: '',
+        confirmPw: '',
+        address: '',
+    };
+
     const [user, setUser] = useState<userObject>(userObjectInitState);
     const [errorMessage, setErrorMessage] = useState<userObject>(
         userObjectInitState
     );
+    const [duplicateCheck, setDuplicateCheck] = useState<boolean>(false);
     const setModal = useSetRecoilState(Modal);
 
     const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+        if (e.target.id === 'userid') {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                checkDuplicateId();
+            }, 1000);
+        }
     };
-
+    const checkDuplicateId = () => {
+        if (!duplicateCheck) {
+            API.post('signup/check', JSON.stringify(user.userid))
+                .then((res: any) => setDuplicateCheck(true))
+                .catch((err) => {
+                    if (err?.response !== undefined)
+                        ErrorMessage(
+                            errorMessage,
+                            err.response.data.msg,
+                            setErrorMessage
+                        );
+                });
+        }
+    };
     const onSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
         setErrorMessage(userObjectInitState);
@@ -58,11 +78,12 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                 })
             )
             .catch((err) => {
-                ErrorMessage(
-                    errorMessage,
-                    err.response.data.msg,
-                    setErrorMessage
-                );
+                if (err?.response !== undefined)
+                    ErrorMessage(
+                        errorMessage,
+                        err.response.data.msg,
+                        setErrorMessage
+                    );
             });
     };
 
@@ -83,6 +104,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="User id"
                         name="userid"
                         type="text"
+                        onBlur={checkDuplicateId}
                         errorMessage={errorMessage.userid}
                     />
                     <Input

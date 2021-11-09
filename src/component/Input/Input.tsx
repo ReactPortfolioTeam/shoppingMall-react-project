@@ -12,6 +12,7 @@ interface InputProps {
     height?: string;
     name?: string;
     errorMessage?: string;
+    onBlur?: any;
 }
 
 interface StyleProps {
@@ -32,6 +33,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
         height,
         name,
         errorMessage,
+        onBlur,
     } = props;
     const label = useRef<HTMLLabelElement>(null);
 
@@ -56,6 +58,9 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
                 placeholder={placeholder}
                 value={value}
                 name={name}
+                onBlur={(e) => {
+                    onBlur(e);
+                }}
                 onChange={(e) => {
                     onChange(e);
                     focusDiv(e);
@@ -74,6 +79,7 @@ Input.defaultProps = {
     height: '40px',
     name: '',
     errorMessage: '',
+    onBlur: () => {},
 };
 
 export default Input;

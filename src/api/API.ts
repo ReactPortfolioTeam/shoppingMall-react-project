@@ -7,7 +7,7 @@ const headers = {
 
 export const API = axios.create({
     baseURL,
-    timeout: 3000,
+    timeout: 10000,
     headers,
 });
 

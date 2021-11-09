@@ -15,7 +15,7 @@ const SearchForm: React.FC<IAppProps> = ({
     changeSearchInput,
 }) => {
     return (
-        <SearchFormStyle>
+        <SearchFormStyle onSubmit={() => setSubmit(true)}>
             {/* <label htmlFor="input-search">
             </label> */}
             <div id="field-search-container">

@@ -1,6 +1,7 @@
+/* eslint-disable consistent-return */
 import axios from 'axios';
 // http://localhost:8080
-const baseURL: string = '/api/v1/';
+const baseURL: string = 'http://localhost:8080/api/v1/';
 const headers = {
     'Content-Type': 'application/json',
 };
@@ -24,6 +25,7 @@ API.interceptors.response.use(
     (error) => {
         // 오류 응답 처리
         console.dir(error);
+
         return Promise.reject(error);
     }
 );

@@ -41,12 +41,12 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
 
     const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
-        if (e.target.id === 'userid') {
-            clearTimeout(timer);
-            timer = setTimeout(() => {
-                checkDuplicateId();
-            }, 1000);
-        }
+        // if (e.target.id === 'userid') {
+        //     clearTimeout(timer);
+        //     timer = setTimeout(() => {
+        //         checkDuplicateId();
+        //     }, 1000);
+        // }
     };
     const checkDuplicateId = () => {
         if (!duplicateCheck) {
@@ -56,14 +56,30 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                     userid: user.userid,
                 },
             })
-                .then((res: any) => setDuplicateCheck(true))
+                .then((res: any) =>
+                    setModal({
+                        isOpen: true,
+                        ModalClose: () => {
+                            setModal({ isOpen: false });
+                            setDuplicateCheck(true);
+                        },
+                        ModalComponent: Alert,
+                        ModalContent: '해당 아이디로 사용하시겠습니까?',
+                    })
+                )
                 .catch((err) => {
-                    if (err?.response !== undefined)
-                        ErrorMessage(
-                            errorMessage,
-                            err.response.data.msg,
-                            setErrorMessage
-                        );
+                    if (
+                        err?.response !== undefined &&
+                        err.response.status === 400
+                    )
+                        setModal({
+                            isOpen: true,
+                            ModalClose: () => {
+                                setModal({ isOpen: false });
+                            },
+                            ModalComponent: Alert,
+                            ModalContent: err.response.data.msg[0].msg,
+                        });
                 });
         }
     };
@@ -83,7 +99,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                 })
             )
             .catch((err) => {
-                if (err?.response !== undefined)
+                if (err?.response !== undefined && err.response.status === 400)
                     ErrorMessage(
                         errorMessage,
                         err.response.data.msg,
@@ -109,6 +125,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         placeholder="User id"
                         name="userid"
                         type="text"
+                        disabled={duplicateCheck}
                         onBlur={checkDuplicateId}
                         errorMessage={errorMessage.userid}
                     />

@@ -1,5 +1,5 @@
 import MiniCart from 'container/MiniCart/MiniCart';
-import { useCallback, useEffect, FunctionComponent } from 'react';
+import { FunctionComponent } from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';

@@ -128,10 +128,18 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         >
                             Edit Password
                         </TextButton>
-                        <TextButton id="editEmail" width="max-content">
+                        <TextButton
+                            id="editEmail"
+                            width="max-content"
+                            onClick={handleClick}
+                        >
                             Edit Email
                         </TextButton>
-                        <TextButton id="editAddress" width="max-content">
+                        <TextButton
+                            id="editAddress"
+                            width="max-content"
+                            onClick={handleClick}
+                        >
                             Edit Address
                         </TextButton>
                     </div>

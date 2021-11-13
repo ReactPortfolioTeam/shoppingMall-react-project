@@ -2,6 +2,7 @@ import { ThemeProvider } from 'styled-components';
 import { MyTheme } from 'assets/css/global/theme.style';
 import GloblaStyle from '../src/assets/css/global/Global.style';
 import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
 
 export const parameters = {
     layout: 'fullscreen',
@@ -17,11 +18,13 @@ export const parameters = {
 // 사용할 스토리를 감싸거나 밑에 처럼 GlobalStyle 적용하기 좋습니다.
 export const decorators = [
     (Story) => (
-        <ThemeProvider theme={MyTheme}>
-            <BrowserRouter>
-                <GloblaStyle />
-                <Story />
-            </BrowserRouter>
-        </ThemeProvider>
+        <RecoilRoot>
+            <ThemeProvider theme={MyTheme}>
+                <BrowserRouter>
+                    <GloblaStyle />
+                    <Story />
+                </BrowserRouter>
+            </ThemeProvider>
+        </RecoilRoot>
     ),
 ];

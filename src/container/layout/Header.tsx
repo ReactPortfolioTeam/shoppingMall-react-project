@@ -4,15 +4,17 @@ import Button from 'component/Button/Button';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import MiniCart from 'container/MiniCart/MiniCart';
+import User from 'state/atom/User';
 
 interface Props {
     count?: number;
 }
 
 const Header: React.FC<Props> = ({ count = 3 }) => {
+    const user = useRecoilValue(User);
     const [modal, setModal] = useRecoilState(Modal);
     useEffect(() => console.log(modal), [modal]);
     return (
@@ -47,15 +49,24 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                     </TextButton>
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="login">
-                                    <TextButton changeColor href="#">
-                                        Sign in
-                                    </TextButton>
-                                </Link>
-                            </li>
+                            {user?.address !== undefined ? (
+                                <li>
+                                    <Link to="login">
+                                        <TextButton changeColor href="#">
+                                            Account
+                                        </TextButton>
+                                    </Link>
+                                </li>
+                            ) : (
+                                <li>
+                                    <Link to="acount">
+                                        <TextButton changeColor href="#">
+                                            Sign in
+                                        </TextButton>
+                                    </Link>
+                                </li>
+                            )}
                         </ul>
-                        <Button>Appointments</Button>
                     </nav>
                     <div className="right-menu__div">
                         <h2 className="screen-out__h2">3sixteen</h2>

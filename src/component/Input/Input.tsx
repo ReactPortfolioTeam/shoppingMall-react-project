@@ -13,6 +13,7 @@ interface InputProps {
     name?: string;
     errorMessage?: string;
     onBlur?: any;
+    disabled?: boolean;
 }
 
 interface StyleProps {
@@ -34,6 +35,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
         name,
         errorMessage,
         onBlur,
+        disabled,
     } = props;
     const label = useRef<HTMLLabelElement>(null);
 
@@ -58,6 +60,7 @@ const Input: React.FC<InputProps> = (props: InputProps) => {
                 placeholder={placeholder}
                 value={value}
                 name={name}
+                disabled={disabled}
                 onBlur={(e) => {
                     onBlur(e);
                 }}
@@ -80,6 +83,7 @@ Input.defaultProps = {
     name: '',
     errorMessage: '',
     onBlur: () => {},
+    disabled: false,
 };
 
 export default Input;

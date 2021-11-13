@@ -6,6 +6,7 @@ interface Props extends ButtonProps {
     href?: string;
 }
 interface ButtonProps {
+    id?: string;
     width?: string;
     height?: string;
     color?: string;
@@ -21,6 +22,7 @@ const TextButton: React.FC<Props> = (props: Props) => {
 };
 
 TextButton.defaultProps = {
+    id: '',
     width: 'auto',
     height: 'auto',
     href: '#',

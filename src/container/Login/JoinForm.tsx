@@ -48,10 +48,10 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
         //     }, 1000);
         // }
     };
-    const checkDuplicateId = () => {
+    const checkDuplicateId = async () => {
         if (!duplicateCheck) {
             setErrorMessage(userObjectInitState);
-            API.get('signup/check', {
+            await API.get('signup/check', {
                 params: {
                     userid: user.userid,
                 },

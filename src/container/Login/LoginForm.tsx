@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
+import User from 'state/atom/User';
 import styled from 'styled-components';
 import ErrorMessage from 'utils/ErrorMessage';
 import { StateToProps } from './Login';
@@ -29,19 +30,35 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
         LoginFormInitObject
     );
     const setModal = useSetRecoilState(Modal);
+    const setUser = useSetRecoilState(User);
     const history = useHistory();
 
     const changeUser = (e: React.ChangeEvent<HTMLInputElement>) => {
         setLoginUser((prev) => ({ ...prev, [e.target.id]: e.target.value }));
     };
-    const onSubmit = (e: React.MouseEvent<HTMLElement>) => {
+    const onSubmit = async (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
 
         setErrorMessage(LoginFormInitObject);
-        API.post('login', JSON.stringify(loginUser))
+        await API.post('login', JSON.stringify(loginUser))
             .then((res: any) => {
-                console.log(res);
-                history.push('/');
+                const { data } = res;
+                if (data.statusCode === 200) {
+                    const { userInfo } = data;
+                    setUser({
+                        address: userInfo.address,
+                        email: userInfo.email,
+                        userid: userInfo.userid,
+                    });
+                    localStorage.setItem(
+                        'token',
+                        JSON.stringify({
+                            refreshToken: userInfo.refreshToken,
+                            token: userInfo.token,
+                        })
+                    );
+                    history.push('');
+                }
             })
             .catch((err) => {
                 if (err?.response !== undefined) {

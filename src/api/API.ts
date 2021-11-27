@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import axios from 'axios';
 // http://localhost:8080
-const baseURL: string = 'http://localhost:8080/api/v1/';
+const baseURL: string = 'http://localhost:8080/api/';
 const headers = {
     'Content-Type': 'application/json',
 };

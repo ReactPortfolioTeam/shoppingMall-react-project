@@ -51,7 +51,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                             </li>
                             {user?.address !== undefined ? (
                                 <li>
-                                    <Link to="login">
+                                    <Link to="account">
                                         <TextButton changeColor href="#">
                                             Account
                                         </TextButton>
@@ -59,7 +59,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                 </li>
                             ) : (
                                 <li>
-                                    <Link to="acount">
+                                    <Link to="login">
                                         <TextButton changeColor href="#">
                                             Sign in
                                         </TextButton>

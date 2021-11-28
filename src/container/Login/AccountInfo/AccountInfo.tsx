@@ -1,12 +1,46 @@
+import { API } from 'api/API';
 import { FlexBoxDiv } from 'assets/styledComponents/global/globalStyle.style';
-import Button from 'component/Button/Button';
 import * as React from 'react';
+import { useParams } from 'react-router';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import User from 'state/atom/User';
+import UserInfo from 'state/atom/UserInfo';
 import AccountDashboard from './AccountDashboard';
 import AccountHeader from './AccountHeader';
 
 export interface IAppProps {}
+interface userIdObject {
+    userid: string;
+}
 
-const AccountInfo = (props: IAppProps) => {
+const AccountInfo = () => {
+    const { userid }: userIdObject = useParams();
+    // Header 에서 account 클릭시 로그인되어있는 user(User.ts)의 userid를 파라미터로 넣어서 push할 것
+
+    const setUserInfo = useSetRecoilState(UserInfo);
+    const getUserInfo = async () => {
+        try {
+            await API.get(`userInfo/list/${userid}`).then((res: any) => {
+                const { data } = res;
+                if (res.status === 200) {
+                    setUserInfo({
+                        userid: data.userid,
+                        password: data.password,
+                        email: data.email,
+                        name: data.name,
+                        address: data.address,
+                        join_date: data.join_date,
+                        level: data.level,
+                    });
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    React.useEffect(() => {
+        getUserInfo();
+    }, []);
     return (
         <FlexBoxDiv
             flexDirection="column"

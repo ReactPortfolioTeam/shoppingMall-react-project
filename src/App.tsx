@@ -16,6 +16,8 @@ import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
 import ShopDetail from 'container/Shop/ShopDetail';
 import Checkout from 'container/Checkout/Checkout';
+import AccountInfo from 'container/Login/AccountInfo/AccountInfo';
+import EditProfile from 'container/Login/AccountInfo/EditProfile/EditProfile';
 
 function App() {
     let isAdmin = false;
@@ -40,6 +42,12 @@ function App() {
                         <Route path="/login">
                             <Login />
                         </Route>
+                        <Route path="/accountInfo/:userid">
+                            <AccountInfo />
+                        </Route>
+                        {/* <Route path="/accountInfo/editProfile/:userid">
+                            <EditProfile />
+                        </Route> */}
                         <Route path="/shop" exact>
                             <Shop />
                         </Route>

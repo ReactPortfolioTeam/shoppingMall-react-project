@@ -1,16 +1,19 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { DaeHwanStyle } from 'assets/css/global/DaeHwan.style';
+import { useRecoilValue } from 'recoil';
+import UserInfo from 'state/atom/UserInfo';
 
 interface IAppProps {}
 
-const AccountWelcome: React.FC<IAppProps> = (props) => {
+const AccountWelcome: React.FC<IAppProps> = () => {
+    const userInfo = useRecoilValue(UserInfo);
     return (
         <AccountWelcomeStyle>
             <DaeHwanStyle>
                 <div id="account-welcome" className="account-section">
                     <div className="welcome-inner">
-                        <h3>Hey CHUN.</h3>
+                        <h3>Hey {userInfo.name}.</h3>
                         <p className="p-lg">
                             <br />
                             <br />

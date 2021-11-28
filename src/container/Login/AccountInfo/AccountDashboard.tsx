@@ -6,9 +6,9 @@ import AccountSize from './AccountSize';
 import AccountWelcome from './AccountWelcome';
 import AccountWish from './AccountWish';
 
-interface IAppProps {}
+interface AccountDashboardProps {}
 
-const AccountDashboard: React.FC<IAppProps> = (props) => {
+const AccountDashboard: React.FC<AccountDashboardProps> = () => {
     return (
         <FlexBoxDiv
             className="account-dashboard-wrapper"

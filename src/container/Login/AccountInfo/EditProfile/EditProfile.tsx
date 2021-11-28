@@ -1,12 +1,15 @@
 import { FlexBoxDiv } from 'assets/styledComponents/global/globalStyle.style';
 import TextButton from 'component/Button/TextButton';
 import Input from 'component/Input/Input';
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { API } from 'api/API';
+import { useParams } from 'react-router';
 
 interface editProfileProps {}
 
-interface userInfo {
+interface userInfoObject {
     userid: string;
     name: string;
     email: string;
@@ -14,9 +17,11 @@ interface userInfo {
     address: string;
 }
 
+// const { id } = useParams();
+
 const EditProfile: FC<editProfileProps> = (props) => {
-    const initialUserInfo: userInfo = {
-        userid: 'dhchun1203',
+    const initialUserInfo: userInfoObject = {
+        userid: 'id',
         name: '전대환',
         email: 'dhchun1203@gmail.com',
         password: 'qlalf0628',
@@ -46,16 +51,6 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         content="현재 비밀번호를 입력해주세요"
                         value={inputValue.prevPassword}
                         name="prevPassword"
-                        onChange={handleChange}
-                    />
-                );
-            case 'editEmail':
-                return (
-                    <Input
-                        id="input next-email"
-                        content="변경할 이메일 주소를 입력해주세요"
-                        value={inputValue.nextEmail}
-                        name="nextEmail"
                         onChange={handleChange}
                     />
                 );
@@ -127,13 +122,6 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             onClick={handleClick}
                         >
                             Edit Password
-                        </TextButton>
-                        <TextButton
-                            id="editEmail"
-                            width="max-content"
-                            onClick={handleClick}
-                        >
-                            Edit Email
                         </TextButton>
                         <TextButton
                             id="editAddress"

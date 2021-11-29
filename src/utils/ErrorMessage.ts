@@ -8,11 +8,11 @@ export default function ErrorMessage(
 ) {
     for (const key of Object.keys(errorObject)) {
         errorArray
-            .filter((item: any) => item.field === key)
+            .filter((item: any) => item.type === key)
             .forEach((item: any) => {
                 setState((prev: { [x: string]: any }) => ({
                     ...prev,
-                    [key]: prev[key] + item.msg,
+                    [key]: `${prev[key]}\n${item.msg}`,
                 }));
             });
     }

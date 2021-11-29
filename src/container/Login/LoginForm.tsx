@@ -40,47 +40,42 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
         e.preventDefault();
 
         setErrorMessage(LoginFormInitObject);
-        await API.post('login', JSON.stringify(loginUser))
-            .then((res: any) => {
-                const { data } = res;
-                if (data.statusCode === 200) {
-                    const { userInfo } = data;
-                    setUser({
-                        address: userInfo.address,
-                        email: userInfo.email,
-                        userid: userInfo.userid,
-                    });
-                    localStorage.setItem(
-                        'token',
-                        JSON.stringify({
-                            refreshToken: userInfo.refreshToken,
-                            token: userInfo.token,
-                        })
-                    );
-                    history.push('');
-                }
-            })
-            .catch((err) => {
-                if (err?.response !== undefined) {
-                    const { statusCode } = err.response.data;
-                    if (statusCode === 400) {
-                        ErrorMessage(
-                            errorMessage,
-                            err.response.data.msg,
-                            setErrorMessage
-                        );
-                    } else if (statusCode === 404) {
-                        setModal({
-                            isOpen: true,
-                            ModalComponent: Alert,
-                            ModalClose: () => {
-                                setModal({ isOpen: false });
-                            },
-                            ModalContent: err.response.data.msg,
-                        });
-                    }
-                }
-            });
+        await API.post('login', JSON.stringify(loginUser)).then((res: any) => {
+            console.dir(res, 'res');
+            if (res.data?.status === 200) {
+                const { data } = res.data;
+                setUser({
+                    address: data.address,
+                    email: data.email,
+                    userid: data.userid,
+                });
+                sessionStorage.setItem('userid', data.userid);
+                setModal({
+                    isOpen: true,
+                    ModalComponent: Alert,
+                    ModalClose: () => {
+                        setModal({ isOpen: false });
+                        history.push('');
+                    },
+                    ModalContent: res.data.message,
+                });
+            } else if (res.response.status === 400) {
+                ErrorMessage(
+                    errorMessage,
+                    res.response.data.msg,
+                    setErrorMessage
+                );
+            } else if (res.response.status === 404) {
+                setModal({
+                    isOpen: true,
+                    ModalComponent: Alert,
+                    ModalClose: () => {
+                        setModal({ isOpen: false });
+                    },
+                    ModalContent: res.response.data.msg,
+                });
+            }
+        });
     };
 
     return (

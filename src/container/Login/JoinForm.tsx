@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { API } from 'api/API';
 import { MyTheme } from 'assets/css/global/theme.style';
+import { AxiosError } from 'axios';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import Input from 'component/Input/Input';
 import Alert from 'component/Modal/Alert';
@@ -51,22 +52,30 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
     const checkDuplicateId = async () => {
         if (!duplicateCheck) {
             setErrorMessage(userObjectInitState);
-            await API.get('signup/check', {
-                params: {
-                    userid: user.userid,
-                },
-            })
-                .then((res: any) =>
-                    setModal({
-                        isOpen: true,
-                        ModalClose: () => {
-                            setModal({ isOpen: false });
-                            setDuplicateCheck(true);
-                        },
-                        ModalComponent: Alert,
-                        ModalContent: '해당 아이디로 사용하시겠습니까?',
-                    })
-                )
+            await API.get(`signup/check/${user.userid}`)
+                .then((res: any) => {
+                    if (res.status === 200) {
+                        setModal({
+                            isOpen: true,
+                            ModalClose: () => {
+                                setModal({ isOpen: false });
+                                setDuplicateCheck(true);
+                            },
+                            ModalComponent: Alert,
+                            ModalContent: '해당 아이디로 사용하시겠습니까?',
+                        });
+                    } else {
+                        setModal({
+                            isOpen: true,
+                            ModalClose: () => {
+                                setModal({ isOpen: false });
+                                setDuplicateCheck(false);
+                            },
+                            ModalComponent: Alert,
+                            ModalContent: res.response.data.msg[0].msg,
+                        });
+                    }
+                })
                 .catch((err) => {
                     if (
                         err?.response !== undefined &&
@@ -86,8 +95,12 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
     const onSubmit = async (e: React.MouseEvent) => {
         e.preventDefault();
         setErrorMessage(userObjectInitState);
-        API.post('signup', JSON.stringify(user))
-            .then((res: any) =>
+        try {
+            const response: any = await API.post(
+                'signup',
+                JSON.stringify(user)
+            );
+            if (response.status === 201) {
                 setModal({
                     isOpen: true,
                     ModalComponent: Alert,
@@ -95,17 +108,18 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         setIsView(!isView);
                         setModal({ isOpen: false });
                     },
-                    ModalContent: res.data.msg,
-                })
-            )
-            .catch((err) => {
-                if (err?.response !== undefined && err.response.status === 400)
-                    ErrorMessage(
-                        errorMessage,
-                        err.response.data.msg,
-                        setErrorMessage
-                    );
-            });
+                    ModalContent: response.data.msg,
+                });
+            } else if (response.response.status === 400) {
+                ErrorMessage(
+                    errorMessage,
+                    response.response.data.msg,
+                    setErrorMessage
+                );
+            }
+        } catch (error: any) {
+            console.dir(error);
+        }
     };
 
     return (

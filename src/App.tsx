@@ -42,12 +42,12 @@ function App() {
                         <Route path="/login">
                             <Login />
                         </Route>
-                        <Route path="/accountInfo/:userid">
+                        <Route exact path="/accountInfo/:userid">
                             <AccountInfo />
                         </Route>
-                        {/* <Route path="/accountInfo/editProfile/:userid">
+                        <Route path="/accountInfo/editProfile/:userid">
                             <EditProfile />
-                        </Route> */}
+                        </Route>
                         <Route path="/shop" exact>
                             <Shop />
                         </Route>

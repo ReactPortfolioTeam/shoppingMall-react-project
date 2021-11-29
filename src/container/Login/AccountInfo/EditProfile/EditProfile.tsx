@@ -6,27 +6,16 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { API } from 'api/API';
 import { useParams } from 'react-router';
+import UserInfo from 'state/atom/UserInfo';
+import { useRecoilValue } from 'recoil';
+import InputCheckout from 'component/Input/inputCheckout';
+import Button from 'component/Button/Button';
 
 interface editProfileProps {}
 
-interface userInfoObject {
-    userid: string;
-    name: string;
-    email: string;
-    password: string;
-    address: string;
-}
-
-// const { id } = useParams();
-
 const EditProfile: FC<editProfileProps> = (props) => {
-    const initialUserInfo: userInfoObject = {
-        userid: 'id',
-        name: '전대환',
-        email: 'dhchun1203@gmail.com',
-        password: 'qlalf0628',
-        address: '수지구 신수로 19',
-    };
+    const userInfo = useRecoilValue(UserInfo);
+    console.log(userInfo);
     const [editMode, setEditMode] = useState<string>('');
     const [inputValue, setInputValue] = useState({
         nextEmail: '',
@@ -42,27 +31,80 @@ const EditProfile: FC<editProfileProps> = (props) => {
         const newValue = e.target.value;
         setInputValue({ ...inputValue, [e.target.name]: newValue });
     };
+    let localErrorMsg: string;
+    const handleSubmit = () => {
+        if (inputValue.nextPassword !== inputValue.confirmNextPassword) {
+            localErrorMsg = '입력하신 비밀번호가 일치하지 않습니다.';
+            return;
+        }
+        try {
+            switch (editMode) {
+                case 'editPassword':
+                    API.post('userInfo/updatePassword', {
+                        userid: userInfo.userid,
+                        prevPassword: inputValue.prevPassword,
+                        password: inputValue.nextPassword,
+                    });
+                    return;
+                case 'editAddress':
+                    API.post('userInfo/updateAddress', {
+                        userid: userInfo.userid,
+                        address: inputValue.nextAddress,
+                    });
+                    return;
+                default:
+                    return;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
     function renderSwitch(editMode: string): JSX.Element {
         switch (editMode) {
             case 'editPassword':
                 return (
-                    <Input
-                        id="input prev-password"
-                        content="현재 비밀번호를 입력해주세요"
-                        value={inputValue.prevPassword}
-                        name="prevPassword"
-                        onChange={handleChange}
-                    />
+                    <>
+                        <InputCheckout
+                            id="input prev-password"
+                            content="현재 비밀번호를 입력해주세요"
+                            value={inputValue.prevPassword}
+                            name="prevPassword"
+                            onChange={handleChange}
+                        />
+                        <InputCheckout
+                            id="input next-password"
+                            content="변경할 비밀번호를 입력해주세요"
+                            placeholder="변경할 비밀번호를 입력해주세요"
+                            value={inputValue.nextPassword}
+                            name="nextPassword"
+                            onChange={handleChange}
+                        />
+                        <InputCheckout
+                            id="input confirm-next-password"
+                            content="변경할 비밀번호를 한번 더 입력해주세요"
+                            value={inputValue.confirmNextPassword}
+                            name="confirmNextPassword"
+                            onChange={handleChange}
+                        />
+                        <Button type="submit" onClick={handleSubmit}>
+                            제출
+                        </Button>
+                    </>
                 );
             case 'editAddress':
                 return (
-                    <Input
-                        id="input next-address"
-                        content="변경할 주소를 입력해주세요"
-                        value={inputValue.nextAddress}
-                        name="nextAddress"
-                        onChange={handleChange}
-                    />
+                    <>
+                        <InputCheckout
+                            id="input next-address"
+                            content="변경할 주소를 입력해주세요"
+                            value={inputValue.nextAddress}
+                            name="nextAddress"
+                            onChange={handleChange}
+                        />
+                        <Button type="submit" onClick={handleSubmit}>
+                            제출
+                        </Button>
+                    </>
                 );
 
             default:
@@ -74,7 +116,6 @@ const EditProfile: FC<editProfileProps> = (props) => {
             <section className="editProfile-section">
                 <FlexBoxDiv
                     flexDirection="column"
-                    // justifyContent="center"
                     alignItems="center"
                     className="information-wrapper prev-information-wrapper"
                 >
@@ -84,7 +125,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         className="prev-information__content prev-id-wrapper"
                     >
                         <h2>User id</h2>
-                        <div>{initialUserInfo.userid}</div>
+                        <div>{userInfo.userid}</div>
                     </FlexBoxDiv>
                     <FlexBoxDiv
                         flexDirection="row"
@@ -92,7 +133,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         className="prev-information__content prev-name-wrapper"
                     >
                         <h2>Name</h2>
-                        <div>{initialUserInfo.name}</div>
+                        <div>{userInfo.name}</div>
                     </FlexBoxDiv>
                     <FlexBoxDiv
                         flexDirection="row"
@@ -100,7 +141,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         className="prev-information__content prev-email-wrapper"
                     >
                         <h2>Email</h2>
-                        <div>{initialUserInfo.email}</div>
+                        <div>{userInfo.email}</div>
                     </FlexBoxDiv>
                     <FlexBoxDiv
                         flexDirection="row"
@@ -108,7 +149,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         className="prev-information__content prev-address-wrapper"
                     >
                         <h2>Address</h2>
-                        <div>{initialUserInfo.address}</div>
+                        <div>{userInfo.address}</div>
                     </FlexBoxDiv>
                 </FlexBoxDiv>
                 <FlexBoxDiv
@@ -169,7 +210,6 @@ const EditProfileStyle = styled.section`
                     justify-content: space-around;
                 }
                 & > .edit-wrapper {
-                    line-height: 100px;
                     align-self: center;
                 }
             }

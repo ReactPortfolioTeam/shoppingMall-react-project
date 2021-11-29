@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import { DaeHwanStyle } from 'assets/css/global/DaeHwan.style';
 import { useRecoilValue } from 'recoil';
 import UserInfo from 'state/atom/UserInfo';
+import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 interface IAppProps {}
 
 const AccountWelcome: React.FC<IAppProps> = () => {
     const userInfo = useRecoilValue(UserInfo);
+    console.log(userInfo.userid);
+    const history = useHistory();
     return (
         <AccountWelcomeStyle>
             <DaeHwanStyle>
@@ -27,11 +31,11 @@ const AccountWelcome: React.FC<IAppProps> = () => {
                             history, set preferred sizes, and edit your address
                             book to make your overall experience easier.
                         </p>
-                        <a
+                        <Link
                             className="welcome-button button-cta has-icon"
-                            href="/collections/new"
+                            to={`/accountInfo/editProfile/${userInfo.userid}`}
                         >
-                            Go to Shop
+                            회원정보 변경
                             <span className="inline-icon">
                                 <svg viewBox="0 0 14 14">
                                     <path
@@ -41,7 +45,7 @@ const AccountWelcome: React.FC<IAppProps> = () => {
                                     ></path>
                                 </svg>
                             </span>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </DaeHwanStyle>

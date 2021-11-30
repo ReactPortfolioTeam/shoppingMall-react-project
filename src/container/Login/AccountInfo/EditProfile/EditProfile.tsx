@@ -5,17 +5,45 @@ import { FC, useState, ChangeEvent, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { API } from 'api/API';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import UserInfo from 'state/atom/UserInfo';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import InputCheckout from 'component/Input/inputCheckout';
 import Button from 'component/Button/Button';
 
 interface editProfileProps {}
 
+interface userIdObject {
+    userid: string;
+}
+
 const EditProfile: FC<editProfileProps> = (props) => {
+    const { userid }: userIdObject = useParams();
     const userInfo = useRecoilValue(UserInfo);
-    console.log(userInfo);
+    const setUserInfo = useSetRecoilState(UserInfo);
+    const getUserInfo = async () => {
+        try {
+            await API.get(`userInfo/list/${userid}`).then((res: any) => {
+                const { data } = res;
+                if (res.status === 200) {
+                    setUserInfo({
+                        userid: data.userid,
+                        password: data.password,
+                        email: data.email,
+                        name: data.name,
+                        address: data.address,
+                        join_date: data.join_date,
+                        level: data.level,
+                    });
+                }
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    useEffect(() => {
+        getUserInfo();
+    }, []);
     const [editMode, setEditMode] = useState<string>('');
     const [inputValue, setInputValue] = useState({
         nextEmail: '',
@@ -31,10 +59,10 @@ const EditProfile: FC<editProfileProps> = (props) => {
         const newValue = e.target.value;
         setInputValue({ ...inputValue, [e.target.name]: newValue });
     };
-    let localErrorMsg: string;
     const handleSubmit = () => {
         if (inputValue.nextPassword !== inputValue.confirmNextPassword) {
-            localErrorMsg = '입력하신 비밀번호가 일치하지 않습니다.';
+            const localErrorMsg = '재확인 비밀번호가 일치하지 않습니다.';
+            alert(localErrorMsg);
             return;
         }
         try {
@@ -45,12 +73,20 @@ const EditProfile: FC<editProfileProps> = (props) => {
                         prevPassword: inputValue.prevPassword,
                         password: inputValue.nextPassword,
                     });
+                    alert('비밀번호가 변경되었습니다.');
+                    window.location.replace(
+                        `/accountInfo/editProfile/${userid}`
+                    );
                     return;
                 case 'editAddress':
                     API.post('userInfo/updateAddress', {
                         userid: userInfo.userid,
                         address: inputValue.nextAddress,
                     });
+                    window.location.replace(
+                        `/accountInfo/editProfile/${userid}`
+                    );
+
                     return;
                 default:
                     return;
@@ -65,6 +101,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                 return (
                     <>
                         <InputCheckout
+                            type="password"
                             id="input prev-password"
                             content="현재 비밀번호를 입력해주세요"
                             value={inputValue.prevPassword}
@@ -72,6 +109,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             onChange={handleChange}
                         />
                         <InputCheckout
+                            type="password"
                             id="input next-password"
                             content="변경할 비밀번호를 입력해주세요"
                             placeholder="변경할 비밀번호를 입력해주세요"
@@ -80,13 +118,18 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             onChange={handleChange}
                         />
                         <InputCheckout
+                            type="password"
                             id="input confirm-next-password"
                             content="변경할 비밀번호를 한번 더 입력해주세요"
                             value={inputValue.confirmNextPassword}
                             name="confirmNextPassword"
                             onChange={handleChange}
                         />
-                        <Button type="submit" onClick={handleSubmit}>
+                        <Button
+                            type="submit"
+                            width="max-content"
+                            onClick={handleSubmit}
+                        >
                             제출
                         </Button>
                     </>
@@ -101,14 +144,18 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             name="nextAddress"
                             onChange={handleChange}
                         />
-                        <Button type="submit" onClick={handleSubmit}>
+                        <Button
+                            type="submit"
+                            width="max-content"
+                            onClick={handleSubmit}
+                        >
                             제출
                         </Button>
                     </>
                 );
 
             default:
-                return <span>변경하고 싶은 항목을 클릭하세요.</span>;
+                return <></>;
         }
     }
     return (
@@ -210,7 +257,13 @@ const EditProfileStyle = styled.section`
                     justify-content: space-around;
                 }
                 & > .edit-wrapper {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
                     align-self: center;
+                    & > Button {
+                        align-self: center;
+                    }
                 }
             }
         }

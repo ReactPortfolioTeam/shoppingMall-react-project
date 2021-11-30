@@ -26,6 +26,6 @@ API.interceptors.response.use(
         // 오류 응답 처리
         console.dir(error);
 
-        return Promise.reject(error);
+        return error;
     }
 );

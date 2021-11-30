@@ -1,18 +1,21 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-return-assign */
 import { MyTheme } from 'assets/css/global/theme.style';
+import Alert from 'component/Modal/Alert';
 import AddCartItem from 'container/Shop/AddCart';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Cart from 'state/atom/Cart';
 import {
     ProductInformation,
     ProductInformationItem,
 } from 'state/atom/dummy/ProductInformation';
 import { ProductsType } from 'state/atom/dummy/Products';
+import { Modal } from 'state/atom/modal/Modal';
 
 import styled from 'styled-components';
+import getSessionUser from 'utils/getSessionUser';
 
 interface Props {
     item: ProductsType;
@@ -21,6 +24,7 @@ interface Props {
 const ShopItem: React.FC<Props> = ({ item }) => {
     const [selected, setSelected] = useState<boolean>(false);
     const [selectItem, setSelectItem] = useState<string>('');
+    const setModal = useSetRecoilState(Modal);
     const productInformation = useRecoilValue(ProductInformation);
     const [cart, setCart] = useRecoilState(Cart);
     const size = productInformation.filter(
@@ -46,7 +50,18 @@ const ShopItem: React.FC<Props> = ({ item }) => {
 
     const onClickAddToBag = (e: React.MouseEvent) => {
         e.stopPropagation();
-        AddCartItem(item, selectItem, productInformation, cart, setCart);
+        if (getSessionUser()) {
+            AddCartItem(item, selectItem, productInformation, cart, setCart);
+        } else {
+            setModal({
+                isOpen: true,
+                ModalComponent: Alert,
+                ModalContent: '로그인 후 이용가능한 기능입니다.',
+                ModalClose: () => {
+                    setModal({ isOpen: false });
+                },
+            });
+        }
     };
 
     return (

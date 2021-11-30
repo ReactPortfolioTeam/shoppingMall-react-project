@@ -7,16 +7,16 @@ import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import MiniCart from 'container/MiniCart/MiniCart';
-import User from 'state/atom/User';
+import getSessionUser from 'utils/getSessionUser';
 
 interface Props {
     count?: number;
 }
 
 const Header: React.FC<Props> = ({ count = 3 }) => {
-    const user = useRecoilValue(User);
+    const isUser = getSessionUser();
+
     const [modal, setModal] = useRecoilState(Modal);
-    useEffect(() => console.log(modal), [modal]);
     return (
         <>
             <HeaderContainer>
@@ -49,7 +49,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                     </TextButton>
                                 </Link>
                             </li>
-                            {user?.address !== undefined ? (
+                            {isUser !== undefined ? (
                                 <li>
                                     <Link to="account">
                                         <TextButton changeColor href="#">

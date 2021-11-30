@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputProps {
-    id: string;
+    id?: string;
     content?: string;
     type?: string;
     placeholder?: string;
@@ -11,6 +11,7 @@ interface InputProps {
     width?: string;
     height?: string;
     name?: string;
+    errorMessage?: string;
 }
 
 interface StyleProps {
@@ -30,6 +31,7 @@ const InputCheckout: React.FC<InputProps> = (props: InputProps) => {
         width,
         height,
         name,
+        errorMessage,
     } = props;
     const label = useRef<HTMLLabelElement>(null);
 
@@ -59,17 +61,20 @@ const InputCheckout: React.FC<InputProps> = (props: InputProps) => {
                     focusDiv(e);
                 }}
             />
+            {errorMessage && <span>{errorMessage}</span>}
         </InputContainer>
     );
 };
 
 InputCheckout.defaultProps = {
+    id: '',
     content: 'Email',
     type: 'email',
     placeholder: 'you@example.com',
     width: '380px',
     height: '40px',
     name: '',
+    errorMessage: '',
 };
 
 export default InputCheckout;
@@ -78,7 +83,7 @@ const InputContainer = styled.div<StyleProps>`
     position: relative;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
-    margin: 0.4285714286em 0;
+    margin: 1rem 0;
     cursor: pointer;
     & > label {
         position: absolute;
@@ -122,5 +127,11 @@ const InputContainer = styled.div<StyleProps>`
                 color: transparent;
             }
         }
+    }
+    & > span {
+        color: red;
+        /* display: block; */
+        margin: 6px 0;
+        font-size: ${(p) => p.theme.fonts.size.fs12};
     }
 `;

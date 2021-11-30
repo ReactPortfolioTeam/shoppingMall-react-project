@@ -40,10 +40,10 @@ function App() {
                         <Route path="/login">
                             <Login />
                         </Route>
-                        <Route exact path="/accountInfo/:userid">
+                        <Route exact path="/accountInfo">
                             <AccountInfo />
                         </Route>
-                        <Route path="/accountInfo/editProfile/:userid">
+                        <Route path="/accountInfo/editProfile">
                             <EditProfile />
                         </Route>
                         <Route path="/shop" exact>

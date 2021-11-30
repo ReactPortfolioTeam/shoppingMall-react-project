@@ -2,13 +2,13 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { DaeHwanStyle } from 'assets/css/global/DaeHwan.style';
 import { useRecoilValue } from 'recoil';
-import UserInfo from 'state/atom/UserInfo';
 import { Link } from 'react-router-dom';
+import User from 'state/atom/User';
 
 interface IAppProps {}
 
 const AccountWelcome: React.FC<IAppProps> = () => {
-    const userInfo = useRecoilValue(UserInfo);
+    const userInfo = useRecoilValue(User);
     return (
         <AccountWelcomeStyle>
             <DaeHwanStyle>
@@ -30,7 +30,7 @@ const AccountWelcome: React.FC<IAppProps> = () => {
                         </p>
                         <Link
                             className="welcome-button button-cta has-icon"
-                            to={`/accountInfo/editProfile/${userInfo.userid}`}
+                            to="/accountInfo/editProfile"
                         >
                             회원정보 변경
                             <span className="inline-icon">

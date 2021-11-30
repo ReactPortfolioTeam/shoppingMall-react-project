@@ -58,7 +58,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                             </li>
                             {isUser ? (
                                 <li>
-                                    <Link to={`accountInfo/${user.userid}`}>
+                                    <Link to="accountInfo">
                                         <TextButton changeColor href="#">
                                             Account
                                         </TextButton>

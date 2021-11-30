@@ -1,49 +1,29 @@
 import { FlexBoxDiv } from 'assets/styledComponents/global/globalStyle.style';
 import TextButton from 'component/Button/TextButton';
-import Input from 'component/Input/Input';
-import { FC, useState, ChangeEvent, useEffect } from 'react';
+import { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { API } from 'api/API';
-import { useHistory, useParams } from 'react-router';
-import UserInfo from 'state/atom/UserInfo';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import InputCheckout from 'component/Input/inputCheckout';
 import Button from 'component/Button/Button';
+import User from 'state/atom/User';
+import { Modal } from 'state/atom/modal/Modal';
+import Alert from 'component/Modal/Alert';
+import ErrorMessage from 'utils/ErrorMessage';
+import { useHistory } from 'react-router';
 
 interface editProfileProps {}
 
-interface userIdObject {
-    userid: string;
+interface editProfileFormObject {
+    prevPassword?: string;
+    password?: string;
+    confirmPassword?: string;
+    address?: string;
 }
 
 const EditProfile: FC<editProfileProps> = (props) => {
-    const { userid }: userIdObject = useParams();
-    const userInfo = useRecoilValue(UserInfo);
-    const setUserInfo = useSetRecoilState(UserInfo);
-    const getUserInfo = async () => {
-        try {
-            await API.get(`userInfo/list/${userid}`).then((res: any) => {
-                const { data } = res;
-                if (res.status === 200) {
-                    setUserInfo({
-                        userid: data.userid,
-                        password: data.password,
-                        email: data.email,
-                        name: data.name,
-                        address: data.address,
-                        join_date: data.join_date,
-                        level: data.level,
-                    });
-                }
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
-    useEffect(() => {
-        getUserInfo();
-    }, []);
+    const history = useHistory();
+    const [userInfo, setUserInfo] = useRecoilState(User);
     const [editMode, setEditMode] = useState<string>('');
     const [inputValue, setInputValue] = useState({
         nextEmail: '',
@@ -52,6 +32,16 @@ const EditProfile: FC<editProfileProps> = (props) => {
         nextPassword: '',
         confirmNextPassword: '',
     });
+    const editProfileFormInitObject: editProfileFormObject = {
+        prevPassword: '',
+        password: '',
+        confirmPassword: '',
+        address: '',
+    };
+    const [errorMessage, setErrorMessage] = useState<editProfileFormObject>(
+        editProfileFormInitObject
+    );
+    const setModal = useSetRecoilState(Modal);
     const handleClick = (e: ChangeEvent<HTMLElement>) => {
         setEditMode(e.target.id);
     };
@@ -59,40 +49,79 @@ const EditProfile: FC<editProfileProps> = (props) => {
         const newValue = e.target.value;
         setInputValue({ ...inputValue, [e.target.name]: newValue });
     };
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (inputValue.nextPassword !== inputValue.confirmNextPassword) {
             const localErrorMsg = '재확인 비밀번호가 일치하지 않습니다.';
-            alert(localErrorMsg);
+            setErrorMessage({
+                ...errorMessage,
+                confirmPassword: localErrorMsg,
+            });
             return;
         }
-        try {
-            switch (editMode) {
-                case 'editPassword':
-                    API.post('userInfo/updatePassword', {
-                        userid: userInfo.userid,
-                        prevPassword: inputValue.prevPassword,
-                        password: inputValue.nextPassword,
-                    });
-                    alert('비밀번호가 변경되었습니다.');
-                    window.location.replace(
-                        `/accountInfo/editProfile/${userid}`
-                    );
-                    return;
-                case 'editAddress':
-                    API.post('userInfo/updateAddress', {
-                        userid: userInfo.userid,
-                        address: inputValue.nextAddress,
-                    });
-                    window.location.replace(
-                        `/accountInfo/editProfile/${userid}`
-                    );
-
-                    return;
-                default:
-                    return;
-            }
-        } catch (error) {
-            console.error(error);
+        setErrorMessage(editProfileFormInitObject);
+        switch (editMode) {
+            case 'editPassword':
+                await API.post('userInfo/updatePassword', {
+                    userid: userInfo.userid,
+                    prevPassword: inputValue.prevPassword,
+                    password: inputValue.nextPassword,
+                }).then((res: any) => {
+                    if (res.data?.status === 200) {
+                        const { data } = res;
+                        setModal({
+                            isOpen: true,
+                            ModalComponent: Alert,
+                            ModalClose: () => {
+                                setModal({ isOpen: false });
+                                history.push('/login');
+                            },
+                            ModalContent: data.msg,
+                        });
+                    } else if (res.response.status === 400) {
+                        ErrorMessage(
+                            errorMessage,
+                            res.response.data.msg,
+                            setErrorMessage
+                        );
+                    } else if (res.response.status === 401) {
+                        setErrorMessage({
+                            ...errorMessage,
+                            prevPassword: res.response.data.msg,
+                        });
+                    }
+                });
+                break;
+            case 'editAddress':
+                API.post('userInfo/updateAddress', {
+                    userid: userInfo.userid,
+                    address: inputValue.nextAddress,
+                }).then((res: any) => {
+                    if (res.data?.status === 200) {
+                        const { data } = res;
+                        console.log(data);
+                        setUserInfo({
+                            ...userInfo,
+                            address: data.address,
+                        });
+                        setModal({
+                            isOpen: true,
+                            ModalComponent: Alert,
+                            ModalClose: () => {
+                                setModal({ isOpen: false });
+                                history.push('/login');
+                            },
+                            ModalContent: data.msg,
+                        });
+                    } else if (res.response.status === 400) {
+                        ErrorMessage(
+                            errorMessage,
+                            res.response.data.msg,
+                            setErrorMessage
+                        );
+                    }
+                });
+                break;
+            default:
         }
     };
     function renderSwitch(editMode: string): JSX.Element {
@@ -107,6 +136,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             value={inputValue.prevPassword}
                             name="prevPassword"
                             onChange={handleChange}
+                            errorMessage={errorMessage.prevPassword}
                         />
                         <InputCheckout
                             type="password"
@@ -116,6 +146,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             value={inputValue.nextPassword}
                             name="nextPassword"
                             onChange={handleChange}
+                            errorMessage={errorMessage.password}
                         />
                         <InputCheckout
                             type="password"
@@ -124,6 +155,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             value={inputValue.confirmNextPassword}
                             name="confirmNextPassword"
                             onChange={handleChange}
+                            errorMessage={errorMessage.confirmPassword}
                         />
                         <Button
                             type="submit"
@@ -143,6 +175,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             value={inputValue.nextAddress}
                             name="nextAddress"
                             onChange={handleChange}
+                            errorMessage={errorMessage.address}
                         />
                         <Button
                             type="submit"
@@ -261,8 +294,10 @@ const EditProfileStyle = styled.section`
                     flex-direction: column;
                     justify-content: space-around;
                     align-self: center;
+
                     & > Button {
                         align-self: center;
+                        margin-top: ${(props) => props.theme.margins.m40};
                     }
                 }
             }

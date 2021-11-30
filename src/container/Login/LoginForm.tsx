@@ -48,6 +48,9 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                     address: data.address,
                     email: data.email,
                     userid: data.userid,
+                    join_date: data.join_date,
+                    level: data.level,
+                    name: data.name,
                 });
                 sessionStorage.setItem(
                     'user',
@@ -55,6 +58,9 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         address: data.address,
                         email: data.email,
                         userid: data.userid,
+                        join_date: data.join_date,
+                        level: data.level,
+                        name: data.name,
                     })
                 );
                 setModal({

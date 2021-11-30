@@ -8,15 +8,22 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import MiniCart from 'container/MiniCart/MiniCart';
 import getSessionUser from 'utils/getSessionUser';
+import User from 'state/atom/User';
 
 interface Props {
     count?: number;
 }
 
 const Header: React.FC<Props> = ({ count = 3 }) => {
+    const [user, setUser] = useRecoilState(User);
     const isUser = getSessionUser();
-
+    console.log(isUser, 'isUser');
     const [modal, setModal] = useRecoilState(Modal);
+    useEffect(() => {
+        const sessionUser: any = sessionStorage.getItem('user');
+        const parseUser: any = JSON.parse(sessionUser);
+        setUser(parseUser);
+    }, []);
     return (
         <>
             <HeaderContainer>
@@ -49,13 +56,14 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                     </TextButton>
                                 </Link>
                             </li>
-                            {isUser !== undefined ? (
+                            {isUser ? (
                                 <li>
                                     <Link to="account">
                                         <TextButton changeColor href="#">
                                             Account
                                         </TextButton>
                                     </Link>
+                                    <span> - {user.userid}</span>
                                 </li>
                             ) : (
                                 <li>
@@ -123,8 +131,24 @@ const HeaderContainer = styled.header`
 
             & > li {
                 padding: 0 ${(props) => props.theme.paddings.p10};
+                position: relative;
                 & > a {
                     font-weight: ${(props) => props.theme.fonts.weight.bold};
+                }
+                & > span {
+                    opacity: 0;
+                    position: absolute;
+                    width: max-content;
+                    color: ${(props) => props.theme.colors.lightGray};
+                    top: 0%;
+                    left: 100%;
+                }
+            }
+            & > li:hover {
+                & > span {
+                    display: inline-block;
+                    transition: 0.5s;
+                    opacity: 1;
                 }
             }
         }

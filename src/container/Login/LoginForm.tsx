@@ -49,7 +49,14 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                     email: data.email,
                     userid: data.userid,
                 });
-                sessionStorage.setItem('userid', data.userid);
+                sessionStorage.setItem(
+                    'user',
+                    JSON.stringify({
+                        address: data.address,
+                        email: data.email,
+                        userid: data.userid,
+                    })
+                );
                 setModal({
                     isOpen: true,
                     ModalComponent: Alert,

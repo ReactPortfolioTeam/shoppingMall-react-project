@@ -3,15 +3,12 @@ import styled from 'styled-components';
 import { DaeHwanStyle } from 'assets/css/global/DaeHwan.style';
 import { useRecoilValue } from 'recoil';
 import UserInfo from 'state/atom/UserInfo';
-import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 
 interface IAppProps {}
 
 const AccountWelcome: React.FC<IAppProps> = () => {
     const userInfo = useRecoilValue(UserInfo);
-    console.log(userInfo.userid);
-    const history = useHistory();
     return (
         <AccountWelcomeStyle>
             <DaeHwanStyle>

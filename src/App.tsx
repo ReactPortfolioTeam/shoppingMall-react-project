@@ -15,6 +15,7 @@ import { RecoilRoot } from 'recoil';
 import ShopDetail from 'container/Shop/ShopDetail';
 import Checkout from 'container/Checkout/Checkout';
 import AccountInfo from 'container/Login/AccountInfo/AccountInfo';
+import EditProfile from 'container/Login/AccountInfo/EditProfile/EditProfile';
 
 function App() {
     let isAdmin = false;

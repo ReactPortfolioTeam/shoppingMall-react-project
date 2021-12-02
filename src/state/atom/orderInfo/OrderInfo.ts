@@ -4,8 +4,7 @@ const OrderInfo = atom({
     key: 'OrderInfo',
     default: {
         email: '',
-        firstName: '',
-        lastName: '',
+        name: '',
         address: '',
         detailedAddress: '',
         phone: '',

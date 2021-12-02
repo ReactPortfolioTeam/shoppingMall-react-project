@@ -1,24 +1,22 @@
 import InputCheckout from 'component/Input/inputCheckout';
 import * as React from 'react';
-import { useRecoilState } from 'recoil';
-import OrderInfo from 'state/atom/orderInfo/OrderInfo';
 import styled from 'styled-components';
 
 interface SectionShippingProps {
     inputValue: {
-        firstName: string;
-        lastName: string;
+        name: string;
         address: string;
         detailedAddress: string;
         phone: string;
     };
     handleChange: any;
+    errorMessage: any;
 }
 
 const SectionShippingAddress: React.FC<SectionShippingProps> = (
     props: SectionShippingProps
 ) => {
-    const { inputValue, handleChange } = props;
+    const { inputValue, handleChange, errorMessage } = props;
 
     return (
         <SectionShippingAddressStyle className="section section--shipping-address">
@@ -26,28 +24,17 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
                 <h2 className="section__title">Shipping address</h2>
             </div>
             <div className="section__content">
-                <div className="section__content doubleInput-row">
-                    <InputCheckout
-                        id="firstName"
-                        name="firstName"
-                        value={inputValue.firstName}
-                        onChange={handleChange}
-                        placeholder="First name"
-                        content="First name"
-                        type="text"
-                        width="48%"
-                    />
-                    <InputCheckout
-                        id="lastName"
-                        name="lastName"
-                        value={inputValue.lastName}
-                        onChange={handleChange}
-                        placeholder="Last name"
-                        content="Last name"
-                        type="text"
-                        width="48%"
-                    />
-                </div>
+                <InputCheckout
+                    id="name"
+                    name="name"
+                    value={inputValue.name}
+                    onChange={handleChange}
+                    placeholder="Name"
+                    content="Name"
+                    type="text"
+                    width="100%"
+                    readOnly
+                />
                 <InputCheckout
                     id="address"
                     name="address"
@@ -57,6 +44,7 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
                     content="Address"
                     type="text"
                     width="100%"
+                    errorMessage={errorMessage.address}
                 />
                 <InputCheckout
                     id="detailedAddress"
@@ -74,10 +62,11 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
                         name="phone"
                         value={inputValue.phone}
                         onChange={handleChange}
-                        placeholder="Phone('-'없이 숫자만 입력해주세요)"
-                        content="Phone('-'없이 숫자만 입력해주세요)"
+                        placeholder="Phone"
+                        content="Phone"
                         type="tel"
                         width="100%"
+                        errorMessage={errorMessage.phone}
                     />
                     <div className="tooltipBox">
                         <img

@@ -30,6 +30,7 @@ const SectionContactInfo: React.FC<IAppProps> = (props: IAppProps) => {
                     content="Email"
                     type="email"
                     width="100%"
+                    readOnly
                 />
                 <div
                     className="email--description"

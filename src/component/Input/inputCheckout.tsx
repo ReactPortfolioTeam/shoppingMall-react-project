@@ -12,6 +12,7 @@ interface InputProps {
     height?: string;
     name?: string;
     errorMessage?: string;
+    readOnly?: boolean;
 }
 
 interface StyleProps {
@@ -32,6 +33,7 @@ const InputCheckout: React.FC<InputProps> = (props: InputProps) => {
         height,
         name,
         errorMessage,
+        readOnly,
     } = props;
     const label = useRef<HTMLLabelElement>(null);
 
@@ -60,6 +62,7 @@ const InputCheckout: React.FC<InputProps> = (props: InputProps) => {
                     onChange(e);
                     focusDiv(e);
                 }}
+                readOnly={readOnly}
             />
             {errorMessage && <span>{errorMessage}</span>}
         </InputContainer>
@@ -75,6 +78,7 @@ InputCheckout.defaultProps = {
     height: '40px',
     name: '',
     errorMessage: '',
+    readOnly: false,
 };
 
 export default InputCheckout;

@@ -1,25 +1,25 @@
 import ButtonBlack from 'component/Button/ButtonBg_black';
 import MiniCart from 'container/MiniCart/MiniCart';
 import * as React from 'react';
-import { useHistory } from 'react-router';
-import { Link } from 'react-router-dom';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
 import { StyledButton } from './Checkout';
 
-interface SectionFooterProps {}
+interface SectionFooterProps {
+    handleSubmit: any;
+}
 
-const SectionFooter: React.FC<SectionFooterProps> = (props) => {
+const SectionFooter: React.FC<SectionFooterProps> = ({ handleSubmit }) => {
     const setModal = useSetRecoilState(Modal);
-    const history = useHistory();
+
     return (
         <SectionFooterStyle className="section section__footer">
             <ButtonBlack
                 width="160px"
                 height="3rem"
-                type="submit"
-                onClick={() => history.push('/checkout/payment')}
+                type="button"
+                onClick={handleSubmit}
             >
                 Continue to shipping
             </ButtonBlack>

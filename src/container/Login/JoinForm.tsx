@@ -51,6 +51,14 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
     };
     const checkDuplicateId = async () => {
         if (!duplicateCheck) {
+            if (user.userid === '') {
+                setErrorMessage((prev) => ({
+                    ...prev,
+                    userid: '아이디를 입력해주세요.',
+                }));
+
+                return;
+            }
             setErrorMessage(userObjectInitState);
             await API.get(`signup/check/${user.userid}`)
                 .then((res: any) => {

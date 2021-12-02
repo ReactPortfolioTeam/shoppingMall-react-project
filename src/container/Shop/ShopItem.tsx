@@ -59,6 +59,7 @@ const ShopItem: React.FC<Props> = ({ item }) => {
                 ModalContent: '로그인 후 이용가능한 기능입니다.',
                 ModalClose: () => {
                     setModal({ isOpen: false });
+                    history.push('/login');
                 },
             });
         }

@@ -1,24 +1,32 @@
+/* eslint-disable consistent-return */
 /* eslint-disable indent */
 /* eslint-disable react/no-array-index-key */
 import { MyTheme } from 'assets/css/global/theme.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
+import Alert from 'component/Modal/Alert';
 import AddCartItem from 'container/Shop/AddCart';
 import { useScroll } from 'hooks/useScroll';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
 import { Products, ProductsType } from 'state/atom/dummy/Products';
+import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
+import getSessionUser from 'utils/getSessionUser';
+import { useHistory } from 'react-router';
 
 const ShopDetail: React.FC = () => {
     const itemList = useRecoilValue(Products);
+    const setModal = useSetRecoilState(Modal);
     const [item, setItem] = useState<ProductsType>();
     const [cart, setCart] = useRecoilState(Cart);
     const [selectItem, setSelectItem] = useState<string>();
     const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
     const productInformation = useRecoilValue(ProductInformation);
+
+    const history = useHistory();
     const productId = item?.product_id;
     const { scrollY } = useScroll();
     const itemInfo = productInformation.filter(
@@ -68,6 +76,19 @@ const ShopDetail: React.FC = () => {
     };
 
     const onClickAddToBag = () => {
+        if (!getSessionUser()) {
+            setModal({
+                isOpen: true,
+                ModalComponent: Alert,
+                ModalContent: '로그인 후 이용가능한 기능입니다.',
+                ModalClose: () => {
+                    setModal({ isOpen: false });
+                    history.push('/login');
+                },
+            });
+
+            return null;
+        }
         if (selectItem) {
             AddCartItem(
                 item as ProductsType,

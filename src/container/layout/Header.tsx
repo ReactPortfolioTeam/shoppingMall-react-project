@@ -32,7 +32,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                         <h2 className="screen-out__h2">메뉴</h2>
                         <ul>
                             <li>
-                                <Link to="shop">
+                                <Link to="/shop">
                                     <TextButton href="#">Shop</TextButton>
                                 </Link>
                             </li>
@@ -40,7 +40,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                 <TextButton href="#">News</TextButton>
                             </li>
                             <li>
-                                <Link to="search">
+                                <Link to="/search">
                                     <TextButton href="#">Search</TextButton>
                                 </Link>
                             </li>
@@ -50,7 +50,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                 </TextButton>
                             </li>
                             <li>
-                                <Link to="about">
+                                <Link to="/about">
                                     <TextButton changeColor href="#">
                                         About
                                     </TextButton>
@@ -58,7 +58,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                             </li>
                             {isUser ? (
                                 <li>
-                                    <Link to="accountInfo">
+                                    <Link to="/accountInfo">
                                         <TextButton changeColor href="#">
                                             Account
                                         </TextButton>
@@ -67,7 +67,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                                 </li>
                             ) : (
                                 <li>
-                                    <Link to="login">
+                                    <Link to="/login">
                                         <TextButton changeColor href="#">
                                             Sign in
                                         </TextButton>

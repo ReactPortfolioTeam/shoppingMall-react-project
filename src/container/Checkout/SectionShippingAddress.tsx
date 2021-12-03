@@ -55,6 +55,7 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
                     content="Detailed Address(동, 호수)"
                     type="text"
                     width="100%"
+                    errorMessage={errorMessage.detailedAddress}
                 />
                 <div className="section__content with-icon">
                     <InputCheckout

@@ -39,15 +39,6 @@ const AccountHeader: React.FC<AccoutHeaderProps> = () => {
                 flexDirection="row"
                 justifyContent="space-between"
                 className="account-header"
-                // style={{
-                //     top: 0,
-                //     paddingTop: '1.4285714286rem',
-                //     paddingBottom: '1.4285714286rem',
-                //     borderBottom: '.0714285714rem solid #dedede',
-                //     position: 'sticky',
-                //     zIndex: 9,
-                //     background: '#fff',
-                // }}
             >
                 <div>
                     <h2>Account</h2>

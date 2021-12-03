@@ -11,6 +11,7 @@ import SectionShippingAddress from './SectionShippingAddress';
 interface IAppProps {}
 interface checkoutErrorCheckObject {
     address: string;
+    detailedAddress: string;
     phone: string;
 }
 
@@ -23,6 +24,7 @@ const CheckoutMainContent: React.FC<IAppProps> = () => {
         setErrorMessage,
     ] = React.useState<checkoutErrorCheckObject>({
         address: '',
+        detailedAddress: '',
         phone: '',
     });
     React.useEffect(() => {
@@ -57,6 +59,14 @@ const CheckoutMainContent: React.FC<IAppProps> = () => {
             });
             return;
         }
+        if (orderInfo.detailedAddress.length === 0) {
+            setErrorMessage({
+                ...errorMessage,
+                detailedAddress: '상세 주소를 입력해주세요.',
+            });
+            return;
+        }
+
         if (regPhone.test(orderInfo.phone) === false) {
             setErrorMessage({
                 ...errorMessage,
@@ -64,6 +74,12 @@ const CheckoutMainContent: React.FC<IAppProps> = () => {
             });
             return;
         }
+        setErrorMessage({
+            ...errorMessage,
+            address: '',
+            detailedAddress: '',
+            phone: '',
+        });
         history.push('/checkout/payment');
     };
 

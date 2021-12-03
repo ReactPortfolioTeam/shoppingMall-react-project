@@ -1,7 +1,7 @@
 import TextButton from 'component/Button/TextButton';
 import Button from 'component/Button/Button';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -9,16 +9,18 @@ import { Modal } from 'state/atom/modal/Modal';
 import MiniCart from 'container/MiniCart/MiniCart';
 import getSessionUser from 'utils/getSessionUser';
 import User from 'state/atom/User';
+import Cart from 'state/atom/Cart';
 
-interface Props {
-    count?: number;
-}
+interface Props {}
 
-const Header: React.FC<Props> = ({ count = 3 }) => {
+const Header: React.FC<Props> = () => {
     const [user, setUser] = useRecoilState(User);
     const isUser = getSessionUser();
     console.log(isUser, 'isUser');
     const [modal, setModal] = useRecoilState(Modal);
+    const cart = useRecoilValue(Cart);
+    const count = useMemo(() => cart.length, [cart]);
+
     useEffect(() => {
         const sessionUser: any = sessionStorage.getItem('user');
         const parseUser: any = JSON.parse(sessionUser);
@@ -81,7 +83,7 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                         <Link to="/">
                             <img src="/images/Logo.png" alt="Logo" />
                         </Link>
-                        {count && (
+                        {count > 0 ? (
                             <button
                                 type="button"
                                 className="badge__button"
@@ -94,6 +96,8 @@ const Header: React.FC<Props> = ({ count = 3 }) => {
                             >
                                 {count}
                             </button>
+                        ) : (
+                            <div />
                         )}
                     </div>
                 </div>

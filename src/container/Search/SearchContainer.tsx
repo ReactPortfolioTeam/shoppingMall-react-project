@@ -44,6 +44,7 @@ const SearchContainer: React.FC<IAppProps> = () => {
 const ResultContainerStyle = styled.section`
     display: flex;
     align-items: center;
+    min-height: 50vh;
 `;
 
 const SearchContainerStyle = styled.section`

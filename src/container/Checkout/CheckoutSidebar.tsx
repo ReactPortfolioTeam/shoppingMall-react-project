@@ -1,4 +1,6 @@
+import Input from 'component/Input/Input';
 import * as React from 'react';
+import { useLocation } from 'react-router';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
@@ -54,6 +56,16 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
             ),
         [cart]
     );
+    const location = useLocation();
+    const isPayment = location.pathname === '/checkout/payment';
+    const shippingPrice = () => {
+        if (isPayment) {
+            return 25;
+        }
+        return 0;
+    };
+    const PaymentTotalPrice = TotoalPrice + shippingPrice();
+
     return (
         <CheckoutSidebarStyle className="sidebar" role="complementary">
             <div className="order-summary__section order-summary__section--product-list">
@@ -96,13 +108,17 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
                 </div>
                 <div className="total--wrapper sub-shipping-price">
                     <span>Shipping</span>
-                    <span>Calculated at next step</span>
+                    {location.pathname === '/checkout/payment' ? (
+                        <span>${shippingPrice()}</span>
+                    ) : (
+                        <span>Calculated at next step</span>
+                    )}
                 </div>
             </div>
             <div className="order-summary__section order-summary__section--total-lines">
                 <div className="total--wrapper total-price">
                     <span>Total</span>
-                    <span>${TotoalPrice}</span>
+                    <span>${PaymentTotalPrice}</span>
                 </div>
             </div>
         </CheckoutSidebarStyle>

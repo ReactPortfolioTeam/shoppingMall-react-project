@@ -13,6 +13,7 @@ import Cart from 'state/atom/Cart';
 import Alert from 'component/Modal/Alert';
 import { useAlertModal } from 'state/actions/useModal';
 import { API } from 'api/API';
+import Loading from 'component/Modal/Loading';
 
 interface Props {}
 
@@ -31,7 +32,7 @@ const Header: React.FC<Props> = () => {
 
         API.interceptors.request.use(async (config) => {
             // 요청을 보내기 전에 수행 할 일
-            modalAction('로딩중');
+            setModal({ isOpen: true, ModalComponent: Loading });
 
             return config;
         });
@@ -39,11 +40,13 @@ const Header: React.FC<Props> = () => {
         API.interceptors.response.use(
             (response) => {
                 console.dir(response);
+                setModal({ isOpen: false });
                 return response;
             },
             (error) => {
                 // 오류 응답 처리
                 console.dir(error);
+                setModal({ isOpen: false });
 
                 return error;
             }

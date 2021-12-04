@@ -16,6 +16,8 @@ import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
 import getSessionUser from 'utils/getSessionUser';
 import { useHistory } from 'react-router';
+import SizeGuide from 'component/Modal/SizeGuide';
+import { useAlertModal } from 'state/actions/useModal';
 
 const ShopDetail: React.FC = () => {
     const itemList = useRecoilValue(Products);
@@ -25,6 +27,7 @@ const ShopDetail: React.FC = () => {
     const [selectItem, setSelectItem] = useState<string>();
     const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
     const productInformation = useRecoilValue(ProductInformation);
+    const modalAction = useAlertModal();
 
     const history = useHistory();
     const productId = item?.product_id;
@@ -101,6 +104,19 @@ const ShopDetail: React.FC = () => {
         }
     };
 
+    const onClickSizing = () => {
+        setModal({
+            isOpen: true,
+            ModalClose: () => {
+                setModal({ isOpen: false });
+            },
+            ModalComponent: SizeGuide,
+        });
+    };
+    const onClickWishList = () => {
+        modalAction('구현되지 않은 기능입니다.');
+    };
+
     if (!item) {
         return null;
     }
@@ -117,14 +133,18 @@ const ShopDetail: React.FC = () => {
                     <div>
                         <p>$ {item.price}</p>
                         <div>
-                            <button type="button">+ Wishlist</button>
-                            <button type="button">Sizing</button>
+                            <button type="button" onClick={onClickWishList}>
+                                + Wishlist
+                            </button>
+                            <button type="button" onClick={onClickSizing}>
+                                Sizing
+                            </button>
                         </div>
                     </div>
                     <hr className="line" />
                     <div>
                         <p>{item.depscription}</p>
-                        <a href="">Read more</a>
+                        <a href="#information">Read more</a>
                     </div>
                     <hr className="line" />
                     <div>
@@ -172,7 +192,7 @@ const ShopDetail: React.FC = () => {
                             </div>
                         );
                     })}
-                    <div>
+                    <div id="information">
                         <p>
                             <strong>Information</strong>
                         </p>
@@ -224,6 +244,7 @@ const ContainerDiv = styled.div`
                         background-color: ${(p) => p.theme.colors.white};
                         font-size: ${(p) => p.theme.fonts.size.fs10};
                         color: ${(p) => p.theme.colors.gray};
+                        cursor: pointer;
                     }
                 }
             }
@@ -304,7 +325,8 @@ const ContainerDiv = styled.div`
                     margin-top: 50px;
                 }
                 p {
-                    width: 300px;
+                    line-height: 25px;
+                    width: 500px;
                 }
                 strong {
                     font-weight: ${(p) => p.theme.fonts.weight.bold};

@@ -29,6 +29,7 @@ declare module 'styled-components' {
         fonts: {
             family: {
                 base: string;
+                brewery: string;
             };
             size: {
                 fs10: string;
@@ -92,6 +93,7 @@ const paddings = {
 const fonts = {
     family: {
         base: `'3sixteen-Futura',Helvetica Neue,Helvetica,Arial,sans-serif;`,
+        brewery: '3sixteen-Brewery,Times New Roman,sans-serif',
     },
     size: {
         fs10: '0.71428rem', // 10px

@@ -6,8 +6,8 @@ const GlobalStyle = createGlobalStyle`
 ${JunhanStyle}
 @font-face {
     font-family: "3sixteen-Futura";
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.eot?v=8475405467952757196 ");
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.eot?v=8475405467952757196 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.woff?v=2055986069778670836 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.woff2?2821 ") format("woff2");
+    src: url("../../font/FuturaPT-Book.woff");
+    /* src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.eot?v=8475405467952757196 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.woff?v=2055986069778670836 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Book.woff2?2821 ") format("woff2"); */
     font-weight: 400;
     font-style: normal;
     font-display: swap
@@ -15,8 +15,8 @@ ${JunhanStyle}
 
 @font-face {
     font-family: "3sixteen-Futura";
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.eot?v=996123339364548918 ");
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.eot?v=996123339364548918 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.woff?v=13076472133656725296 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.woff2?2821 ") format("woff2");
+	src: url("../../font/FuturaPT-BookObl.woff");
+    /* src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.eot?v=996123339364548918 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.woff?v=13076472133656725296 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-BookObl.woff2?2821 ") format("woff2"); */
     font-weight: 400;
     font-style: italic;
     font-display: swap
@@ -24,8 +24,8 @@ ${JunhanStyle}
 
 @font-face {
     font-family: "3sixteen-Futura";
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.eot?v=13443831076423191093 ");
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.eot?v=13443831076423191093 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.woff?v=15614256649977071015 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.woff2?2821 ") format("woff2");
+	src: url("../../font/FuturaPT-Demi.woff");
+    /* src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.eot?v=13443831076423191093 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.woff?v=15614256649977071015 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-Demi.woff2?2821 ") format("woff2"); */
     font-weight: 500;
     font-style: normal;
     font-display: swap
@@ -33,8 +33,8 @@ ${JunhanStyle}
 
 @font-face {
     font-family: "3sixteen-Futura";
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.eot?v=1443922868093412514 ");
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.eot?v=1443922868093412514 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.woff?v=7700426176577362567 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.woff2?2821 ") format("woff2");
+	src: url("../../font/FuturaPT-DemiObl.woff");
+    /* src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.eot?v=1443922868093412514 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.woff?v=7700426176577362567 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/FuturaPT-DemiObl.woff2?2821 ") format("woff2"); */
     font-weight: 500;
     font-style: italic;
     font-display: swap
@@ -42,8 +42,8 @@ ${JunhanStyle}
 
 @font-face {
     font-family: "3sixteen-Brewery";
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.eot?v=12899612267492566931 ");
-    src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.eot?v=12899612267492566931 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.woff?v=12665231174229498725 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.woff2?2821 ") format("woff2");
+	src: url("../../font/3sBrewery.eot");
+    /* src: url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.eot?v=12899612267492566931 ?#iefix ") format("embedded-opentype"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.woff?v=12665231174229498725 ") format("woff"),url(" //cdn.shopify.com/s/files/1/0028/6132/t/10/assets/3sBrewery.woff2?2821 ") format("woff2"); */
     font-weight: 700;
     font-style: normal;
     font-display: swap

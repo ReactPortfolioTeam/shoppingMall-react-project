@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import JoinForm from './JoinForm';
 import LoginForm from './LoginForm';
@@ -10,6 +10,9 @@ export interface StateToProps {
 
 const Login = () => {
     const [loginMenu, setLoginMenu] = useState<boolean>(true);
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <LoginContainer>
             <div className="wrapper__div">

@@ -20,9 +20,9 @@ const Footer: React.FC<Props> = (props) => {
     ];
     return (
         <FooterContainer>
-            <div className="footer-error__div">
+            {/* <div className="footer-error__div">
                 <em>{errorMessage}</em>
-            </div>
+            </div> */}
             <hr className="line" />
             <div className="footer-content__div">
                 <div>
@@ -80,11 +80,11 @@ const Footer: React.FC<Props> = (props) => {
                 </div>
             </div>
             <hr className="line" />
-            <div className="footer-cookie__div">
+            {/* <div className="footer-cookie__div">
                 <ButtonHover>
                     <p>Cookies settings</p>
                 </ButtonHover>
-            </div>
+            </div> */}
         </FooterContainer>
     );
 };

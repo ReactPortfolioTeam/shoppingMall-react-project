@@ -10,14 +10,17 @@ import MiniCart from 'container/MiniCart/MiniCart';
 import getSessionUser from 'utils/getSessionUser';
 import User from 'state/atom/User';
 import Cart from 'state/atom/Cart';
+import Alert from 'component/Modal/Alert';
+import { useAlertModal } from 'state/actions/useModal';
+import { API } from 'api/API';
 
 interface Props {}
 
 const Header: React.FC<Props> = () => {
     const [user, setUser] = useRecoilState(User);
     const isUser = getSessionUser();
-    console.log(isUser, 'isUser');
     const [modal, setModal] = useRecoilState(Modal);
+    const modalAction = useAlertModal();
     const cart = useRecoilValue(Cart);
     const count = useMemo(() => cart.length, [cart]);
 
@@ -25,7 +28,31 @@ const Header: React.FC<Props> = () => {
         const sessionUser: any = sessionStorage.getItem('user');
         const parseUser: any = JSON.parse(sessionUser);
         setUser(parseUser);
+
+        API.interceptors.request.use(async (config) => {
+            // 요청을 보내기 전에 수행 할 일
+            modalAction('로딩중');
+
+            return config;
+        });
+
+        API.interceptors.response.use(
+            (response) => {
+                console.dir(response);
+                return response;
+            },
+            (error) => {
+                // 오류 응답 처리
+                console.dir(error);
+
+                return error;
+            }
+        );
     }, []);
+
+    const onClickNotWorkingPage = () => {
+        modalAction('구현되지 않은 페이지 입니다.');
+    };
     return (
         <>
             <HeaderContainer>
@@ -39,7 +66,12 @@ const Header: React.FC<Props> = () => {
                                 </Link>
                             </li>
                             <li>
-                                <TextButton href="#">News</TextButton>
+                                <TextButton
+                                    onClick={onClickNotWorkingPage}
+                                    href="#"
+                                >
+                                    News
+                                </TextButton>
                             </li>
                             <li>
                                 <Link to="/search">
@@ -47,7 +79,11 @@ const Header: React.FC<Props> = () => {
                                 </Link>
                             </li>
                             <li>
-                                <TextButton changeColor href="#">
+                                <TextButton
+                                    onClick={onClickNotWorkingPage}
+                                    changeColor
+                                    href="#"
+                                >
                                     Visit
                                 </TextButton>
                             </li>

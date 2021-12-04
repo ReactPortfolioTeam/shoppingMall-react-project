@@ -1,4 +1,5 @@
-import { atom } from 'recoil';
+import Alert from 'component/Modal/Alert';
+import { atom, useSetRecoilState } from 'recoil';
 
 interface ModalTypes {
     isOpen: boolean;
@@ -16,3 +17,15 @@ export const Modal = atom<ModalTypes>({
         ModalClose: undefined,
     },
 });
+
+export const ModalOpen = () => {
+    const setModal = useSetRecoilState(Modal);
+    setModal({
+        isOpen: true,
+        ModalComponent: Alert,
+        ModalContent: '로딩중입니다.',
+        ModalClose: () => {
+            setModal({ isOpen: false });
+        },
+    });
+};

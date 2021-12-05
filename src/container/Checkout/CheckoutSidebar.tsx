@@ -1,6 +1,7 @@
 import Input from 'component/Input/Input';
 import * as React from 'react';
-import { useLocation } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
@@ -72,11 +73,13 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
                 {cartList.map((item) => (
                     <div className="product-list--item">
                         <div className="product-inner--wrapper product-image--wrapper">
-                            <img
-                                src={item.product_image}
-                                alt={item.product_name}
-                                className="product-image"
-                            />
+                            <Link to={`/shop/product/${item.product_id}`}>
+                                <img
+                                    src={item.product_image}
+                                    alt={item.product_name}
+                                    className="product-image"
+                                />
+                            </Link>
                             <span
                                 className="product-thumbnail__purchase_quantity"
                                 aria-hidden="true"
@@ -192,7 +195,7 @@ const CheckoutSidebarStyle = styled.aside`
                         top: -0.75em;
                         z-index: 3;
                     }
-                    & > img {
+                    .product-image {
                         border: 0.5px solid
                             ${(props) => props.theme.colors.lightGray};
                         border-radius: 4px;

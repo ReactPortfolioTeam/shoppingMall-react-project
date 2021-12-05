@@ -1,6 +1,7 @@
 import { FlexBoxDiv } from 'assets/styledComponents/global/globalStyle.style';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import * as React from 'react';
+import { useAlertModal } from 'state/actions/useModal';
 import styled from 'styled-components';
 
 interface IAppProps {}
@@ -9,6 +10,11 @@ const AccountSizeForm: React.FC<IAppProps> = (props) => {
     const sizeValue = ['S', 'M', 'L', 'XL', '2X', 'Clear'];
     const BottomSizeValue = ['28', '29', '30', '31', '32'];
     const FootWearSizeValue = ['240', '250', '260', '270', '280'];
+    const modalAction = useAlertModal();
+    const onClickNotWorkingPage = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        modalAction('구현되지 않은 페이지 입니다.');
+    };
     return (
         <AccountSizeFormStyle>
             <form
@@ -87,7 +93,6 @@ const AccountSizeForm: React.FC<IAppProps> = (props) => {
                                                     name="sizes[outerwear]"
                                                     type="radio"
                                                     value={size}
-                                                    tabIndex={0}
                                                 />
 
                                                 <label
@@ -210,6 +215,7 @@ const AccountSizeForm: React.FC<IAppProps> = (props) => {
                             id="save-sizes"
                             className="button-cta has-icon"
                             type="submit"
+                            onClick={onClickNotWorkingPage}
                         >
                             Save
                             <span className="inline-icon">

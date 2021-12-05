@@ -15,7 +15,7 @@ import { Products, ProductsType } from 'state/atom/dummy/Products';
 import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
 import getSessionUser from 'utils/getSessionUser';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router';
 import SizeGuide from 'component/Modal/SizeGuide';
 import { useAlertModal } from 'state/actions/useModal';
 
@@ -28,9 +28,12 @@ const ShopDetail: React.FC = () => {
     const [innerHeight, setInnerHeight] = useState<number>(window.innerHeight);
     const productInformation = useRecoilValue(ProductInformation);
     const modalAction = useAlertModal();
-
+    const location = useLocation();
     const history = useHistory();
-    const productId = item?.product_id;
+    const productId = parseInt(
+        location.pathname.substring(location.pathname.lastIndexOf('/') + 1),
+        10
+    );
     const { scrollY } = useScroll();
     const itemInfo = productInformation.filter(
         (info) => info.product_id === productId
@@ -44,7 +47,7 @@ const ShopDetail: React.FC = () => {
                     parseInt(window.location.pathname.split('product/')[1], 10)
             )
         );
-    }, []);
+    }, [productId]);
     useEffect(() => {
         const step = Math.floor(scrollY / (innerHeight + 100));
         switch (step) {

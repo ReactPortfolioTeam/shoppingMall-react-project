@@ -1,5 +1,9 @@
 import * as React from 'react';
+import { useHistory } from 'react-router';
+import { useSetRecoilState } from 'recoil';
+import { Modal } from 'state/atom/modal/Modal';
 import styled from 'styled-components';
+import MiniCart from './MiniCart';
 
 interface IAppProps {
     product_id: number;
@@ -26,36 +30,43 @@ const CartItem: React.FC<IAppProps> = ({
     onRemove,
     id,
 }) => {
+    const setModal = useSetRecoilState(Modal);
+    const history = useHistory();
+    const handleClick = () => {
+        history.push(`/shop/product/${product_id}`);
+        setModal({
+            isOpen: false,
+            ModalComponent: MiniCart,
+        });
+    };
     return (
         <CartItemStyle className="line-item js-line-item" key={id}>
             <div className="line-item-inner">
                 <div className="line-image">
-                    <a
-                        className="link-to-product"
-                        href="#"
-                        // 추후 shop 연결 필요
-                    >
-                        <div className="portrait-product-image">
-                            <div className="landscape-image-wrap">
-                                <div className="lazy js-lazy image-landscape">
-                                    <img
-                                        className="lazy-img lazyload lazy-preload lazyautosizes lazy-loaded"
-                                        src={product_image}
-                                        width="100"
-                                        height="66"
-                                        alt={product_name}
-                                        sizes="86px"
-                                    />
-                                </div>
+                    <div className="portrait-product-image">
+                        <div className="landscape-image-wrap">
+                            <button
+                                type="button"
+                                className="lazy js-lazy image-landscape"
+                                onClick={handleClick}
+                            >
+                                <img
+                                    className="lazy-img lazyload lazy-preload lazyautosizes lazy-loaded"
+                                    src={product_image}
+                                    width="100"
+                                    height="66"
+                                    alt={product_name}
+                                    sizes="86px"
+                                />
                                 <span
                                     className="product-thumbnail__purchase_quantity"
                                     aria-hidden="true"
                                 >
                                     {quantity}
                                 </span>
-                            </div>
+                            </button>
                         </div>
-                    </a>
+                    </div>
                 </div>
                 <div className="line-info-wrap">
                     <div className="main-product-info line-info">
@@ -105,6 +116,17 @@ const CartItem: React.FC<IAppProps> = ({
 const CartItemStyle = styled.div`
     .landscape-image-wrap {
         position: relative;
+        .lazy {
+            &.image-landscape {
+                background: none;
+                color: inherit;
+                border: none;
+                padding: 0;
+                font: inherit;
+                cursor: pointer;
+                outline: inherit;
+            }
+        }
         & > .product-thumbnail__purchase_quantity {
             font-size: 0.8571428571em;
             font-weight: 400;

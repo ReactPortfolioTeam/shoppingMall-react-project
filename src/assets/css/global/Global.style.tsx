@@ -1,9 +1,7 @@
 import { createGlobalStyle, css } from 'styled-components';
-import { JunhanStyle } from './Junhan.style';
 
 const GlobalStyle = createGlobalStyle`
 
-${JunhanStyle}
 @font-face {
     font-family: "3sixteen-Futura";
     src: url("../../font/FuturaPT-Book.woff");
@@ -72,7 +70,9 @@ time, mark, audio, video,input,hr {
 	font: inherit;
 	vertical-align: baseline;
     box-sizing:border-box;
-	font-family: '3sixteen-Futura',"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-family: "3sixteen-Brewery",Times New Roman,sans-serif;
+		
+	
 	
 }
 /* HTML5 display-role reset for older browsers */
@@ -103,8 +103,9 @@ html{
 	position: relative;
 	
 }
-a,a:link,a:visited{
+a,button,a:link,a:visited{
 	text-decoration:none;
+	font-family: '3sixteen-Futura',"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 ${({ theme }) => css`
         h1 {
@@ -135,7 +136,37 @@ ${({ theme }) => css`
 		}
     `}
 
+	.line {
+        width: 100%;
+        color: #dedede;
+        border: 0.5px solid #dedede;
+    }
+    .make-button {
+        opacity: 0.5;
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+        }
 
+        user-select: none;
+    }
+    .rotate90 {
+        transform: rotate(90deg);
+    }
+    .filter-gray {
+        filter: invert(41%) sepia(1%) saturate(0%) hue-rotate(347deg)
+            brightness(95%) contrast(92%);
+    }
+    .center-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        color: #666;
+        border: none;
+        cursor: pointer;
+    }
 
 `;
 

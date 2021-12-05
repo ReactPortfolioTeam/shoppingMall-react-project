@@ -1,6 +1,6 @@
 import { FlexBoxDiv } from 'assets/styledComponents/global/globalStyle.style';
 import TextButton from 'component/Button/TextButton';
-import { FC, useState, ChangeEvent } from 'react';
+import { FC, useState, ChangeEvent, useCallback, memo } from 'react';
 import styled from 'styled-components';
 import { API } from 'api/API';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -23,6 +23,7 @@ interface editProfileFormObject {
 
 const EditProfile: FC<editProfileProps> = (props) => {
     const history = useHistory();
+    const setUser = useSetRecoilState(User);
     const [userInfo, setUserInfo] = useRecoilState(User);
     const [editMode, setEditMode] = useState<string>('');
     const [inputValue, setInputValue] = useState({
@@ -42,14 +43,20 @@ const EditProfile: FC<editProfileProps> = (props) => {
         editProfileFormInitObject
     );
     const setModal = useSetRecoilState(Modal);
-    const handleClick = (e: ChangeEvent<HTMLElement>) => {
-        setEditMode(e.target.id);
-    };
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValue = e.target.value;
-        setInputValue({ ...inputValue, [e.target.name]: newValue });
-    };
-    const handleSubmit = async () => {
+    const handleClick = useCallback(
+        (e: ChangeEvent<HTMLElement>) => {
+            setEditMode(e.target.id);
+        },
+        [editMode]
+    );
+    const handleChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            const newValue = e.target.value;
+            setInputValue({ ...inputValue, [e.target.name]: newValue });
+        },
+        [inputValue]
+    );
+    const handleSubmit = useCallback(async () => {
         if (inputValue.nextPassword !== inputValue.confirmNextPassword) {
             const localErrorMsg = '재확인 비밀번호가 일치하지 않습니다.';
             setErrorMessage({
@@ -68,14 +75,19 @@ const EditProfile: FC<editProfileProps> = (props) => {
                 }).then((res: any) => {
                     if (res.data?.status === 200) {
                         const { data } = res;
-                        setModal({
-                            isOpen: true,
-                            ModalComponent: Alert,
-                            ModalClose: () => {
-                                setModal({ isOpen: false });
-                                history.push('/login');
-                            },
-                            ModalContent: data.msg,
+                        API.get('logout').then((res: any) => {
+                            console.dir(res, 'res');
+                            setUser({});
+                            sessionStorage.removeItem('user');
+                            setModal({
+                                isOpen: true,
+                                ModalComponent: Alert,
+                                ModalClose: () => {
+                                    setModal({ isOpen: false });
+                                    history.push('/login');
+                                },
+                                ModalContent: data.msg,
+                            });
                         });
                     } else if (res.response.status === 400) {
                         ErrorMessage(
@@ -103,14 +115,19 @@ const EditProfile: FC<editProfileProps> = (props) => {
                             ...userInfo,
                             address: data.address,
                         });
-                        setModal({
-                            isOpen: true,
-                            ModalComponent: Alert,
-                            ModalClose: () => {
-                                setModal({ isOpen: false });
-                                history.push('/login');
-                            },
-                            ModalContent: data.msg,
+                        API.get('logout').then((res: any) => {
+                            console.dir(res, 'res');
+                            setUser({});
+                            sessionStorage.removeItem('user');
+                            setModal({
+                                isOpen: true,
+                                ModalComponent: Alert,
+                                ModalClose: () => {
+                                    setModal({ isOpen: false });
+                                    history.push('/login');
+                                },
+                                ModalContent: data.msg,
+                            });
                         });
                     } else if (res.response.status === 400) {
                         ErrorMessage(
@@ -123,7 +140,7 @@ const EditProfile: FC<editProfileProps> = (props) => {
                 break;
             default:
         }
-    };
+    }, [inputValue, errorMessage]);
     function renderSwitch(editMode: string): JSX.Element {
         switch (editMode) {
             case 'editPassword':
@@ -304,4 +321,4 @@ const EditProfileStyle = styled.section`
         }
     }
 `;
-export default EditProfile;
+export default memo(EditProfile);

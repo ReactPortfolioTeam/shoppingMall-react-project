@@ -6,6 +6,7 @@ import { AxiosError } from 'axios';
 import { ButtonHover } from 'component/Button/ButtonHover';
 import Input from 'component/Input/Input';
 import Alert from 'component/Modal/Alert';
+import DuplicateCheck from 'component/Modal/DuplicateCheck';
 import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { Modal } from 'state/atom/modal/Modal';
@@ -69,7 +70,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                                 setModal({ isOpen: false });
                                 setDuplicateCheck(true);
                             },
-                            ModalComponent: Alert,
+                            ModalComponent: DuplicateCheck,
                             ModalContent: '해당 아이디로 사용하시겠습니까?',
                         });
                     } else {
@@ -247,7 +248,7 @@ const JoinFormContainer = styled.form`
 
     & > fieldset {
         & > div:not(:last-of-type) {
-            margin-top: ${(props) => props.theme.margins.m40};
+            margin-top: ${(props) => props.theme.margins.m20};
         }
         & > div:last-of-type {
             width: 100%;

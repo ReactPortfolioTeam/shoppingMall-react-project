@@ -91,7 +91,7 @@ export default Input;
 const InputContainer = styled.div<StyleProps>`
     position: relative;
     width: ${(props) => props.width};
-    height: ${(props) => props.height};
+    min-height: ${(props) => props.height};
     & > label {
         position: absolute;
         left: 10px;

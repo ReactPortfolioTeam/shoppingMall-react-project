@@ -66,7 +66,7 @@ const AboutContentContainer = styled.article`
         margin-top: ${(p) => p.theme.margins.m40};
     }
     & > p {
-        line-height: 120%;
+        line-height: 25px;
         color: ${(p) => p.theme.colors.gray};
     }
     strong,
@@ -76,6 +76,8 @@ const AboutContentContainer = styled.article`
     }
     ul {
         margin-left: ${(p) => p.theme.margins.m10};
+        line-height: 25px;
+        letter-spacing: 2px;
         list-style-type: disc;
     }
     & > div {

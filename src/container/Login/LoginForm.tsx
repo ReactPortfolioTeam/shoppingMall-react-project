@@ -159,7 +159,7 @@ const LoginFormContainer = styled.form`
     fieldset {
         & > legend,
         & > div:first-of-type {
-            margin-bottom: ${(props) => props.theme.paddings.p40};
+            margin-bottom: ${(props) => props.theme.paddings.p20};
         }
         .forward__a {
             display: block;

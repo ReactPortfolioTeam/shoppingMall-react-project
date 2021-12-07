@@ -2,11 +2,12 @@ import { ReactElement } from 'react';
 import styled from 'styled-components';
 
 export interface ButtonProps {
+    id?: string;
     children: string | ReactElement<any, any>;
     width?: string;
     height?: string;
     type?: 'button' | 'reset' | 'submit';
-    // onClick?: MouseEvent;
+    onClick?: any;
 }
 
 const ButtonBlack = styled.button<ButtonProps>`
@@ -23,8 +24,10 @@ const ButtonBlack = styled.button<ButtonProps>`
 `;
 
 ButtonBlack.defaultProps = {
+    id: '',
     width: 'auto',
     height: '2rem',
     type: 'button',
+    onClick: () => {},
 };
 export default ButtonBlack;

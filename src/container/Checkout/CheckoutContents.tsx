@@ -8,7 +8,7 @@ import CheckoutPayment from './CheckoutPayment';
 
 interface IAppProps {}
 
-const CheckoutContents: React.FC<IAppProps> = (props) => {
+const CheckoutContents: React.FC<IAppProps> = () => {
     return (
         <CheckoutContentsStyle>
             <CheckoutMainHeader />

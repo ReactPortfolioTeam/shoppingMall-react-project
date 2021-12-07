@@ -1,11 +1,15 @@
-import Input from 'component/Input/Input';
+import { API } from 'api/API';
+import ButtonBlack from 'component/Button/ButtonBg_black';
+import Alert from 'component/Modal/Alert';
 import * as React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
 import { Products } from 'state/atom/dummy/Products';
+import { Modal } from 'state/atom/modal/Modal';
+import OrderInfo from 'state/atom/orderInfo/OrderInfo';
 import styled from 'styled-components';
 
 interface CheckoutSidebarProps {}
@@ -22,12 +26,11 @@ type CartList = {
     id?: number;
 };
 
-const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
-    props: CheckoutSidebarProps
-) => {
+const CheckoutSidebar: React.FC<CheckoutSidebarProps> = () => {
     const cart = useRecoilValue(Cart);
     const productInfo = useRecoilValue(ProductInformation);
     const products = useRecoilValue(Products);
+    const orderInfo = useRecoilValue(OrderInfo);
     const selectedList: CartList[] = cart.map((item) => {
         const resultInfo = productInfo.find(
             (index) => index.product_option_id === item.product_option_id
@@ -49,7 +52,7 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
         return result;
     });
     const [cartList, setCartList] = React.useState<CartList[]>(selectedList);
-    const TotoalPrice = React.useMemo(
+    const totalPrice = React.useMemo(
         () =>
             cartList.reduce(
                 (acc, curr) => acc + curr.price! * curr.quantity!,
@@ -57,16 +60,53 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
             ),
         [cart]
     );
+    const setModal = useSetRecoilState(Modal);
     const location = useLocation();
+    const history = useHistory();
     const isPayment = location.pathname === '/checkout/payment';
     const shippingPrice = () => {
         if (isPayment) {
             return 25;
+            // 우선 배송비는 $25로 고정함
         }
         return 0;
     };
-    const PaymentTotalPrice = TotoalPrice + shippingPrice();
+    const PaymentTotalPrice = totalPrice + shippingPrice();
 
+    const handleSubmit = async () => {
+        await API.post('order', {
+            userid: orderInfo.userid,
+            email: orderInfo.email,
+            tel: orderInfo.phone,
+            address: orderInfo.address,
+            detailedAddress: orderInfo.detailedAddress,
+            shippingPrice,
+            products: selectedList,
+        }).then((res: any) => {
+            const { data } = res;
+            if (res.status === 200) {
+                console.log('여기 실행');
+                setModal({
+                    isOpen: true,
+                    ModalComponent: Alert,
+                    ModalClose: () => {
+                        setModal({ isOpen: false });
+                        window.location.replace('/');
+                    },
+                    ModalContent: data.msg,
+                });
+            } else if (res.status === 400) {
+                setModal({
+                    isOpen: true,
+                    ModalComponent: Alert,
+                    ModalClose: () => {
+                        setModal({ isOpen: false });
+                    },
+                    ModalContent: res.response.data.msg,
+                });
+            }
+        });
+    };
     return (
         <CheckoutSidebarStyle className="sidebar" role="complementary">
             <div className="order-summary__section order-summary__section--product-list">
@@ -107,7 +147,7 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
                     id="sub-total-price"
                 >
                     <span>Subtotal</span>
-                    <span>${TotoalPrice}</span>
+                    <span>${totalPrice}</span>
                 </div>
                 <div className="total--wrapper sub-shipping-price">
                     <span>Shipping</span>
@@ -124,6 +164,11 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = (
                     <span>${PaymentTotalPrice}</span>
                 </div>
             </div>
+            {isPayment && (
+                <ButtonBlack type="submit" onClick={handleSubmit}>
+                    Payment
+                </ButtonBlack>
+            )}
         </CheckoutSidebarStyle>
     );
 };

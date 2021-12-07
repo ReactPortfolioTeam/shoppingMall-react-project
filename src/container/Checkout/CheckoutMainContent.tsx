@@ -17,6 +17,7 @@ interface checkoutErrorCheckObject {
 
 const CheckoutMainContent: React.FC<IAppProps> = () => {
     const history = useHistory();
+
     const userInfo = useRecoilValue(User);
     const [orderInfo, setOrderInfo] = useRecoilState(OrderInfo);
     const [
@@ -29,6 +30,7 @@ const CheckoutMainContent: React.FC<IAppProps> = () => {
     });
     React.useEffect(() => {
         setOrderInfo({
+            userid: userInfo.userid!,
             email: userInfo.email!,
             name: userInfo.name!,
             address: userInfo.address!,
@@ -47,10 +49,16 @@ const CheckoutMainContent: React.FC<IAppProps> = () => {
         },
         [orderInfo]
     );
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         // 프론트단 regex 검사
         const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
         const regAddress = /(([가-힣A-Za-z·\d~\-\\.]{2,}(로|길).[\d]+)|([가-힣A-Za-z·\d~\-\\.]+(읍|동)\s)[\d]+)/;
+        setErrorMessage({
+            ...errorMessage,
+            address: '',
+            detailedAddress: '',
+            phone: '',
+        });
         if (regAddress.test(orderInfo.address) === false) {
             setErrorMessage({
                 ...errorMessage,
@@ -74,12 +82,6 @@ const CheckoutMainContent: React.FC<IAppProps> = () => {
             });
             return;
         }
-        setErrorMessage({
-            ...errorMessage,
-            address: '',
-            detailedAddress: '',
-            phone: '',
-        });
         history.push('/checkout/payment');
     };
 

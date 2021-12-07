@@ -1,10 +1,68 @@
+import { API } from 'api/API';
 import { DaeHwanStyle } from 'assets/css/global/DaeHwan.style';
 import * as React from 'react';
+import { useRecoilValue } from 'recoil';
+import OrderId from 'state/atom/orderInfo/OrderId';
+import User from 'state/atom/User';
 import styled from 'styled-components';
 
 interface IAppProps {}
-
+interface orderInfoObject {
+    order_date?: string;
+    order_id?: number;
+    order_price?: number;
+    order_state?: string;
+    phone_number?: string;
+    shipment_address?: string;
+    userid?: string;
+}
+interface orderProductObject {
+    product_id?: number;
+    order_id?: number;
+    quantity?: number;
+}
 const AccountOrders: React.FC<IAppProps> = (props) => {
+    const { orderId } = useRecoilValue(OrderId);
+    const { userid } = useRecoilValue(User);
+    const orderInfoInitObject: orderInfoObject = {
+        order_date: undefined,
+        order_id: 0,
+        order_price: 0,
+        order_state: '',
+        phone_number: '',
+        shipment_address: '',
+        userid: '',
+    };
+    const [orderInfo, setOrderInfo] = React.useState<orderInfoObject>(
+        orderInfoInitObject
+    );
+    const orderProductInitObject: orderProductObject = {
+        product_id: undefined,
+        order_id: undefined,
+        quantity: 0,
+    };
+
+    const [orderProduct, setOrderProduct] = React.useState<
+        orderProductObject[]
+    >([orderProductInitObject]);
+
+    const getOrderData = async () => {
+        if (orderId) {
+            await API.get(`order/${userid}/${orderId}`).then((res: any) => {
+                const { data } = res;
+                setOrderInfo({
+                    ...orderInfo,
+                    ...data.orderInfo,
+                });
+                setOrderProduct(data.orderProduct);
+            });
+        }
+    };
+    React.useEffect(() => {
+        getOrderData();
+    }, []);
+    console.log(orderInfo);
+    console.log(orderProduct);
     return (
         <AccountOrdersStyle>
             <DaeHwanStyle id="account-orders" className="account-section">
@@ -14,12 +72,26 @@ const AccountOrders: React.FC<IAppProps> = (props) => {
                         <span className="h5 text-light-grey">0 total</span>
                     </div>
                     <div id="past-orders" className="account-section-content">
-                        <div className="account-empty-text">
-                            <p>
-                                Once you&apos;ve placed an order, you&apos;ll
-                                find order details here.
-                            </p>
-                        </div>
+                        {orderId ? (
+                            <div className="account-order-text">
+                                <h2>주문 정보</h2>
+                                <p>
+                                    주문날짜:
+                                    {orderInfo.order_date}
+                                </p>
+                                <p>주문번호: {orderProduct[0].order_id}</p>
+                                <p>결제금액: ${orderInfo.order_price}</p>
+                                <p>배송지: {orderInfo.shipment_address}</p>
+                                <p>주문상태: {orderInfo.order_state}</p>
+                            </div>
+                        ) : (
+                            <div className="account-empty-text">
+                                <p>
+                                    Once you&apos;ve placed an order,
+                                    you&apos;ll find order details here.
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
             </DaeHwanStyle>

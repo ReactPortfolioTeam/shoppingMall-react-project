@@ -4,11 +4,12 @@ import Alert from 'component/Modal/Alert';
 import * as React from 'react';
 import { useHistory, useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Cart from 'state/atom/Cart';
 import { ProductInformation } from 'state/atom/dummy/ProductInformation';
 import { Products } from 'state/atom/dummy/Products';
 import { Modal } from 'state/atom/modal/Modal';
+import OrderId from 'state/atom/orderInfo/OrderId';
 import OrderInfo from 'state/atom/orderInfo/OrderInfo';
 import styled from 'styled-components';
 
@@ -27,10 +28,11 @@ type CartList = {
 };
 
 const CheckoutSidebar: React.FC<CheckoutSidebarProps> = () => {
-    const cart = useRecoilValue(Cart);
+    const [cart, setCart] = useRecoilState(Cart);
     const productInfo = useRecoilValue(ProductInformation);
     const products = useRecoilValue(Products);
     const orderInfo = useRecoilValue(OrderInfo);
+    const setOrderId = useSetRecoilState(OrderId);
     const selectedList: CartList[] = cart.map((item) => {
         const resultInfo = productInfo.find(
             (index) => index.product_option_id === item.product_option_id
@@ -80,18 +82,22 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = () => {
             tel: orderInfo.phone,
             address: orderInfo.address,
             detailedAddress: orderInfo.detailedAddress,
-            shippingPrice,
+            orderPrice: PaymentTotalPrice,
             products: selectedList,
         }).then((res: any) => {
             const { data } = res;
+            console.dir(data);
             if (res.status === 200) {
-                console.log('여기 실행');
                 setModal({
                     isOpen: true,
                     ModalComponent: Alert,
                     ModalClose: () => {
                         setModal({ isOpen: false });
-                        window.location.replace('/');
+                        setCart([]);
+                        history.push('/accountInfo');
+                        setOrderId({
+                            orderId: data.orderId,
+                        });
                     },
                     ModalContent: data.msg,
                 });

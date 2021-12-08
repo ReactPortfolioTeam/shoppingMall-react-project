@@ -94,10 +94,10 @@ const CheckoutSidebar: React.FC<CheckoutSidebarProps> = () => {
                     ModalClose: () => {
                         setModal({ isOpen: false });
                         setCart([]);
-                        history.push('/accountInfo');
                         setOrderId({
                             orderId: data.orderId,
                         });
+                        history.push('');
                     },
                     ModalContent: data.msg,
                 });

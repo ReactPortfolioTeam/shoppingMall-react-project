@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import OrderId from 'state/atom/orderInfo/OrderId';
 import User from 'state/atom/User';
 import styled from 'styled-components';
+import AccountOrderContent from './AccountOrderContent';
 
 interface IAppProps {}
 interface orderInfoObject {
@@ -22,11 +23,11 @@ interface orderProductObject {
     quantity?: number;
 }
 const AccountOrders: React.FC<IAppProps> = (props) => {
-    const { orderId } = useRecoilValue(OrderId);
+    const { orderId } = useRecoilValue(OrderId); // LocalStorage 작업 필요
     const { userid } = useRecoilValue(User);
     const orderInfoInitObject: orderInfoObject = {
         order_date: undefined,
-        order_id: 0,
+        order_id: undefined,
         order_price: 0,
         order_state: '',
         phone_number: '',
@@ -60,9 +61,9 @@ const AccountOrders: React.FC<IAppProps> = (props) => {
     };
     React.useEffect(() => {
         getOrderData();
-    }, []);
-    console.log(orderInfo);
-    console.log(orderProduct);
+    }, [OrderId]);
+    // console.log(orderInfo);
+    // console.log(orderProduct);
     return (
         <AccountOrdersStyle>
             <DaeHwanStyle id="account-orders" className="account-section">
@@ -73,17 +74,21 @@ const AccountOrders: React.FC<IAppProps> = (props) => {
                     </div>
                     <div id="past-orders" className="account-section-content">
                         {orderId ? (
-                            <div className="account-order-text">
-                                <h2>주문 정보</h2>
-                                <p>
-                                    주문날짜:
-                                    {orderInfo.order_date}
-                                </p>
-                                <p>주문번호: {orderProduct[0].order_id}</p>
-                                <p>결제금액: ${orderInfo.order_price}</p>
-                                <p>배송지: {orderInfo.shipment_address}</p>
-                                <p>주문상태: {orderInfo.order_state}</p>
-                            </div>
+                            // <div className="account-order-text">
+                            //     <h2>주문 정보</h2>
+                            //     <p>
+                            //         주문날짜:
+                            //         {orderInfo.order_date}
+                            //     </p>
+                            //     <p>주문번호: {orderProduct[0].order_id}</p>
+                            //     <p>결제금액: ${orderInfo.order_price}</p>
+                            //     <p>배송지: {orderInfo.shipment_address}</p>
+                            //     <p>주문상태: {orderInfo.order_state}</p>
+                            // </div>
+                            <AccountOrderContent
+                                orderProduct={orderProduct}
+                                orderInfo={orderInfo}
+                            />
                         ) : (
                             <div className="account-empty-text">
                                 <p>

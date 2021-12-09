@@ -9,22 +9,22 @@ const AdminSideMenu: React.FC = () => {
         <AdminSideMenuContainer>
             <ul>
                 <li>
-                    <Link to="/admin/user">
+                    <Link to="./admin/user">
                         <ButtonHover>회원정보관리</ButtonHover>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/admin/product">
+                    <Link to="./admin/product">
                         <ButtonHover>상품등록</ButtonHover>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/admin/product">
+                    <Link to="./admin/product">
                         <ButtonHover>상품수정</ButtonHover>
                     </Link>
                 </li>
                 <li>
-                    <Link to="/">
+                    <Link to="./">
                         <ButtonHover width="100%" height="40px">
                             메인페이지로
                         </ButtonHover>

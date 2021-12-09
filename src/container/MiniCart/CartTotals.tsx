@@ -49,7 +49,7 @@ const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
                 <h5 className="js-cart-price">${totalPrice}</h5>
             </div>
             <div className="cart-row">
-                <Link to="/checkout">
+                <Link to="./checkout">
                     <button
                         id="checkout-button"
                         className="button-cta button-gold has-icon"
@@ -66,7 +66,7 @@ const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
                             Check out
                             <span className="inline-icon">
                                 <img
-                                    src="/images/icon/arrow-top.svg"
+                                    src="./images/icon/arrow-top.svg"
                                     alt="arrow-right"
                                     width="14px"
                                     height="14px"

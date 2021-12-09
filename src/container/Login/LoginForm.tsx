@@ -129,7 +129,7 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         <>
                             Submit
                             <img
-                                src="/images/icon/arrow-top.svg"
+                                src="./images/icon/arrow-top.svg"
                                 alt="arrow-right"
                                 width="14px"
                                 height="14px"

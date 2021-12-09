@@ -31,34 +31,34 @@ function App() {
                     {!isAdmin && <Header />}
                     <ModalPortals />
                     <Switch>
-                        <Route exact path="/">
+                        <Route exact path="./">
                             <MainView />
                         </Route>
-                        <Route path="/search">
+                        <Route path="./search">
                             <SearchView />
                         </Route>
-                        <Route path="/login">
+                        <Route path="./login">
                             <Login />
                         </Route>
-                        <Route exact path="/accountInfo">
+                        <Route exact path="./accountInfo">
                             <AccountInfo />
                         </Route>
-                        <Route path="/accountInfo/editProfile">
+                        <Route path="./accountInfo/editProfile">
                             <EditProfile />
                         </Route>
-                        <Route path="/shop" exact>
+                        <Route path="./shop" exact>
                             <Shop />
                         </Route>
-                        <Route path="/about">
+                        <Route path="./about">
                             <About />
                         </Route>
-                        <Route path="/admin">
+                        <Route path="./admin">
                             <AdminMain />
                         </Route>
-                        <Route path="/shop/product/:id">
+                        <Route path="./shop/product/:id">
                             <ShopDetail />
                         </Route>
-                        <Route path="/checkout">
+                        <Route path="./checkout">
                             <Checkout />
                         </Route>
                     </Switch>

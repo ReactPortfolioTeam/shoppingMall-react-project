@@ -15,7 +15,7 @@ const MiniCartHeader: React.FC = () => {
             <div className="cart-header-right">
                 <Link
                     className="header-logo"
-                    to="/"
+                    to="./"
                     onClick={() =>
                         setModal({
                             isOpen: false,

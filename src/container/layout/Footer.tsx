@@ -27,19 +27,19 @@ const Footer: React.FC<Props> = (props) => {
             <div className="footer-content__div">
                 <div>
                     <img
-                        src="/images/icon/vane.svg"
+                        src="./images/icon/vane.svg"
                         width="24px"
                         height="18px;"
                         alt="vane"
                     />
-                    <img src="/images/icon/arrow-top.svg" alt="arrow-top" />
+                    <img src="./images/icon/arrow-top.svg" alt="arrow-top" />
                 </div>
                 <div>
                     <ButtonHover width="370px">
                         <>
                             Sign up for newsletters
                             <img
-                                src="/images/icon/arrow-right.svg"
+                                src="./images/icon/arrow-right.svg"
                                 alt="arrow-right"
                             />
                         </>
@@ -60,12 +60,12 @@ const Footer: React.FC<Props> = (props) => {
                 <div>
                     <div>
                         <img
-                            src="/images/icon/instagram.svg"
+                            src="./images/icon/instagram.svg"
                             className="make-button"
                             alt="instagram"
                         />
                         <img
-                            src="/images/icon/twitter.svg"
+                            src="./images/icon/twitter.svg"
                             className="make-button"
                             alt="twitter"
                         />

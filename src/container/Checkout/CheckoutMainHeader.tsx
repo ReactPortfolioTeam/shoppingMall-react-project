@@ -18,8 +18,8 @@ const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
     // useEffect(() => console.log(location, isInfo, isPayment), [location]);
     return (
         <CheckoutMainHeaderStyle>
-            <Link to="/" className="logo">
-                <img src="images/Logo.png" alt="" className="logoImg" />
+            <Link to="./" className="logo">
+                <img src="./images/Logo.png" alt="" className="logoImg" />
             </Link>
             <ol className="checkoutProgressBar">
                 <StyledButton
@@ -33,7 +33,10 @@ const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
                     <li className="progressBar__item visited">Cart</li>
                 </StyledButton>
                 <li className="progressBar__item">
-                    <img src="images/icon/arrow-right.svg" alt="arrow-right" />
+                    <img
+                        src="./images/icon/arrow-right.svg"
+                        alt="arrow-right"
+                    />
                 </li>
                 {isInfo ? (
                     <li
@@ -57,7 +60,10 @@ const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
                     )
                 )}
                 <li className="progressBar__item">
-                    <img src="images/icon/arrow-right.svg" alt="arrow-right" />
+                    <img
+                        src="./images/icon/arrow-right.svg"
+                        alt="arrow-right"
+                    />
                 </li>
                 <li
                     className={`progressBar__item ${

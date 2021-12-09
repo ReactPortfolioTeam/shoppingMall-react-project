@@ -5,7 +5,7 @@ import { useAlertModal } from '../state/actions/useModal';
 
 // http://localhost:8080
 const baseURL: string =
-    'https://git.heroku.com/shoppingmall-backend-server.git/api/';
+    'https://shoppingmall-backend-server.herokuapp.com/api/';
 const headers = {
     'Content-Type': 'application/json',
 };

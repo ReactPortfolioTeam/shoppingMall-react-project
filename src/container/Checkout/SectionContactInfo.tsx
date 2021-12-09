@@ -17,7 +17,7 @@ const SectionContactInfo: React.FC<IAppProps> = (props: IAppProps) => {
                 <h2 className="section__title">Contact information</h2>
                 <p>
                     Already have an account? &nbsp;
-                    <StyledLink to="/login">Log in</StyledLink>
+                    <StyledLink to="./login">Log in</StyledLink>
                 </p>
             </div>
             <div className="section__content">

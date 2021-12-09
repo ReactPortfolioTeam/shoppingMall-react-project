@@ -19,7 +19,11 @@ const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
     return (
         <CheckoutMainHeaderStyle>
             <Link to="./" className="logo">
-                <img src="./images/Logo.png" alt="" className="logoImg" />
+                <img
+                    src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/Logo.png"
+                    alt=""
+                    className="logoImg"
+                />
             </Link>
             <ol className="checkoutProgressBar">
                 <StyledButton
@@ -34,7 +38,7 @@ const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
                 </StyledButton>
                 <li className="progressBar__item">
                     <img
-                        src="./images/icon/arrow-right.svg"
+                        src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/arrow-right.svg"
                         alt="arrow-right"
                     />
                 </li>
@@ -61,7 +65,7 @@ const CheckoutMainHeader: FunctionComponent<IAppProps> = () => {
                 )}
                 <li className="progressBar__item">
                     <img
-                        src="./images/icon/arrow-right.svg"
+                        src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/arrow-right.svg"
                         alt="arrow-right"
                     />
                 </li>

@@ -14,7 +14,10 @@ const AboutFooter = () => {
     return (
         <AboutFooterContainer>
             <h1>Jean Anatomy</h1>
-            <img src="./images/about/anatomy_jean_1440x.jpg" alt="jean" />
+            <img
+                src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/about/anatomy_jean_1440x.jpg"
+                alt="jean"
+            />
 
             {DataObject.map((item, index) => {
                 return (

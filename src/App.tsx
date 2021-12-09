@@ -8,7 +8,7 @@ import MainView from 'container/Main/Main_view';
 import SearchView from 'container/Search/SearchView';
 import { ThemeProvider } from 'styled-components';
 import Shop from 'container/Shop/Shop';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
 import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
@@ -27,7 +27,7 @@ function App() {
         <RecoilRoot>
             <ThemeProvider theme={MyTheme}>
                 <GlobalStyle />
-                <HashRouter>
+                <BrowserRouter basename="/shoppingMall-react-project">
                     {!isAdmin && <Header />}
                     <ModalPortals />
                     <Switch>
@@ -63,7 +63,7 @@ function App() {
                         </Route>
                     </Switch>
                     {!isAdmin && <Footer />}
-                </HashRouter>
+                </BrowserRouter>
             </ThemeProvider>
         </RecoilRoot>
     );

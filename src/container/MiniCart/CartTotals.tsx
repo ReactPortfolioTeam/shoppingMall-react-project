@@ -66,7 +66,7 @@ const CartTotals: React.FunctionComponent<IAppProps> = (props) => {
                             Check out
                             <span className="inline-icon">
                                 <img
-                                    src="./images/icon/arrow-top.svg"
+                                    src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/arrow-top.svg"
                                     alt="arrow-right"
                                     width="14px"
                                     height="14px"

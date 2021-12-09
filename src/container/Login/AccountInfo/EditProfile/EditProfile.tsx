@@ -76,7 +76,6 @@ const EditProfile: FC<editProfileProps> = (props) => {
                     if (res.data?.status === 200) {
                         const { data } = res;
                         API.get('logout').then((res: any) => {
-                            console.dir(res, 'res');
                             setUser({});
                             sessionStorage.removeItem('user');
                             setModal({

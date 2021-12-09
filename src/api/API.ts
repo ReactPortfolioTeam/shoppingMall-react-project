@@ -4,7 +4,8 @@ import axios from 'axios';
 import { useAlertModal } from '../state/actions/useModal';
 
 // http://localhost:8080
-const baseURL: string = 'http://localhost:8080/api/';
+const baseURL: string =
+    'https://git.heroku.com/shoppingmall-backend-server.git/api/';
 const headers = {
     'Content-Type': 'application/json',
 };

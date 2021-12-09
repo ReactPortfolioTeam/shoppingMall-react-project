@@ -216,7 +216,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         <>
                             Create account
                             <img
-                                src="/images/icon/arrow-top.svg"
+                                src="./images/icon/arrow-top.svg"
                                 alt="arrow-right"
                                 width="14px"
                                 height="14px"

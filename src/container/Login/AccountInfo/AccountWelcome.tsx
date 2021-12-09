@@ -30,7 +30,7 @@ const AccountWelcome: React.FC<IAppProps> = () => {
                         </p>
                         <Link
                             className="welcome-button button-cta has-icon"
-                            to="/accountInfo/editProfile"
+                            to="./accountInfo/editProfile"
                         >
                             회원정보 변경
                             <span className="inline-icon">

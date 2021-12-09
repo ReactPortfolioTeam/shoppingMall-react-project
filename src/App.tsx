@@ -8,7 +8,7 @@ import MainView from 'container/Main/Main_view';
 import SearchView from 'container/Search/SearchView';
 import { ThemeProvider } from 'styled-components';
 import Shop from 'container/Shop/Shop';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import AdminMain from 'container/Admin/AdminMain';
 import ModalPortals from 'modal/ModalComponent';
 import { RecoilRoot } from 'recoil';
@@ -27,43 +27,43 @@ function App() {
         <RecoilRoot>
             <ThemeProvider theme={MyTheme}>
                 <GlobalStyle />
-                <BrowserRouter>
+                <HashRouter>
                     {!isAdmin && <Header />}
                     <ModalPortals />
                     <Switch>
-                        <Route exact path="./">
+                        <Route exact path="/">
                             <MainView />
                         </Route>
-                        <Route path="./search">
+                        <Route path="/search">
                             <SearchView />
                         </Route>
-                        <Route path="./login">
+                        <Route path="/login">
                             <Login />
                         </Route>
-                        <Route exact path="./accountInfo">
+                        <Route exact path="/accountInfo">
                             <AccountInfo />
                         </Route>
-                        <Route path="./accountInfo/editProfile">
+                        <Route path="/accountInfo/editProfile">
                             <EditProfile />
                         </Route>
-                        <Route path="./shop" exact>
+                        <Route path="/shop" exact>
                             <Shop />
                         </Route>
-                        <Route path="./about">
+                        <Route path="/about">
                             <About />
                         </Route>
-                        <Route path="./admin">
+                        <Route path="/admin">
                             <AdminMain />
                         </Route>
-                        <Route path="./shop/product/:id">
+                        <Route path="/shop/product/:id">
                             <ShopDetail />
                         </Route>
-                        <Route path="./checkout">
+                        <Route path="/checkout">
                             <Checkout />
                         </Route>
                     </Switch>
                     {!isAdmin && <Footer />}
-                </BrowserRouter>
+                </HashRouter>
             </ThemeProvider>
         </RecoilRoot>
     );

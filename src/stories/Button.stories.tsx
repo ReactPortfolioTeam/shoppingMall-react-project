@@ -56,7 +56,10 @@ export const ButtoHoverStory: any = () => {
         <ButtonHover isOverrlay width="350px">
             <>
                 Sign up for newsletters
-                <img src="./images/icon/arrow-right.svg" alt="arrow" />
+                <img
+                    src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/arrow-right.svg"
+                    alt="arrow"
+                />
             </>
         </ButtonHover>
     );

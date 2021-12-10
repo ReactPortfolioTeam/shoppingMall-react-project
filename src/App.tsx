@@ -27,7 +27,7 @@ function App() {
         <RecoilRoot>
             <ThemeProvider theme={MyTheme}>
                 <GlobalStyle />
-                <BrowserRouter>
+                <BrowserRouter basename="/shoppingMall-react-project">
                     {!isAdmin && <Header />}
                     <ModalPortals />
                     <Switch>

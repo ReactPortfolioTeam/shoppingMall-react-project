@@ -216,7 +216,7 @@ const JoinForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         <>
                             Create account
                             <img
-                                src="./images/icon/arrow-top.svg"
+                                src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/arrow-top.svg"
                                 alt="arrow-right"
                                 width="14px"
                                 height="14px"
@@ -254,5 +254,15 @@ const JoinFormContainer = styled.form`
             width: 100%;
             margin-top: ${(props) => props.theme.margins.m20};
         }
+    }
+    .center-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        color: #666;
+        border: none;
+        cursor: pointer;
     }
 `;

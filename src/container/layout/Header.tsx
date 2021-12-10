@@ -119,8 +119,11 @@ const Header: React.FC<Props> = () => {
                     </nav>
                     <div className="right-menu__div">
                         <h2 className="screen-out__h2">3sixteen</h2>
-                        <Link to="./">
-                            <img src="./images/Logo.png" alt="Logo" />
+                        <Link to="https://reactportfolioteam.github.io/shoppingMall-react-project/">
+                            <img
+                                src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/Logo.png"
+                                alt="Logo"
+                            />
                         </Link>
                         {count > 0 ? (
                             <button

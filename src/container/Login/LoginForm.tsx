@@ -129,7 +129,7 @@ const LoginForm: React.FC<StateToProps> = ({ isView, setIsView }) => {
                         <>
                             Submit
                             <img
-                                src="./images/icon/arrow-top.svg"
+                                src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/arrow-top.svg"
                                 alt="arrow-right"
                                 width="14px"
                                 height="14px"
@@ -169,5 +169,15 @@ const LoginFormContainer = styled.form`
         & > div:last-of-type {
             width: 100%;
         }
+    }
+    .center-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        color: #666;
+        border: none;
+        cursor: pointer;
     }
 `;

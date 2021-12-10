@@ -71,7 +71,7 @@ const SectionShippingAddress: React.FC<SectionShippingProps> = (
                     />
                     <div className="tooltipBox">
                         <img
-                            src="./images/icon/question.svg"
+                            src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/icon/question.svg"
                             alt="question"
                             className="question-icon"
                         />

@@ -16,6 +16,7 @@ import { API } from 'api/API';
 import Loading from 'component/Modal/Loading';
 
 interface Props {}
+console.log(process.env.REACT_APP_API_URL);
 
 const Header: React.FC<Props> = () => {
     const [user, setUser] = useRecoilState(User);
@@ -64,7 +65,7 @@ const Header: React.FC<Props> = () => {
                         <h2 className="screen-out__h2">메뉴</h2>
                         <ul>
                             <li>
-                                <Link to="./shop">
+                                <Link to="/shop">
                                     <TextButton href="#">Shop</TextButton>
                                 </Link>
                             </li>
@@ -77,7 +78,7 @@ const Header: React.FC<Props> = () => {
                                 </TextButton>
                             </li>
                             <li>
-                                <Link to="./search">
+                                <Link to="/search">
                                     <TextButton href="#">Search</TextButton>
                                 </Link>
                             </li>
@@ -91,7 +92,7 @@ const Header: React.FC<Props> = () => {
                                 </TextButton>
                             </li>
                             <li>
-                                <Link to="./about">
+                                <Link to="/about">
                                     <TextButton changeColor href="#">
                                         About
                                     </TextButton>
@@ -99,7 +100,7 @@ const Header: React.FC<Props> = () => {
                             </li>
                             {isUser ? (
                                 <li>
-                                    <Link to="./accountInfo">
+                                    <Link to="/accountInfo">
                                         <TextButton changeColor href="#">
                                             Account
                                         </TextButton>
@@ -108,7 +109,7 @@ const Header: React.FC<Props> = () => {
                                 </li>
                             ) : (
                                 <li>
-                                    <Link to="./login">
+                                    <Link to="/login">
                                         <TextButton changeColor href="#">
                                             Sign in
                                         </TextButton>
@@ -119,7 +120,7 @@ const Header: React.FC<Props> = () => {
                     </nav>
                     <div className="right-menu__div">
                         <h2 className="screen-out__h2">3sixteen</h2>
-                        <Link to="https://reactportfolioteam.github.io/shoppingMall-react-project/">
+                        <Link to="/">
                             <img
                                 src="https://reactportfolioteam.github.io/shoppingMall-react-project/images/Logo.png"
                                 alt="Logo"
